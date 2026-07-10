@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>This Week — Meal Prep</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Meal Prep">
+<meta name="theme-color" content="#46603a">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD9ElEQVR4nO3dMW7cOBiGYXmRU+UAOcBWKVMESLUHyAlygK0C5ABb7RlTDBAMbH9jWfpJkdLzVCmMjCy+JkVzjHn69OXjAq/56+gLYFziIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRB9OPC1f/74deCrT+Tb96+HvO5T5zf7CGKnnqH0i0MWhfok0jwOTTTVtJK2cTwu46ildDpH3cZWcTz4fjSxWee72iSOV78HTRTqc4fr43h53bJopPWtLv4lmDJ6enlvax//K2eOZ1cmi24a3fmymUMZB3p2t6vmj5o4lHG4Fn0UxKGMQZT3sTcOZQylto/K3YoyRlA4CrvicG4yvj1jtD0OC8qwqhaXmmVFGaMpGRFvEyTaGMf9TGXaGNP9uGxbWcwcRFvisEmZ0YZR2ztzWFNGtnN0LCtE4iB6dxz2KXPZs2c58i/eDvffv/8//oLP//zd50rGdN1l5c0yVn7NiV00jvWjfuU+rhjHe8f7sn1cLo5tI33NPi4XB+uJg0gcROIgEgeROIjEQSQOoskO3hyV9TTTzOGorLNp4nBU1t8ccTgqO8QEcTgqO8oEcXCUyXYrIzvfTsrMUeOUOylxFDjrTkoce514JyWOXc69kxIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxLHLtk8DneUzRMWx13tHepYyFnGUWD/eE5WxiKPKmlGfq4zFx5UXmm7s32TmIJogjnPvCEY2QRzLqXcEI5sjjuW8O4KRTRPHctIdwcgm260Y+55mmjnoTBxE4iASB5E4iMRBJA4icRBdLg7HeOtdLo7FMd5qV4xjcYy3zkXjWBzjrTDZwVuti4/9m949c3z7/vXPv3/++FV6MdS7H6P7sVvjussKbxIH0d44rCwj2zk6W+J479LFCDaMmmWFaGMc9izj27NPuTFzENXEYfIYTcmIbI/j2Uylj3E8G4vNG4hdM4dty/j2jFHlM4fJYwSFo7A3DovLUKoWlJuCmUMfg6gtY6laVvRxuPIylsJnDn0cqEUZy7I8ffryseQ/unnZhB1NU01vePFvSF9emSmkndY/isUzx82rQZhCCvW5w03iWB5OGCrZrPNdbRXHzeM1RSUrHXUb28axeOZorOkPWPM4/lBJoT6Tbr84biSyU8+1uHcc94Sy0lEPZ0fGweC8TZBIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRB9BuPvzF5alBTwwAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD9ElEQVR4nO3dMW7cOBiGYXmRU+UAOcBWKVMESLUHyAlygK0C5ABb7RlTDBAMbH9jWfpJkdLzVCmMjCy+JkVzjHn69OXjAq/56+gLYFziIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRB9OPC1f/74deCrT+Tb96+HvO5T5zf7CGKnnqH0i0MWhfok0jwOTTTVtJK2cTwu46ildDpH3cZWcTz4fjSxWee72iSOV78HTRTqc4fr43h53bJopPWtLv4lmDJ6enlvax//K2eOZ1cmi24a3fmymUMZB3p2t6vmj5o4lHG4Fn0UxKGMQZT3sTcOZQylto/K3YoyRlA4CrvicG4yvj1jtD0OC8qwqhaXmmVFGaMpGRFvEyTaGMf9TGXaGNP9uGxbWcwcRFvisEmZ0YZR2ztzWFNGtnN0LCtE4iB6dxz2KXPZs2c58i/eDvffv/8//oLP//zd50rGdN1l5c0yVn7NiV00jvWjfuU+rhjHe8f7sn1cLo5tI33NPi4XB+uJg0gcROIgEgeROIjEQSQOoskO3hyV9TTTzOGorLNp4nBU1t8ccTgqO8QEcTgqO8oEcXCUyXYrIzvfTsrMUeOUOylxFDjrTkoce514JyWOXc69kxIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxLHLtk8DneUzRMWx13tHepYyFnGUWD/eE5WxiKPKmlGfq4zFx5UXmm7s32TmIJogjnPvCEY2QRzLqXcEI5sjjuW8O4KRTRPHctIdwcgm260Y+55mmjnoTBxE4iASB5E4iMRBJA4icRBdLg7HeOtdLo7FMd5qV4xjcYy3zkXjWBzjrTDZwVuti4/9m949c3z7/vXPv3/++FV6MdS7H6P7sVvjussKbxIH0d44rCwj2zk6W+J479LFCDaMmmWFaGMc9izj27NPuTFzENXEYfIYTcmIbI/j2Uylj3E8G4vNG4hdM4dty/j2jFHlM4fJYwSFo7A3DovLUKoWlJuCmUMfg6gtY6laVvRxuPIylsJnDn0cqEUZy7I8ffryseQ/unnZhB1NU01vePFvSF9emSmkndY/isUzx82rQZhCCvW5w03iWB5OGCrZrPNdbRXHzeM1RSUrHXUb28axeOZorOkPWPM4/lBJoT6Tbr84biSyU8+1uHcc94Sy0lEPZ0fGweC8TZBIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRB9BuPvzF5alBTwwAAAABJRU5ErkJggg==">
+<style>
+  :root{
+    --paper:#f7f4ee; --card:#fffdf8; --ink:#201f1a; --muted:#6f6a5d;
+    --line:#e4ded1; --line2:#efe9dd;
+    --him:#46603a; --him-soft:#eaf0e3;
+    --her:#8a4d68; --her-soft:#f3e7ee;
+    --p:#46603a; --c:#b07d2b; --fib:#6a7f52; --fat:#a05a3c;
+    --ok:#3f7a3a; --warn:#b26a1f;
+    --accent:var(--him); --accent-soft:var(--him-soft);
+    --num:"SF Mono",ui-monospace,"DejaVu Sans Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  body.her{ --accent:var(--her); --accent-soft:var(--her-soft); }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.4;-webkit-text-size-adjust:100%}
+  .wrap{max-width:560px;margin:0 auto;padding:0 0 96px}
+
+  /* top bar */
+  header{position:sticky;top:0;z-index:20;background:var(--paper);
+    padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;border-bottom:1px solid var(--line)}
+  .topline{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px}
+  .brand{font-size:1.02rem;font-weight:700;letter-spacing:-.01em}
+  .brand small{display:block;font-weight:500;color:var(--muted);font-size:.72rem;letter-spacing:.02em;text-transform:uppercase}
+  .who{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+  .who button{appearance:none;border:0;background:transparent;font:inherit;font-weight:600;
+    padding:8px 18px;color:var(--muted);cursor:pointer;font-size:.9rem;transition:.15s}
+  .who button[aria-pressed="true"]{background:var(--accent);color:#fff}
+
+  /* day rail */
+  .rail{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 2px}
+  .rail::-webkit-scrollbar{display:none}
+  .rail button{flex:0 0 auto;appearance:none;border:1px solid var(--line);background:var(--card);
+    font:inherit;font-weight:600;font-size:.82rem;color:var(--muted);padding:7px 13px;border-radius:10px;cursor:pointer}
+  .rail button[aria-current="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .rail .todaydot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle}
+
+  /* day header */
+  .dayhead{padding:18px 16px 6px}
+  .dayhead h1{margin:0;font-size:1.5rem;letter-spacing:-.02em}
+  .dayhead .sub{color:var(--muted);font-size:.82rem;margin-top:2px}
+  .daysum{margin:14px 16px 4px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:13px 14px}
+  .daysum .kcal{font-family:var(--num);font-size:1.7rem;font-weight:600;letter-spacing:-.02em}
+  .daysum .kcal span{font-family:var(--sans);font-size:.8rem;color:var(--muted);font-weight:500;margin-left:6px}
+  .floor{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:600;
+    padding:3px 9px;border-radius:999px;margin-top:2px}
+  .floor.ok{background:#e7f1e5;color:var(--ok)} .floor.under{background:#f6ecdb;color:var(--warn)}
+  .sumrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .sumrow .cell{text-align:left}
+  .sumrow .lab{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .sumrow .val{font-family:var(--num);font-weight:600;font-size:1rem}
+  .sumrow .pct{font-family:var(--num);font-size:.72rem;color:var(--muted)}
+
+  /* meal card */
+  .meal{margin:12px 16px;border:1px solid var(--line);background:var(--card);border-radius:16px;overflow:hidden}
+  .mtop{padding:14px 15px 10px}
+  .mname{font-weight:700;font-size:1.02rem;letter-spacing:-.01em;line-height:1.25}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .tag{font-size:.68rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+    padding:3px 8px;border-radius:6px;background:var(--line2);color:var(--muted)}
+  .tag.lpr{background:#f6e9df;color:#9a5a34}
+  .mkcal{display:flex;align-items:baseline;gap:8px;margin-top:12px}
+  .mkcal b{font-family:var(--num);font-size:1.5rem;font-weight:600;letter-spacing:-.02em}
+  .mkcal .of{font-size:.78rem;color:var(--muted)}
+  /* calorie source bar */
+  .srcbar{display:flex;height:8px;border-radius:5px;overflow:hidden;margin-top:10px;background:var(--line2)}
+  .srcbar i{display:block;height:100%}
+  .srcleg{display:flex;gap:12px;margin-top:7px;flex-wrap:wrap}
+  .srcleg span{font-family:var(--num);font-size:.7rem;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
+  .dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+  /* macro grid */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2);
+    border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin-top:13px}
+  .macros .m{background:var(--card);padding:10px 12px}
+  .macros .mlab{font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .macros .mval{font-family:var(--num);font-weight:600;font-size:1.05rem;margin-top:2px}
+  .macros .mpct{font-family:var(--num);font-size:.72rem;color:var(--muted)}
+  /* checklist */
+  .checks{padding:6px 6px 8px}
+  .chk{display:flex;align-items:center;gap:12px;padding:11px 10px;border-radius:10px;cursor:pointer;user-select:none}
+  .chk:active{background:var(--accent-soft)}
+  .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--line);
+    display:grid;place-items:center;transition:.12s}
+  .chk[data-on="1"] .box{background:var(--accent);border-color:var(--accent)}
+  .box svg{width:13px;height:13px;stroke:#fff;stroke-width:3;fill:none;opacity:0;transition:.12s}
+  .chk[data-on="1"] .box svg{opacity:1}
+  .chk .nm{flex:1;font-size:.94rem}
+  .chk[data-on="1"] .nm{color:var(--muted);text-decoration:line-through}
+  .chk .amt{font-family:var(--num);font-weight:600;font-size:.95rem;white-space:nowrap}
+  .chk .amt em{font-style:normal;color:var(--muted);font-weight:500;font-size:.78rem;margin-left:2px}
+  .note{padding:2px 16px 15px;color:var(--muted);font-size:.82rem;line-height:1.45}
+  .note b{color:var(--ink);font-weight:600}
+
+  .dayfoot{display:flex;justify-content:flex-end;padding:2px 16px 4px}
+  .reset{appearance:none;border:1px solid var(--line);background:var(--card);font:inherit;
+    font-size:.76rem;color:var(--muted);padding:6px 11px;border-radius:9px;cursor:pointer}
+
+  footer{margin:26px 16px 0;color:var(--muted);font-size:.74rem;line-height:1.5;border-top:1px solid var(--line);padding-top:14px}
+  footer b{color:var(--ink)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topline">
+      <div class="brand">This Week<small>Meal Prep</small></div>
+      <div class="who" role="group" aria-label="Whose portions">
+        <button id="wHim" aria-pressed="true">His</button>
+        <button id="wHer" aria-pressed="false">Hers</button>
+      </div>
+    </div>
+    <nav class="rail" id="rail" aria-label="Day"></nav>
+  </header>
+
+  <main id="day"></main>
+
+  <footer>
+    <b>% shown is share of the daily target</b> (his ~2,250&nbsp;kcal / 190&nbsp;g&nbsp;protein · hers ~1,300 / 105), not of that day's plan — so weekend day-totals read low on purpose (only breakfast is prepped; lunch &amp; dinner are freeform). <b>Nutrition is estimated</b> from standard reference values per gram cooked; treat as a close guide, not lab-exact. Ticks save on this device. Add to Home Screen for a full-screen app icon.
+  </footer>
+</div>
+
+<script>
+const DB = {"nutrition":{"ground_beef":{"basis":"100g","kcal":185,"p":26.0,"c":0,"fib":0,"f":8.5},"chicken_breast":{"basis":"100g","kcal":165,"p":31.0,"c":0,"fib":0,"f":3.6},"chicken_thigh":{"basis":"100g","kcal":209,"p":26.0,"c":0,"fib":0,"f":11.0},"shrimp":{"basis":"100g","kcal":99,"p":24.0,"c":0.2,"fib":0,"f":0.3},"steak":{"basis":"100g","kcal":250,"p":27.0,"c":0,"fib":0,"f":15.0},"egg":{"basis":"unit","kcal":72,"p":6.3,"c":0.4,"fib":0,"f":4.8},"koia":{"basis":"unit","kcal":210,"p":32.0,"c":8.0,"fib":3.0,"f":5.0},"rice":{"basis":"100g","kcal":112,"p":2.6,"c":24.0,"fib":1.6,"f":0.9},"farro":{"basis":"100g","kcal":130,"p":5.0,"c":26.0,"fib":3.5,"f":1.0},"lentils":{"basis":"100g","kcal":116,"p":9.0,"c":20.0,"fib":8.0,"f":0.4},"beans":{"basis":"100g","kcal":127,"p":8.0,"c":23.0,"fib":7.0,"f":0.5},"oats":{"basis":"100g","kcal":379,"p":13.0,"c":67.0,"fib":10.0,"f":6.5},"chia":{"basis":"100g","kcal":486,"p":17.0,"c":42.0,"fib":34.0,"f":31.0},"tortilla":{"basis":"100g","kcal":310,"p":8.0,"c":51.0,"fib":3.0,"f":8.0},"sweet_potato":{"basis":"100g","kcal":90,"p":2.0,"c":21.0,"fib":3.3,"f":0.15},"peppers":{"basis":"100g","kcal":26,"p":1.0,"c":6.0,"fib":2.0,"f":0.3},"spinach":{"basis":"100g","kcal":23,"p":2.9,"c":3.6,"fib":2.2,"f":0.4},"yu_choy":{"basis":"100g","kcal":20,"p":2.0,"c":3.0,"fib":2.0,"f":0.3},"brussels":{"basis":"100g","kcal":36,"p":2.6,"c":7.0,"fib":2.6,"f":0.5},"broccolini":{"basis":"100g","kcal":35,"p":2.4,"c":7.0,"fib":3.3,"f":0.4},"squash":{"basis":"100g","kcal":45,"p":1.0,"c":12.0,"fib":2.0,"f":0.1},"onion":{"basis":"100g","kcal":40,"p":1.1,"c":9.0,"fib":1.7,"f":0.1},"mushrooms":{"basis":"100g","kcal":22,"p":3.0,"c":3.0,"fib":1.0,"f":0.3},"edamame":{"basis":"100g","kcal":121,"p":12.0,"c":9.0,"fib":5.0,"f":5.0},"avocado":{"basis":"100g","kcal":160,"p":2.0,"c":9.0,"fib":7.0,"f":15.0},"mango":{"basis":"100g","kcal":60,"p":0.8,"c":15.0,"fib":1.6,"f":0.4},"strawberry":{"basis":"100g","kcal":32,"p":0.7,"c":8.0,"fib":2.0,"f":0.3},"greek_yogurt":{"basis":"100g","kcal":73,"p":10.0,"c":4.0,"fib":0,"f":2.0},"milk":{"basis":"100g","kcal":50,"p":3.4,"c":5.0,"fib":0,"f":2.0},"cheese":{"basis":"100g","kcal":350,"p":25.0,"c":3.0,"fib":0,"f":28.0},"olive_oil":{"basis":"unit","kcal":40,"p":0,"c":0,"fib":0,"f":4.5},"sesame_oil":{"basis":"unit","kcal":40,"p":0,"c":0,"fib":0,"f":4.5},"butter":{"basis":"unit","kcal":36,"p":0,"c":0,"fib":0,"f":4.0}},"labels":{"ground_beef":{"name":"Ground beef (90/10)","unit":"g"},"chicken_breast":{"name":"Chicken breast","unit":"g"},"chicken_thigh":{"name":"Chicken thigh","unit":"g"},"shrimp":{"name":"Shrimp","unit":"g"},"steak":{"name":"Strip steak","unit":"g"},"egg":{"name":"Eggs","unit":"ct"},"koia":{"name":"Koia Elite shake","unit":"bottle"},"rice":{"name":"Brown rice","unit":"g"},"farro":{"name":"Farro","unit":"g"},"lentils":{"name":"Lentils","unit":"g"},"beans":{"name":"Beans","unit":"g"},"oats":{"name":"Rolled oats","unit":"g"},"chia":{"name":"Chia","unit":"g"},"tortilla":{"name":"Flour tortilla","unit":"g"},"sweet_potato":{"name":"Sweet potato","unit":"g"},"peppers":{"name":"Peppers","unit":"g"},"spinach":{"name":"Spinach","unit":"g"},"yu_choy":{"name":"Yu choy","unit":"g"},"brussels":{"name":"Brussels","unit":"g"},"broccolini":{"name":"Broccolini","unit":"g"},"squash":{"name":"Squash","unit":"g"},"onion":{"name":"Onion","unit":"g"},"mushrooms":{"name":"Mushrooms","unit":"g"},"edamame":{"name":"Edamame","unit":"g"},"avocado":{"name":"Avocado","unit":"g"},"mango":{"name":"Mango","unit":"g"},"strawberry":{"name":"Strawberry","unit":"g"},"greek_yogurt":{"name":"Greek yogurt","unit":"g"},"milk":{"name":"2% milk","unit":"g"},"cheese":{"name":"Shredded cheese","unit":"g"},"olive_oil":{"name":"Olive oil","unit":"tsp"},"sesame_oil":{"name":"Sesame oil","unit":"tsp"},"butter":{"name":"Butter","unit":"tsp"}},"targets":{"him":{"kcal":2250,"p":190,"c":226,"fib":38,"f":65},"her":{"kcal":1300,"p":105,"c":134,"fib":30,"f":38}},"days":{"monday":{"label":"Monday","sub":"WFH \u00b7 fresh wrap","meals":[{"name":"Breakfast \u2014 Egg scramble","tag":"fresh","note":"Salt, pepper, scallion.","comps":[{"ing":"egg","him":3,"her":2},{"ing":"spinach","him":100,"her":100},{"ing":"sweet_potato","him":200,"her":120},{"ing":"mango","him":120,"her":100},{"ing":"butter","him":1,"her":1}]},{"name":"Lunch \u2014 Chicken wrap","tag":"fresh","lpr":true,"note":"His: no tomato; mustard/sesame-mayo ok. Hers: chili/lime.","comps":[{"ing":"tortilla","him":100,"her":70},{"ing":"chicken_breast","him":200,"her":140},{"ing":"peppers","him":60,"her":60},{"ing":"spinach","him":40,"her":40},{"ing":"avocado","him":60,"her":25},{"ing":"cheese","him":25,"her":0}]},{"name":"Dinner \u2014 Ground beef rice bowl","tag":"reheat","note":"Saut\u00e9 yu choy w/ ginger. Hers: chili crisp at plate.","comps":[{"ing":"ground_beef","him":200,"her":110},{"ing":"rice","him":200,"her":120},{"ing":"yu_choy","him":150,"her":150},{"ing":"avocado","him":70,"her":0},{"ing":"sesame_oil","him":0.5,"her":0.5}]}],"shake":{"ing":"koia","him":1,"her":0}},"tuesday":{"label":"Tuesday","sub":"office \u00b7 packed lunch","meals":[{"name":"Breakfast \u2014 Overnight oats","tag":"prev-night","note":"1 part oats : 2 parts liquid. Too thick? more milk.","comps":[{"ing":"oats","him":55,"her":40},{"ing":"greek_yogurt","him":150,"her":150},{"ing":"chia","him":10,"her":10},{"ing":"milk","him":200,"her":150},{"ing":"mango","him":100,"her":80}]},{"name":"Lunch \u2014 Ground beef + farro","tag":"packed","note":"Hers: hot sauce/chili crisp at plate.","comps":[{"ing":"ground_beef","him":200,"her":110},{"ing":"farro","him":200,"her":120},{"ing":"brussels","him":150,"her":130},{"ing":"beans","him":100,"her":80}]},{"name":"Dinner \u2014 Shrimp stir-fry","tag":"fresh","lpr":true,"note":"Ginger+garlic; shrimp 2 min, veg 3 min, +1 Tbsp soy. Hers: chili crisp + rice vinegar; his: \u00bc tsp sugar instead.","comps":[{"ing":"shrimp","him":200,"her":120},{"ing":"mushrooms","him":100,"her":100},{"ing":"peppers","him":100,"her":100},{"ing":"rice","him":200,"her":120},{"ing":"sesame_oil","him":1,"her":1}]}],"shake":{"ing":"koia","him":1,"her":0}},"wednesday":{"label":"Wednesday","sub":"cook session 2 tonight","meals":[{"name":"Breakfast \u2014 Yogurt + oats bowl","tag":"fresh","comps":[{"ing":"greek_yogurt","him":170,"her":150},{"ing":"oats","him":55,"her":40},{"ing":"strawberry","him":100,"her":100},{"ing":"chia","him":10,"her":10},{"ing":"milk","him":150,"her":120}]},{"name":"Lunch \u2014 Lentil + beef bowl","tag":"packed","note":"High-fiber. Hers: chili-garlic.","comps":[{"ing":"lentils","him":200,"her":150},{"ing":"ground_beef","him":150,"her":100},{"ing":"squash","him":150,"her":130},{"ing":"spinach","him":100,"her":100},{"ing":"olive_oil","him":1.5,"her":1}]},{"name":"Dinner \u2014 Strip steak","tag":"fresh","lpr":true,"note":"Dry-brine 40 min ahead, sear hot, ~130\u00b0F, rest 8 min, slice against grain. Hers: chimichurri/lime; his: garlic-butter baste.","comps":[{"ing":"steak","him":190,"her":110},{"ing":"sweet_potato","him":220,"her":150},{"ing":"broccolini","him":150,"her":130},{"ing":"olive_oil","him":1,"her":1}]}],"shake":{"ing":"koia","him":1,"her":0}},"thursday":{"label":"Thursday","sub":"office \u00b7 packed lunch","meals":[{"name":"Breakfast \u2014 Overnight oats","tag":"prev-night","comps":[{"ing":"oats","him":55,"her":40},{"ing":"greek_yogurt","him":150,"her":150},{"ing":"chia","him":10,"her":10},{"ing":"milk","him":200,"her":150},{"ing":"mango","him":100,"her":80}]},{"name":"Lunch \u2014 Chicken + farro","tag":"packed","note":"Chicken cooked Wed night. Hers: lemon/chili.","comps":[{"ing":"chicken_thigh","him":200,"her":110},{"ing":"farro","him":200,"her":120},{"ing":"brussels","him":150,"her":130},{"ing":"edamame","him":80,"her":60},{"ing":"sesame_oil","him":1,"her":0}]},{"name":"Dinner \u2014 Ground beef rice bowl","tag":"reheat","note":"Saut\u00e9 peppers. Hers: chili crisp.","comps":[{"ing":"ground_beef","him":200,"her":110},{"ing":"rice","him":200,"her":120},{"ing":"peppers","him":100,"her":100},{"ing":"avocado","him":70,"her":0}]}],"shake":{"ing":"koia","him":1,"her":0}},"friday":{"label":"Friday","sub":"WFH \u00b7 fresh wrap","meals":[{"name":"Breakfast \u2014 Egg scramble","tag":"fresh","comps":[{"ing":"egg","him":3,"her":2},{"ing":"spinach","him":100,"her":100},{"ing":"sweet_potato","him":200,"her":120},{"ing":"mango","him":120,"her":100},{"ing":"butter","him":1,"her":1}]},{"name":"Lunch \u2014 Chicken wrap","tag":"fresh","lpr":true,"comps":[{"ing":"tortilla","him":100,"her":70},{"ing":"chicken_breast","him":200,"her":140},{"ing":"peppers","him":60,"her":60},{"ing":"spinach","him":40,"her":40},{"ing":"avocado","him":60,"her":25},{"ing":"cheese","him":25,"her":0}]},{"name":"Dinner \u2014 Shrimp + yu choy + rice","tag":"fresh","lpr":true,"note":"Slightly larger to lift the day. Hers: chili crisp + rice vinegar; his: \u00bc tsp sugar.","comps":[{"ing":"shrimp","him":230,"her":120},{"ing":"yu_choy","him":150,"her":150},{"ing":"rice","him":230,"her":120},{"ing":"sesame_oil","him":1,"her":1}]}],"shake":{"ing":"koia","him":1,"her":0}},"saturday":{"label":"Saturday","sub":"weekend \u00b7 breakfast only prepped","meals":[{"name":"Breakfast \u2014 Savory hash","tag":"fresh","lpr":true,"note":"Onion+peppers 3 min, add sweet potato covered 8-10 min, brown beef, eggs in. His: no tomato (browning is the flavor). Hers: hot sauce on top.","comps":[{"ing":"ground_beef","him":150,"her":90},{"ing":"sweet_potato","him":200,"her":120},{"ing":"egg","him":3,"her":2},{"ing":"peppers","him":80,"her":80},{"ing":"onion","him":50,"her":50},{"ing":"olive_oil","him":1,"her":1}]}],"shake":{"ing":"koia","him":1,"her":0}},"sunday":{"label":"Sunday","sub":"weekend \u00b7 breakfast only prepped","meals":[{"name":"Breakfast \u2014 Savory hash","tag":"fresh","lpr":true,"note":"Same as Saturday. His: no tomato. Hers: hot sauce on top.","comps":[{"ing":"ground_beef","him":150,"her":90},{"ing":"sweet_potato","him":200,"her":120},{"ing":"egg","him":3,"her":2},{"ing":"peppers","him":80,"her":80},{"ing":"onion","him":50,"her":50},{"ing":"olive_oil","him":1,"her":1}]}],"shake":{"ing":"koia","him":1,"her":0}}},"weekOrder":["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]};
+
+/* ---------- storage (graceful: real localStorage when installed, memory fallback) ---------- */
+const mem = {};
+const store = {
+  get(k){ try{ const v=localStorage.getItem(k); return v===null?(k in mem?mem[k]:null):v; }catch(e){ return k in mem?mem[k]:null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){ mem[k]=v; } },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} delete mem[k]; }
+};
+
+/* ---------- nutrition compute (mirrors the data build) ---------- */
+function nutOf(ing, amt){
+  const n = DB.nutrition[ing];
+  const k = n.basis==='100g' ? amt/100 : amt;
+  return {kcal:n.kcal*k, p:n.p*k, c:n.c*k, fib:n.fib*k, f:n.f*k};
+}
+function mealTotals(meal, who){
+  const t={kcal:0,p:0,c:0,fib:0,f:0};
+  for(const cp of meal.comps){ const a=cp[who]; if(a){ const x=nutOf(cp.ing,a); for(const k in t) t[k]+=x[k]; } }
+  return t;
+}
+function dayTotals(dayKey, who){
+  const d=DB.days[dayKey]; const t={kcal:0,p:0,c:0,fib:0,f:0};
+  for(const m of d.meals){ const mt=mealTotals(m,who); for(const k in t) t[k]+=mt[k]; }
+  if(d.shake[who]){ const x=nutOf('koia',d.shake[who]); for(const k in t) t[k]+=x[k]; }
+  return t;
+}
+const pct=(v,t)=> t? Math.round(v/t*100) : 0;
+
+/* ---------- amount formatting ---------- */
+const FRAC={0.25:'¼',0.5:'½',0.75:'¾'};
+function fmtAmt(v){
+  const whole=Math.floor(v), frac=+(v-whole).toFixed(2);
+  if(FRAC[frac]) return (whole?whole:'')+FRAC[frac];
+  return String(Math.round(v));
+}
+
+/* ---------- state ---------- */
+let who = store.get('mp1::person')==='her' ? 'her' : 'him';
+const order = DB.weekOrder;
+const todayKey = order[(new Date().getDay()+6)%7];
+let dayKey = todayKey;
+
+/* ---------- render: day rail ---------- */
+function buildRail(){
+  const rail=document.getElementById('rail'); rail.innerHTML='';
+  order.forEach(k=>{
+    const b=document.createElement('button');
+    b.textContent=DB.days[k].label.slice(0,3);
+    if(k===todayKey){ const s=document.createElement('span'); s.className='todaydot'; b.appendChild(s); }
+    b.setAttribute('aria-current', k===dayKey?'true':'false');
+    b.onclick=()=>{ dayKey=k; render(); b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'}); };
+    rail.appendChild(b);
+    if(k===dayKey && k===todayKey) requestAnimationFrame(()=>b.scrollIntoView({inline:'center',block:'nearest'}));
+  });
+}
+
+/* ---------- render: one meal ---------- */
+function mealCard(meal, idx){
+  const t=mealTotals(meal, who);
+  const tgt=DB.targets[who];
+  // calorie sources
+  const kP=t.p*4, kC=t.c*4, kF=t.f*9, kSum=Math.max(kP+kC+kF,1);
+  const wP=(kP/kSum*100), wC=(kC/kSum*100), wF=(kF/kSum*100);
+
+  const el=document.createElement('section'); el.className='meal';
+
+  // tag labels
+  const tagMap={fresh:'Fresh',packed:'Packed',reheat:'Reheat','prev-night':'Made night before',anchor:'Anytime'};
+  let tags=`<span class="tag">${tagMap[meal.tag]||meal.tag}</span>`;
+  if(meal.lpr) tags+=`<span class="tag lpr">⚠ His LPR</span>`;
+
+  el.innerHTML=`
+    <div class="mtop">
+      <div class="mname">${meal.name}</div>
+      <div class="tags">${tags}</div>
+      <div class="mkcal"><b>${Math.round(t.kcal)}</b><span class="of">kcal · ${pct(t.kcal,tgt.kcal)}% of day</span></div>
+      <div class="srcbar">
+        <i style="width:${wP}%;background:var(--p)"></i>
+        <i style="width:${wC}%;background:var(--c)"></i>
+        <i style="width:${wF}%;background:var(--fat)"></i>
+      </div>
+      <div class="srcleg">
+        <span><i class="dot" style="background:var(--p)"></i>Protein ${Math.round(kP)}</span>
+        <span><i class="dot" style="background:var(--c)"></i>Carbs ${Math.round(kC)}</span>
+        <span><i class="dot" style="background:var(--fat)"></i>Fat ${Math.round(kF)}</span>
+      </div>
+    </div>
+    <div class="macros">
+      <div class="m"><div class="mlab">Protein</div><div class="mval">${Math.round(t.p)}g</div><div class="mpct">(${pct(t.p,tgt.p)}%)</div></div>
+      <div class="m"><div class="mlab">Carbs</div><div class="mval">${Math.round(t.c)}g</div><div class="mpct">(${pct(t.c,tgt.c)}%)</div></div>
+      <div class="m"><div class="mlab">Fiber</div><div class="mval">${Math.round(t.fib)}g</div><div class="mpct">(${pct(t.fib,tgt.fib)}%)</div></div>
+      <div class="m"><div class="mlab">Fat</div><div class="mval">${Math.round(t.f)}g</div><div class="mpct">(${pct(t.f,tgt.f)}%)</div></div>
+    </div>
+    <div class="checks"></div>
+    ${meal.note?`<div class="note">${meal.note}</div>`:''}
+  `;
+
+  // checklist rows
+  const checks=el.querySelector('.checks');
+  meal.comps.forEach((cp,ci)=>{
+    const amt=cp[who];
+    if(!amt) return;                       // skip components the current person doesn't get
+    const lab=DB.labels[cp.ing];
+    const key=`mp1::chk::${who}::${dayKey}::${idx}::${ci}`;
+    const on=store.get(key)==='1';
+    const row=document.createElement('div');
+    row.className='chk'; row.setAttribute('data-on', on?'1':'0'); row.setAttribute('role','checkbox');
+    row.setAttribute('aria-checked', on?'true':'false');
+    row.innerHTML=`
+      <span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span>
+      <span class="nm">${lab.name}</span>
+      <span class="amt">${fmtAmt(amt)}<em>${lab.unit}</em></span>`;
+    row.onclick=()=>{
+      const now=row.getAttribute('data-on')==='1'?'0':'1';
+      row.setAttribute('data-on',now); row.setAttribute('aria-checked',now==='1'?'true':'false');
+      if(now==='1') store.set(key,'1'); else store.del(key);
+    };
+    checks.appendChild(row);
+  });
+  return el;
+}
+
+/* ---------- render: whole day ---------- */
+function render(){
+  document.body.classList.toggle('her', who==='her');
+  document.getElementById('wHim').setAttribute('aria-pressed', who==='him');
+  document.getElementById('wHer').setAttribute('aria-pressed', who==='her');
+  buildRail();
+
+  const d=DB.days[dayKey], tgt=DB.targets[who], dt=dayTotals(dayKey,who);
+  const floorMet = dt.p >= (who==='him'?180:100);
+  const main=document.getElementById('day');
+
+  // render list = real meals + synthetic shake card (his anchor) so it has a checkbox and shows
+  const list=[...d.meals];
+  if(d.shake[who]) list.push({name:'Anytime — Koia Elite shake',tag:'anchor',comps:[{ing:'koia',him:d.shake.him,her:d.shake.her}]});
+
+  main.innerHTML=`
+    <div class="dayhead">
+      <h1>${d.label}${dayKey===todayKey?' · Today':''}</h1>
+      <div class="sub">${d.sub}</div>
+    </div>
+    <div class="daysum">
+      <div class="kcal">${Math.round(dt.kcal)}<span>kcal · ${pct(dt.kcal,tgt.kcal)}% of ${tgt.kcal} target</span></div>
+      <div class="floor ${floorMet?'ok':'under'}">${floorMet?'✓ protein floor met':'protein under floor'} · ${Math.round(dt.p)}g</div>
+      <div class="sumrow">
+        <div class="cell"><div class="lab">Protein</div><div class="val">${Math.round(dt.p)}g</div><div class="pct">${pct(dt.p,tgt.p)}%</div></div>
+        <div class="cell"><div class="lab">Carbs</div><div class="val">${Math.round(dt.c)}g</div><div class="pct">${pct(dt.c,tgt.c)}%</div></div>
+        <div class="cell"><div class="lab">Fiber</div><div class="val">${Math.round(dt.fib)}g</div><div class="pct">${pct(dt.fib,tgt.fib)}%</div></div>
+        <div class="cell"><div class="lab">Fat</div><div class="val">${Math.round(dt.f)}g</div><div class="pct">${pct(dt.f,tgt.f)}%</div></div>
+      </div>
+    </div>
+  `;
+  list.forEach((m,i)=> main.appendChild(mealCard(m,i)));
+
+  const foot=document.createElement('div'); foot.className='dayfoot';
+  const rb=document.createElement('button'); rb.className='reset'; rb.textContent='Clear ticks · this day';
+  rb.onclick=()=>{
+    list.forEach((m,i)=> m.comps.forEach((cp,ci)=> store.del(`mp1::chk::${who}::${dayKey}::${i}::${ci}`)));
+    render();
+  };
+  foot.appendChild(rb); main.appendChild(foot);
+}
+
+document.getElementById('wHim').onclick=()=>{ who='him'; store.set('mp1::person','him'); render(); };
+document.getElementById('wHer').onclick=()=>{ who='her'; store.set('mp1::person','her'); render(); };
+render();
+</script>
+</body>
+</html>
