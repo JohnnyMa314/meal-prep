@@ -73,7 +73,7 @@ def compute():
 
     # --- group + convert to purchase quantities ---
     groups, staples = {}, []
-    for ing in set(cooked_g) | set(count_u):
+    for ing in sorted(set(cooked_g) | set(count_u)):   # sorted => deterministic output
         g = spec[ing]["grocery"]
         if g.get("is_staple"):
             staples.append(spec[ing]["name"])

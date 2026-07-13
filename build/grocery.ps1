@@ -63,7 +63,7 @@ $order = @()
 $staples = @()
 $groups = @{}   # groupKey -> @{ base_g; count; members=@(); spec }
 
-foreach ($ing in ($cookedG.Keys + $countU.Keys | Select-Object -Unique)) {
+foreach ($ing in ($cookedG.Keys + $countU.Keys | Select-Object -Unique | Sort-Object)) {   # sorted => deterministic output
     $s = $spec[$ing]
     $g = $s.grocery
     if ($g.is_staple) { $staples += $s.name; continue }
