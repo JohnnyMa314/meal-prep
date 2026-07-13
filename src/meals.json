@@ -1,0 +1,189 @@
+{
+  "_comment": "Favorites library. Each meal is a self-contained reusable object (separate entry per distinct component set — see beef-rice-bowl-yuchoy vs -peppers). `name` is the clean display name; build.py prepends the slot label ('Breakfast — '). Amounts in `components` are COOKED grams per person, EXCEPT unit-basis ingredients (egg=count, oils/butter=tsp, koia=bottle). him/her=0 means that person skips it. `note` is the canonical cooking note; week.json can override or suppress it per assignment.",
+
+  "egg-scramble": {
+    "name": "Egg scramble",
+    "slot": "breakfast",
+    "tag": "fresh",
+    "note": "Salt, pepper, scallion.",
+    "components": [
+      { "ing": "egg", "him": 3, "her": 2 },
+      { "ing": "spinach", "him": 100, "her": 100 },
+      { "ing": "sweet_potato", "him": 200, "her": 120 },
+      { "ing": "mango", "him": 120, "her": 100 },
+      { "ing": "butter", "him": 1, "her": 1 }
+    ]
+  },
+
+  "chicken-wrap": {
+    "name": "Chicken wrap",
+    "slot": "lunch",
+    "tag": "fresh",
+    "lpr": true,
+    "note": "His: no tomato; mustard/sesame-mayo ok. Hers: chili/lime.",
+    "components": [
+      { "ing": "tortilla", "him": 100, "her": 70 },
+      { "ing": "chicken_breast", "him": 200, "her": 140 },
+      { "ing": "peppers", "him": 60, "her": 60 },
+      { "ing": "spinach", "him": 40, "her": 40 },
+      { "ing": "avocado", "him": 60, "her": 25 },
+      { "ing": "cheese", "him": 25, "her": 0 }
+    ]
+  },
+
+  "beef-rice-bowl-yuchoy": {
+    "name": "Ground beef rice bowl",
+    "slot": "dinner",
+    "tag": "reheat",
+    "note": "Sauté yu choy w/ ginger. Hers: chili crisp at plate.",
+    "components": [
+      { "ing": "ground_beef", "him": 200, "her": 110 },
+      { "ing": "rice", "him": 200, "her": 120 },
+      { "ing": "yu_choy", "him": 150, "her": 150 },
+      { "ing": "avocado", "him": 70, "her": 0 },
+      { "ing": "sesame_oil", "him": 0.5, "her": 0.5 }
+    ]
+  },
+
+  "overnight-oats": {
+    "name": "Overnight oats",
+    "slot": "breakfast",
+    "tag": "prev-night",
+    "note": "1 part oats : 2 parts liquid. Too thick? more milk.",
+    "components": [
+      { "ing": "oats", "him": 55, "her": 40 },
+      { "ing": "greek_yogurt", "him": 150, "her": 150 },
+      { "ing": "chia", "him": 10, "her": 10 },
+      { "ing": "milk", "him": 200, "her": 150 },
+      { "ing": "mango", "him": 100, "her": 80 }
+    ]
+  },
+
+  "beef-farro-lentils": {
+    "name": "Ground beef + farro + lentils",
+    "slot": "lunch",
+    "tag": "packed",
+    "note": "His keeps beans on top of the lentils (extra calories for the gain). Hers swaps beans → lentils rather than stacking both, staying calorie-neutral. Hers: hot sauce/chili crisp at plate.",
+    "components": [
+      { "ing": "ground_beef", "him": 200, "her": 110 },
+      { "ing": "farro", "him": 200, "her": 120 },
+      { "ing": "brussels", "him": 150, "her": 130 },
+      { "ing": "lentils", "him": 120, "her": 100 },
+      { "ing": "beans", "him": 100, "her": 0 }
+    ]
+  },
+
+  "shrimp-stirfry": {
+    "name": "Shrimp stir-fry",
+    "slot": "dinner",
+    "tag": "fresh",
+    "lpr": true,
+    "note": "Ginger+garlic; shrimp 2 min, veg 3 min, +1 Tbsp soy. Hers: chili crisp + rice vinegar; his: ¼ tsp sugar instead.",
+    "components": [
+      { "ing": "shrimp", "him": 200, "her": 120 },
+      { "ing": "mushrooms", "him": 100, "her": 100 },
+      { "ing": "peppers", "him": 100, "her": 100 },
+      { "ing": "rice", "him": 200, "her": 120 },
+      { "ing": "sesame_oil", "him": 1, "her": 1 }
+    ]
+  },
+
+  "yogurt-oats-bowl": {
+    "name": "Yogurt + oats bowl",
+    "slot": "breakfast",
+    "tag": "fresh",
+    "components": [
+      { "ing": "greek_yogurt", "him": 170, "her": 150 },
+      { "ing": "oats", "him": 55, "her": 40 },
+      { "ing": "strawberry", "him": 100, "her": 100 },
+      { "ing": "chia", "him": 10, "her": 10 },
+      { "ing": "milk", "him": 150, "her": 120 }
+    ]
+  },
+
+  "lentil-beef-bowl": {
+    "name": "Lentil + beef bowl",
+    "slot": "lunch",
+    "tag": "packed",
+    "note": "High-fiber. Hers: chili-garlic.",
+    "components": [
+      { "ing": "lentils", "him": 200, "her": 150 },
+      { "ing": "ground_beef", "him": 150, "her": 100 },
+      { "ing": "squash", "him": 150, "her": 130 },
+      { "ing": "spinach", "him": 100, "her": 100 },
+      { "ing": "olive_oil", "him": 1.5, "her": 1 }
+    ]
+  },
+
+  "strip-steak": {
+    "name": "Strip steak",
+    "slot": "dinner",
+    "tag": "fresh",
+    "lpr": true,
+    "note": "Dry-brine 40 min ahead, sear hot, ~130°F, rest 8 min, slice against grain. Hers: chimichurri/lime; his: garlic-butter baste.",
+    "components": [
+      { "ing": "steak", "him": 190, "her": 110 },
+      { "ing": "sweet_potato", "him": 220, "her": 150 },
+      { "ing": "broccolini", "him": 150, "her": 130 },
+      { "ing": "olive_oil", "him": 1, "her": 1 }
+    ]
+  },
+
+  "chicken-farro-lentils": {
+    "name": "Chicken + farro + lentils",
+    "slot": "lunch",
+    "tag": "packed",
+    "note": "Chicken cooked Wed night. Hers trades some edamame for lentils to stay calorie-neutral; his adds them on top. Season chicken salt/garlic/herbs. Hers: lemon/chili.",
+    "components": [
+      { "ing": "chicken_thigh", "him": 200, "her": 110 },
+      { "ing": "farro", "him": 200, "her": 120 },
+      { "ing": "brussels", "him": 150, "her": 130 },
+      { "ing": "lentils", "him": 120, "her": 80 },
+      { "ing": "edamame", "him": 80, "her": 30 },
+      { "ing": "sesame_oil", "him": 1, "her": 0 }
+    ]
+  },
+
+  "beef-rice-bowl-peppers": {
+    "name": "Ground beef rice bowl",
+    "slot": "dinner",
+    "tag": "reheat",
+    "note": "Sauté peppers. Hers: chili crisp.",
+    "components": [
+      { "ing": "ground_beef", "him": 200, "her": 110 },
+      { "ing": "rice", "him": 200, "her": 120 },
+      { "ing": "peppers", "him": 100, "her": 100 },
+      { "ing": "avocado", "him": 70, "her": 0 }
+    ]
+  },
+
+  "shrimp-yuchoy-rice": {
+    "name": "Shrimp + yu choy + rice",
+    "slot": "dinner",
+    "tag": "fresh",
+    "lpr": true,
+    "note": "Slightly larger to lift the day. Hers: chili crisp + rice vinegar; his: ¼ tsp sugar.",
+    "components": [
+      { "ing": "shrimp", "him": 230, "her": 120 },
+      { "ing": "yu_choy", "him": 150, "her": 150 },
+      { "ing": "rice", "him": 230, "her": 120 },
+      { "ing": "sesame_oil", "him": 1, "her": 1 }
+    ]
+  },
+
+  "savory-hash": {
+    "name": "Savory hash",
+    "slot": "breakfast",
+    "tag": "fresh",
+    "lpr": true,
+    "note": "Onion+peppers 3 min, add sweet potato covered 8-10 min, brown beef, eggs in. His: no tomato (browning is the flavor). Hers: hot sauce on top.",
+    "components": [
+      { "ing": "ground_beef", "him": 150, "her": 90 },
+      { "ing": "sweet_potato", "him": 200, "her": 120 },
+      { "ing": "egg", "him": 3, "her": 2 },
+      { "ing": "peppers", "him": 80, "her": 80 },
+      { "ing": "onion", "him": 50, "her": 50 },
+      { "ing": "olive_oil", "him": 1, "her": 1 }
+    ]
+  }
+}

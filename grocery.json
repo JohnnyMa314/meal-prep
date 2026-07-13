@@ -1,0 +1,377 @@
+{
+  "weekId": "wk-2026-07-13",
+  "note": "Gross purchase (round-up). Phase 3 subtracts fridge inventory to get the net order.",
+  "order": [
+    {
+      "key": "milk",
+      "name": "2% milk",
+      "quantity": 0.5,
+      "unit": "gallon",
+      "display": "0.5 gallon",
+      "cooked_g": 970.0,
+      "raw_g": 970.0,
+      "count": null,
+      "members": [
+        "milk"
+      ]
+    },
+    {
+      "key": "avocado",
+      "name": "Avocado",
+      "quantity": 3,
+      "unit": "each",
+      "display": "3",
+      "cooked_g": 310.0,
+      "raw_g": 442.9,
+      "count": null,
+      "members": [
+        "avocado"
+      ]
+    },
+    {
+      "key": "beans",
+      "name": "Beans",
+      "quantity": 1,
+      "unit": "can",
+      "display": "1 can",
+      "cooked_g": 100.0,
+      "raw_g": 100.0,
+      "count": null,
+      "members": [
+        "beans"
+      ]
+    },
+    {
+      "key": "broccolini",
+      "name": "Broccolini",
+      "quantity": 0.75,
+      "unit": "lb",
+      "display": "0.75 lb",
+      "cooked_g": 280.0,
+      "raw_g": 280.0,
+      "count": null,
+      "members": [
+        "broccolini"
+      ]
+    },
+    {
+      "key": "rice",
+      "name": "Brown rice",
+      "quantity": 2.75,
+      "unit": "cup_dry",
+      "display": "2.75 cups dry",
+      "cooked_g": 1310.0,
+      "raw_g": 481.6,
+      "count": null,
+      "members": [
+        "rice"
+      ]
+    },
+    {
+      "key": "brussels",
+      "name": "Brussels",
+      "quantity": 1.25,
+      "unit": "lb",
+      "display": "1.25 lb",
+      "cooked_g": 560.0,
+      "raw_g": 560.0,
+      "count": null,
+      "members": [
+        "brussels"
+      ]
+    },
+    {
+      "key": "chicken",
+      "name": "Chicken (thigh + breast)",
+      "quantity": 3,
+      "unit": "lb",
+      "display": "3 lb",
+      "cooked_g": 990.0,
+      "raw_g": 1356.2,
+      "count": null,
+      "members": [
+        "chicken_thigh",
+        "chicken_breast"
+      ]
+    },
+    {
+      "key": "edamame",
+      "name": "Edamame",
+      "quantity": 0.5,
+      "unit": "lb",
+      "display": "0.5 lb",
+      "cooked_g": 110.0,
+      "raw_g": 110.0,
+      "count": null,
+      "members": [
+        "edamame"
+      ]
+    },
+    {
+      "key": "egg",
+      "name": "Eggs",
+      "quantity": 2,
+      "unit": "dozen",
+      "display": "2 dozen",
+      "cooked_g": null,
+      "raw_g": null,
+      "count": 20.0,
+      "members": [
+        "egg"
+      ]
+    },
+    {
+      "key": "farro",
+      "name": "Farro",
+      "quantity": 1.25,
+      "unit": "cup_dry",
+      "display": "1.25 cups dry",
+      "cooked_g": 640.0,
+      "raw_g": 227.8,
+      "count": null,
+      "members": [
+        "farro"
+      ]
+    },
+    {
+      "key": "tortilla",
+      "name": "Flour tortilla",
+      "quantity": 6,
+      "unit": "each",
+      "display": "6",
+      "cooked_g": 340.0,
+      "raw_g": 340.0,
+      "count": null,
+      "members": [
+        "tortilla"
+      ]
+    },
+    {
+      "key": "greek_yogurt",
+      "name": "Greek yogurt",
+      "quantity": 1,
+      "unit": "tub",
+      "display": "1 tub",
+      "cooked_g": 920.0,
+      "raw_g": 920.0,
+      "count": null,
+      "members": [
+        "greek_yogurt"
+      ]
+    },
+    {
+      "key": "ground_beef",
+      "name": "Ground beef (90/10)",
+      "quantity": 5,
+      "unit": "lb",
+      "display": "5 lb",
+      "cooked_g": 1660.0,
+      "raw_g": 2243.2,
+      "count": null,
+      "members": [
+        "ground_beef"
+      ]
+    },
+    {
+      "key": "koia",
+      "name": "Koia Elite shake",
+      "quantity": 7,
+      "unit": "bottle",
+      "display": "7 bottles",
+      "cooked_g": null,
+      "raw_g": null,
+      "count": 7.0,
+      "members": [
+        "koia"
+      ]
+    },
+    {
+      "key": "lentils",
+      "name": "Lentils",
+      "quantity": 1.75,
+      "unit": "cup_dry",
+      "display": "1.75 cups dry",
+      "cooked_g": 770.0,
+      "raw_g": 336.2,
+      "count": null,
+      "members": [
+        "lentils"
+      ]
+    },
+    {
+      "key": "mango",
+      "name": "Mango",
+      "quantity": 4,
+      "unit": "each",
+      "display": "4",
+      "cooked_g": 800.0,
+      "raw_g": 1230.8,
+      "count": null,
+      "members": [
+        "mango"
+      ]
+    },
+    {
+      "key": "mushrooms",
+      "name": "Mushrooms",
+      "quantity": 0.5,
+      "unit": "lb",
+      "display": "0.5 lb",
+      "cooked_g": 200.0,
+      "raw_g": 227.3,
+      "count": null,
+      "members": [
+        "mushrooms"
+      ]
+    },
+    {
+      "key": "onion",
+      "name": "Onion",
+      "quantity": 2,
+      "unit": "each",
+      "display": "2",
+      "cooked_g": 200.0,
+      "raw_g": 222.2,
+      "count": null,
+      "members": [
+        "onion"
+      ]
+    },
+    {
+      "key": "peppers",
+      "name": "Peppers",
+      "quantity": 2.5,
+      "unit": "lb",
+      "display": "2.5 lb",
+      "cooked_g": 960.0,
+      "raw_g": 1129.4,
+      "count": null,
+      "members": [
+        "peppers"
+      ]
+    },
+    {
+      "key": "oats",
+      "name": "Rolled oats",
+      "quantity": 1,
+      "unit": "container",
+      "display": "1 container",
+      "cooked_g": 285.0,
+      "raw_g": 285.0,
+      "count": null,
+      "members": [
+        "oats"
+      ]
+    },
+    {
+      "key": "cheese",
+      "name": "Shredded cheese",
+      "quantity": 1,
+      "unit": "bag",
+      "display": "1 bag",
+      "cooked_g": 50.0,
+      "raw_g": 50.0,
+      "count": null,
+      "members": [
+        "cheese"
+      ]
+    },
+    {
+      "key": "shrimp",
+      "name": "Shrimp",
+      "quantity": 2,
+      "unit": "lb",
+      "display": "2 lb",
+      "cooked_g": 670.0,
+      "raw_g": 893.3,
+      "count": null,
+      "members": [
+        "shrimp"
+      ]
+    },
+    {
+      "key": "spinach",
+      "name": "Spinach",
+      "quantity": 1.75,
+      "unit": "lb",
+      "display": "1.75 lb",
+      "cooked_g": 760.0,
+      "raw_g": 760.0,
+      "count": null,
+      "members": [
+        "spinach"
+      ]
+    },
+    {
+      "key": "squash",
+      "name": "Squash",
+      "quantity": 0.75,
+      "unit": "lb",
+      "display": "0.75 lb",
+      "cooked_g": 280.0,
+      "raw_g": 280.0,
+      "count": null,
+      "members": [
+        "squash"
+      ]
+    },
+    {
+      "key": "strawberry",
+      "name": "Strawberry",
+      "quantity": 1,
+      "unit": "carton",
+      "display": "1 carton",
+      "cooked_g": 200.0,
+      "raw_g": 200.0,
+      "count": null,
+      "members": [
+        "strawberry"
+      ]
+    },
+    {
+      "key": "steak",
+      "name": "Strip steak",
+      "quantity": 1,
+      "unit": "lb",
+      "display": "1 lb",
+      "cooked_g": 300.0,
+      "raw_g": 441.2,
+      "count": null,
+      "members": [
+        "steak"
+      ]
+    },
+    {
+      "key": "sweet_potato",
+      "name": "Sweet potato",
+      "quantity": 3.75,
+      "unit": "lb",
+      "display": "3.75 lb",
+      "cooked_g": 1650.0,
+      "raw_g": 1650.0,
+      "count": null,
+      "members": [
+        "sweet_potato"
+      ]
+    },
+    {
+      "key": "yu_choy",
+      "name": "Yu choy",
+      "quantity": 1.5,
+      "unit": "lb",
+      "display": "1.5 lb",
+      "cooked_g": 600.0,
+      "raw_g": 681.8,
+      "count": null,
+      "members": [
+        "yu_choy"
+      ]
+    }
+  ],
+  "staples": [
+    "Butter",
+    "Chia",
+    "Olive oil",
+    "Sesame oil"
+  ]
+}

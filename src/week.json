@@ -1,0 +1,56 @@
+{
+  "_comment": "Assignment only: which meal fills each day/slot, plus per-day shake counts. A slot value is either a meal id (string) or { meal, note } to override/suppress that meal's canonical note for this assignment (note:\"\" hides it). targets and weekOrder live here as plan config. Bump weekId (wk-YYYY-MM-DD) each week to auto-reset the app's checklist ticks.",
+
+  "weekId": "wk-2026-07-13",
+  "weekOrder": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+
+  "targets": {
+    "him": { "kcal": 2250, "p": 190, "c": 226, "fib": 38, "f": 65 },
+    "her": { "kcal": 1300, "p": 105, "c": 134, "fib": 30, "f": 38 }
+  },
+
+  "days": {
+    "monday": {
+      "label": "Monday",
+      "sub": "WFH · fresh wrap",
+      "slots": { "breakfast": "egg-scramble", "lunch": "chicken-wrap", "dinner": "beef-rice-bowl-yuchoy" },
+      "shake": { "him": 1, "her": 0 }
+    },
+    "tuesday": {
+      "label": "Tuesday",
+      "sub": "office · packed lunch",
+      "slots": { "breakfast": "overnight-oats", "lunch": "beef-farro-lentils", "dinner": "shrimp-stirfry" },
+      "shake": { "him": 1, "her": 0 }
+    },
+    "wednesday": {
+      "label": "Wednesday",
+      "sub": "cook session 2 tonight",
+      "slots": { "breakfast": "yogurt-oats-bowl", "lunch": "lentil-beef-bowl", "dinner": "strip-steak" },
+      "shake": { "him": 1, "her": 0 }
+    },
+    "thursday": {
+      "label": "Thursday",
+      "sub": "office · packed lunch",
+      "slots": { "breakfast": { "meal": "overnight-oats", "note": "" }, "lunch": "chicken-farro-lentils", "dinner": "beef-rice-bowl-peppers" },
+      "shake": { "him": 1, "her": 0 }
+    },
+    "friday": {
+      "label": "Friday",
+      "sub": "WFH · fresh wrap",
+      "slots": { "breakfast": { "meal": "egg-scramble", "note": "" }, "lunch": { "meal": "chicken-wrap", "note": "" }, "dinner": "shrimp-yuchoy-rice" },
+      "shake": { "him": 1, "her": 0 }
+    },
+    "saturday": {
+      "label": "Saturday",
+      "sub": "weekend · breakfast only prepped",
+      "slots": { "breakfast": "savory-hash" },
+      "shake": { "him": 1, "her": 0 }
+    },
+    "sunday": {
+      "label": "Sunday",
+      "sub": "weekend · breakfast only prepped",
+      "slots": { "breakfast": { "meal": "savory-hash", "note": "Same as Saturday. His: no tomato. Hers: hot sauce on top." } },
+      "shake": { "him": 1, "her": 0 }
+    }
+  }
+}

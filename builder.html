@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Week Builder — Meal Prep</title>
+<style>
+  :root{
+    --paper:#f7f4ee; --card:#fffdf8; --ink:#201f1a; --muted:#6f6a5d;
+    --line:#e4ded1; --line2:#efe9dd;
+    --him:#46603a; --him-soft:#eaf0e3;
+    --her:#8a4d68; --her-soft:#f3e7ee;
+    --ok:#3f7a3a; --warn:#b26a1f; --bad:#b23b2f;
+    --num:"SF Mono",ui-monospace,"DejaVu Sans Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.4}
+  .wrap{max-width:760px;margin:0 auto;padding:0 0 120px}
+  header{position:sticky;top:0;z-index:20;background:var(--paper);padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .brand{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+  .brand small{display:block;font-weight:500;color:var(--muted);font-size:.72rem;letter-spacing:.02em;text-transform:uppercase}
+  .ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .wk{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted)}
+  .wk input{font:inherit;font-family:var(--num);font-size:.82rem;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);width:130px}
+  button{appearance:none;border:1px solid var(--line);background:var(--card);font:inherit;font-weight:600;font-size:.84rem;color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer}
+  button.primary{background:var(--him);color:#fff;border-color:var(--him)}
+  button:active{transform:translateY(1px)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 16px 0;color:var(--muted);font-size:.76rem}
+  .legend b{color:var(--ink)}
+  main{padding:6px 0}
+  .day{margin:12px 16px;border:1px solid var(--line);background:var(--card);border-radius:16px;overflow:hidden}
+  .day.weekend{opacity:.96}
+  .dhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:13px 15px 8px}
+  .dhead h2{margin:0;font-size:1.15rem;letter-spacing:-.01em}
+  .dhead .sub input{font:inherit;font-size:.8rem;color:var(--muted);border:0;background:transparent;text-align:right;width:210px;max-width:48vw}
+  .dhead .sub input:focus{outline:1px solid var(--line);border-radius:6px}
+  .slots{padding:2px 12px 6px}
+  .slot{display:grid;grid-template-columns:92px 1fr auto;align-items:center;gap:10px;padding:7px 4px;border-top:1px solid var(--line2)}
+  .slot:first-child{border-top:0}
+  .slot .lab{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+  .slot select{font:inherit;font-size:.9rem;padding:8px 9px;border:1px solid var(--line);border-radius:9px;background:var(--paper);width:100%;max-width:100%}
+  .slot .mk{font-family:var(--num);font-size:.72rem;color:var(--muted);white-space:nowrap;text-align:right;min-width:96px}
+  .slot .mk b{color:var(--him);font-weight:600}.slot .mk i{color:var(--her);font-style:normal;font-weight:600}
+  .shakerow{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid var(--line2)}
+  .shakerow .lab{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+  .shakeinputs{display:flex;gap:16px;align-items:center;font-size:.82rem;color:var(--muted)}
+  .shakeinputs label{display:inline-flex;align-items:center;gap:6px}
+  .shakeinputs input{font:inherit;font-family:var(--num);width:52px;padding:6px 7px;border:1px solid var(--line);border-radius:8px;background:var(--paper);text-align:center}
+  .summary{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
+  .per{background:var(--card);padding:11px 14px}
+  .per .who{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:4px}
+  .per.him .who{color:var(--him)} .per.her .who{color:var(--her)}
+  .per .kc{font-family:var(--num);font-size:1.15rem;font-weight:600}
+  .per .kc span{font-family:var(--sans);font-size:.72rem;color:var(--muted);font-weight:500;margin-left:5px}
+  .per .row2{display:flex;gap:8px;align-items:center;margin-top:5px;flex-wrap:wrap}
+  .chip{font-size:.7rem;font-weight:600;padding:3px 8px;border-radius:999px}
+  .chip.p{font-family:var(--num)}
+  .chip.ok{background:#e7f1e5;color:var(--ok)}
+  .chip.warn{background:#f6ecdb;color:var(--warn)}
+  .chip.bad{background:#f6e0dd;color:var(--bad)}
+  .chip.muted{background:var(--line2);color:var(--muted)}
+  .weekfoot{margin:18px 16px 0;padding:14px;border:1px dashed var(--line);border-radius:14px;background:var(--card)}
+  .weekfoot h3{margin:0 0 8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .wtot{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--num);font-size:.86rem}
+  .wtot b{font-weight:600}
+  .export{margin:16px}
+  .export textarea{width:100%;height:200px;font-family:var(--num);font-size:.74rem;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--card);color:var(--ink);white-space:pre;overflow:auto}
+  .hint{color:var(--muted);font-size:.76rem;margin:6px 2px 0;line-height:1.5}
+  .state{padding:56px 24px;text-align:center;color:var(--muted)}
+  .state code{font-family:var(--num);background:var(--line2);padding:2px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topline">
+      <div class="brand">Week Builder<small>Meal Prep · planning</small></div>
+      <div class="ctrls">
+        <span class="wk">weekId <input id="weekId" spellcheck="false"></span>
+        <button id="reload" title="Reload from src/week.json">Reset</button>
+        <button id="export" class="primary">Export week.json</button>
+      </div>
+    </div>
+    <div class="legend">
+      <span><b>Him</b> ≥2,250 kcal · P&nbsp;≥180g</span>
+      <span><b>Her</b> ≥1,300 kcal · P&nbsp;≥100g</span>
+      <span>flag if kcal &gt;15% off target</span>
+    </div>
+  </header>
+  <main id="main"><div class="state">Loading library…</div></main>
+</div>
+
+<script>
+let ING=null, MEALS=null, WEEK=null;
+const SLOTS=["breakfast","lunch","dinner"];
+const SLOT_LABEL={breakfast:"Breakfast",lunch:"Lunch",dinner:"Dinner"};
+const WEEKEND=new Set(["saturday","sunday"]);
+const FLOOR={him:180,her:100};
+
+function nutOf(ing,amt){const n=ING[ing];const k=n.basis==="100g"?amt/100:amt;
+  return {kcal:n.kcal*k,p:n.p*k,c:n.c*k,fib:n.fib*k,f:n.f*k};}
+function mealTotals(mid,w){const t={kcal:0,p:0,c:0,fib:0,f:0};if(!mid)return t;
+  for(const cp of MEALS[mid].components){const a=cp[w];if(a){const x=nutOf(cp.ing,a);for(const k in t)t[k]+=x[k];}}return t;}
+const R=Math.round;
+
+// live editable state, seeded from week.json
+let ST=null;
+function seed(){
+  ST={weekId:WEEK.weekId,targets:WEEK.targets,order:WEEK.weekOrder,days:{}};
+  for(const dk of WEEK.weekOrder){
+    const wd=WEEK.days[dk];const slots={};
+    for(const s of SLOTS){const sv=wd.slots[s];slots[s]=sv?(typeof sv==="string"?sv:sv.meal):"";}
+    ST.days[dk]={label:wd.label,sub:wd.sub,slots,shake:{...wd.shake}};
+  }
+}
+
+function mealsForSlot(slot){return Object.keys(MEALS).filter(id=>!id.startsWith("_")&&MEALS[id].slot===slot);}
+
+function dayTotals(dk,w){const d=ST.days[dk];const t={kcal:0,p:0,c:0,fib:0,f:0};
+  for(const s of SLOTS){const mt=mealTotals(d.slots[s],w);for(const k in t)t[k]+=mt[k];}
+  const sk=d.shake[w];if(sk){const x=nutOf("koia",sk);for(const k in t)t[k]+=x[k];}return t;}
+
+function personBlock(dk,w){
+  const t=dayTotals(dk,w),tgt=ST.targets[w],weekend=WEEKEND.has(dk);
+  const off=Math.abs(t.kcal-tgt.kcal)/tgt.kcal;
+  const pOk=t.p>=FLOOR[w];
+  let chips="";
+  if(weekend){chips=`<span class="chip muted">weekend · breakfast only</span>`;}
+  else{
+    chips+=`<span class="chip p ${pOk?'ok':'bad'}">P ${R(t.p)}g${pOk?' ✓':' < '+FLOOR[w]}</span>`;
+    if(off>0.15)chips+=`<span class="chip warn">kcal ${R(off*100)}% off</span>`;
+    else chips+=`<span class="chip ok">on target</span>`;
+  }
+  return `<div class="per ${w}"><div class="who">${w==='him'?'His':'Hers'}</div>
+    <div class="kc">${R(t.kcal)}<span>/ ${tgt.kcal} kcal</span></div>
+    <div class="row2">${chips}</div></div>`;
+}
+
+function slotRow(dk,slot){
+  const d=ST.days[dk],cur=d.slots[slot],opts=mealsForSlot(slot);
+  let o=`<option value="">— none —</option>`;
+  for(const id of opts)o+=`<option value="${id}"${id===cur?' selected':''}>${MEALS[id].name}</option>`;
+  const th=mealTotals(cur,"him"),tr=mealTotals(cur,"her");
+  const mk=cur?`<b>${R(th.kcal)}</b> / <i>${R(tr.kcal)}</i>`:`—`;
+  return `<div class="slot"><span class="lab">${SLOT_LABEL[slot]}</span>
+    <select data-day="${dk}" data-slot="${slot}">${o}</select>
+    <span class="mk">${mk}</span></div>`;
+}
+
+function dayCard(dk){
+  const d=ST.days[dk];
+  const rows=SLOTS.map(s=>slotRow(dk,s)).join("");
+  return `<section class="day ${WEEKEND.has(dk)?'weekend':''}">
+    <div class="dhead"><h2>${d.label}</h2>
+      <span class="sub"><input data-day="${dk}" data-sub="1" value="${(d.sub||'').replace(/"/g,'&quot;')}" placeholder="day note…"></span></div>
+    <div class="slots">${rows}
+      <div class="shakerow"><span class="lab">Koia shake</span>
+        <span class="shakeinputs">
+          <label>His <input type="number" min="0" step="1" data-day="${dk}" data-shake="him" value="${d.shake.him}"></label>
+          <label>Hers <input type="number" min="0" step="1" data-day="${dk}" data-shake="her" value="${d.shake.her}"></label>
+        </span></div>
+    </div>
+    <div class="summary">${personBlock(dk,'him')}${personBlock(dk,'her')}</div>
+  </section>`;
+}
+
+function weekFoot(){
+  let sum={him:{kcal:0,p:0},her:{kcal:0,p:0}};
+  for(const dk of ST.order)for(const w of ["him","her"]){const t=dayTotals(dk,w);sum[w].kcal+=t.kcal;sum[w].p+=t.p;}
+  const wd=ST.order.filter(d=>!WEEKEND.has(d)).length||1;
+  const avg=w=>`avg/day <b>${R(sum[w].kcal/ST.order.length)}</b> kcal · <b>${R(sum[w].p/ST.order.length)}</b>g P`;
+  return `<div class="weekfoot"><h3>Week at a glance</h3>
+    <div class="wtot"><span style="color:var(--him)">His ${avg('him')}</span>
+    <span style="color:var(--her)">Hers ${avg('her')}</span></div>
+    <div class="hint">Weekend lunch/dinner are intentionally not prepped, so Sat/Sun read low by design — that's expected, not a flag.</div></div>`;
+}
+
+function render(){
+  const m=document.getElementById("main");
+  m.innerHTML=ST.order.map(dayCard).join("")+weekFoot();
+  document.getElementById("weekId").value=ST.weekId;
+  m.querySelectorAll("select[data-slot]").forEach(sel=>sel.onchange=e=>{
+    ST.days[e.target.dataset.day].slots[e.target.dataset.slot]=e.target.value;render();});
+  m.querySelectorAll("input[data-shake]").forEach(inp=>inp.onchange=e=>{
+    ST.days[e.target.dataset.day].shake[e.target.dataset.shake]=Math.max(0,parseInt(e.target.value||"0",10));render();});
+  m.querySelectorAll("input[data-sub]").forEach(inp=>inp.oninput=e=>{ST.days[e.target.dataset.day].sub=e.target.value;});
+}
+
+function buildWeekJson(){
+  const wid=document.getElementById("weekId").value.trim()||ST.weekId;
+  const days={};
+  for(const dk of ST.order){
+    const d=ST.days[dk],slots={};
+    for(const s of SLOTS)if(d.slots[s])slots[s]=d.slots[s];
+    days[dk]={label:d.label,sub:d.sub,slots,shake:{him:d.shake.him,her:d.shake.her}};
+  }
+  return {weekId:wid,weekOrder:ST.order,targets:ST.targets,days};
+}
+
+function doExport(){
+  const obj=buildWeekJson();
+  const txt=JSON.stringify(obj,null,2);
+  let box=document.getElementById("exportbox");
+  if(!box){box=document.createElement("div");box.className="export";box.id="exportbox";
+    document.querySelector(".wrap").appendChild(box);}
+  box.innerHTML=`<textarea readonly></textarea>
+    <div class="hint">Save this as <code>src/week.json</code>, then run <code>python build/build.py</code> + <code>python build/grocery.py</code> and push. (Note overrides that suppress a repeated meal's note aren't emitted — the meal's canonical note is used; hand-edit if needed.)</div>`;
+  box.querySelector("textarea").value=txt;
+  const blob=new Blob([txt],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="week.json";a.click();
+  box.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+async function boot(){
+  try{
+    const [i,me,wk]=await Promise.all([
+      fetch("./src/ingredients.json").then(r=>r.json()),
+      fetch("./src/meals.json").then(r=>r.json()),
+      fetch("./src/week.json").then(r=>r.json())]);
+    ING={};for(const k in i)if(!k.startsWith("_"))ING[k]=i[k];
+    MEALS=me;WEEK=wk;seed();render();
+    document.getElementById("export").onclick=doExport;
+    document.getElementById("reload").onclick=()=>{seed();const b=document.getElementById("exportbox");if(b)b.remove();render();};
+  }catch(e){
+    document.getElementById("main").innerHTML=
+      `<div class="state">Couldn't load sources. Serve the repo over HTTP so <code>./src/*.json</code> is reachable.<br><br>(${String(e.message||e)})</div>`;
+  }
+}
+boot();
+</script>
+</body>
+</html>
