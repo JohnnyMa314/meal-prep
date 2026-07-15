@@ -119,8 +119,9 @@ function compTotals(comps,w){const t={kcal:0,p:0,c:0,fib:0,f:0};
 const R=Math.round, r5=x=>Math.max(0,Math.round(x/5)*5), clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 const mealsForSlot=s=>Object.keys(MEALS).filter(id=>!id.startsWith("_")&&MEALS[id].slot===s);
 
-function fillOptions(sel,ids,auto){sel.innerHTML=(auto?`<option value="">Auto</option>`:`<option value="">— none —</option>`)+
-  ids.map(id=>`<option value="${id}">${ING[id]?ING[id].name:MEALS[id].name}</option>`).join("");}
+function fillOptions(sel,ids,ph,label){sel.innerHTML=(ph?`<option value="">${ph}</option>`:"")+
+  ids.map(id=>`<option value="${id}">${label(id)}</option>`).join("");}
+const labMeal=id=>MEALS[id].name, labIng=id=>ING[id].name, labSlot=id=>SLOT_LABEL[id];
 
 function otherSlots(){return SLOTS.filter(s=>s!==document.getElementById("fillSlot").value);}
 function rebuildOthers(){
@@ -129,7 +130,7 @@ function rebuildOthers(){
   w1.querySelector("label").textContent="Already: "+SLOT_LABEL[os[0]];
   w2.querySelector("label").textContent="Already: "+SLOT_LABEL[os[1]];
   const s1=document.getElementById("other1"),s2=document.getElementById("other2");
-  fillOptions(s1,mealsForSlot(os[0]),false); fillOptions(s2,mealsForSlot(os[1]),false);
+  fillOptions(s1,mealsForSlot(os[0]),"— none —",labMeal); fillOptions(s2,mealsForSlot(os[1]),"— none —",labMeal);
   // sensible defaults from the current week's Monday, if present
   const mon=WEEK.days.monday.slots;
   const pick=slot=>{const sv=mon[slot];return sv?(typeof sv==="string"?sv:sv.meal):"";};
@@ -266,11 +267,11 @@ function boot(){
   Promise.all([fetch("./src/ingredients.json").then(r=>r.json()),fetch("./src/meals.json").then(r=>r.json()),fetch("./src/week.json").then(r=>r.json())])
    .then(([i,me,wk])=>{
      ING={};for(const k in i)if(!k.startsWith("_"))ING[k]=i[k];MEALS=me;WEEK=wk;
-     fillOptions(document.getElementById("fillSlot"),["lunch","dinner"],false);
+     fillOptions(document.getElementById("fillSlot"),["lunch","dinner"],"",labSlot);
      document.getElementById("fillSlot").value="dinner";
-     fillOptions(document.getElementById("lockP"),ROLE.protein,true);
-     fillOptions(document.getElementById("lockC"),ROLE.carb,true);
-     fillOptions(document.getElementById("lockV"),ROLE.veg,true);
+     fillOptions(document.getElementById("lockP"),ROLE.protein,"Auto",labIng);
+     fillOptions(document.getElementById("lockC"),ROLE.carb,"Auto",labIng);
+     fillOptions(document.getElementById("lockV"),ROLE.veg,"Auto",labIng);
      rebuildOthers();
      document.getElementById("fillSlot").onchange=()=>{rebuildOthers();refresh();};
      ["other1","other2","shake","lockP","lockC","lockV"].forEach(id=>document.getElementById(id).onchange=refresh);
