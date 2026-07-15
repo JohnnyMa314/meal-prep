@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meal Suggester — Meal Prep</title>
+<style>
+  :root{
+    --paper:#f7f4ee; --card:#fffdf8; --ink:#201f1a; --muted:#6f6a5d;
+    --line:#e4ded1; --line2:#efe9dd;
+    --him:#46603a; --him-soft:#eaf0e3; --her:#8a4d68; --her-soft:#f3e7ee;
+    --ok:#3f7a3a; --warn:#b26a1f; --bad:#b23b2f;
+    --num:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --accent:var(--him); --accent-soft:var(--him-soft);
+  }
+  body.her{--accent:var(--her); --accent-soft:var(--her-soft);}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.4}
+  .wrap{max-width:720px;margin:0 auto;padding:0 0 120px}
+  header{position:sticky;top:0;z-index:20;background:var(--paper);padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .brand{font-size:1.05rem;font-weight:700}.brand small{display:block;font-weight:500;color:var(--muted);font-size:.72rem;letter-spacing:.02em;text-transform:uppercase}
+  .who{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+  .who button{appearance:none;border:0;background:transparent;font:inherit;font-weight:600;padding:8px 18px;color:var(--muted);cursor:pointer;font-size:.9rem}
+  .who button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  .panel{margin:12px 16px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:13px 15px}
+  .panel h3{margin:0 0 10px;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .fld{display:flex;flex-direction:column;gap:4px}
+  .fld label{font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+  select{font:inherit;font-size:.9rem;padding:8px 9px;border:1px solid var(--line);border-radius:9px;background:var(--paper)}
+  .chkline{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.85rem;color:var(--muted)}
+  .gap{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--accent-soft);font-size:.9rem}
+  .gap b{font-family:var(--num)}
+  .results{margin:4px 0}
+  .card{margin:12px 16px;border:1px solid var(--line);background:var(--card);border-radius:16px;overflow:hidden}
+  .card .top{padding:13px 15px 6px}
+  .card .nm{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .tag{font-size:.66rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:var(--line2);color:var(--muted)}
+  .tag.lpr{background:#f6e9df;color:#9a5a34}.tag.fit{background:var(--accent-soft);color:var(--accent)}
+  .lands{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .chip{font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;font-family:var(--num)}
+  .chip.ok{background:#e7f1e5;color:var(--ok)}.chip.warn{background:#f6ecdb;color:var(--warn)}.chip.bad{background:#f6e0dd;color:var(--bad)}
+  .comps{display:grid;grid-template-columns:1fr auto auto;gap:1px;background:var(--line2);margin-top:12px;border-top:1px solid var(--line2)}
+  .comps .h,.comps .r{display:contents}
+  .comps span{background:var(--card);padding:7px 12px;font-size:.84rem}
+  .comps .colh{font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:right}
+  .comps .amt{font-family:var(--num);text-align:right}
+  .comps .amt.him{color:var(--him)}.comps .amt.her{color:var(--her)}
+  .note{padding:9px 15px 4px;color:var(--muted);font-size:.82rem;line-height:1.45}
+  .cardfoot{display:flex;gap:8px;justify-content:flex-end;padding:8px 12px 12px}
+  button.mini{appearance:none;border:1px solid var(--line);background:var(--card);font:inherit;font-weight:600;font-size:.78rem;color:var(--ink);padding:7px 12px;border-radius:9px;cursor:pointer}
+  button.mini.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .exportbox{margin:10px 16px 0}
+  .exportbox textarea{width:100%;height:150px;font-family:var(--num);font-size:.72rem;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--card)}
+  .hint{color:var(--muted);font-size:.76rem;margin:8px 16px 0;line-height:1.5}
+  .state{padding:56px 24px;text-align:center;color:var(--muted)}
+  .state code{font-family:var(--num);background:var(--line2);padding:2px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topline">
+      <div class="brand">Meal Suggester<small>Meal Prep · fill the gap</small></div>
+      <div class="who" role="group" aria-label="Whose day">
+        <button id="wHim" aria-pressed="true">His</button>
+        <button id="wHer" aria-pressed="false">Hers</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="panel" id="setup">
+    <h3>The day so far</h3>
+    <div class="grid">
+      <div class="fld"><label>I'm filling</label><select id="fillSlot"></select></div>
+      <div class="fld" id="o1wrap"><label></label><select id="other1"></select></div>
+      <div class="fld" id="o2wrap"><label></label><select id="other2"></select></div>
+    </div>
+    <div class="chkline"><input type="checkbox" id="shake" checked><label for="shake">His Koia shake counted in the day</label></div>
+    <div class="gap" id="gap"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Bowl combo — lock any axis, or leave on Auto</h3>
+    <div class="grid">
+      <div class="fld"><label>Protein</label><select id="lockP"></select></div>
+      <div class="fld"><label>Carb</label><select id="lockC"></select></div>
+      <div class="fld"><label>Veg</label><select id="lockV"></select></div>
+    </div>
+    <div class="hint" style="margin:10px 0 0">Suggestions portion <b>his</b> and <b>hers</b> separately to each person's remaining budget, add the right seasoning, and apply his LPR acid-swap automatically.</div>
+  </div>
+
+  <main class="results" id="results"></main>
+</div>
+
+<script>
+let ING=null, MEALS=null, WEEK=null, who='him';
+const SLOTS=["breakfast","lunch","dinner"], SLOT_LABEL={breakfast:"Breakfast",lunch:"Lunch",dinner:"Dinner"};
+// ingredient roles for the bowl template (could later live as a `role` field in ingredients.json)
+const ROLE={
+  protein:["ground_beef","chicken_breast","chicken_thigh","shrimp","steak"],
+  carb:["rice","farro","lentils","beans","sweet_potato","tortilla"],
+  veg:["peppers","spinach","yu_choy","brussels","broccolini","squash","mushrooms","onion"]
+};
+const HIFIBER=new Set(["lentils","beans","farro"]);
+const SEASON={ground_beef:"Asian",shrimp:"Asian",chicken_breast:"Savory",chicken_thigh:"Savory",steak:"Clean"};
+const SEASON_NOTE={Asian:"Ginger, garlic, scallion, soy, a little sesame oil.",Savory:"Salt, garlic, thyme/oregano, black pepper.",Clean:"Salt, pepper, a knob of butter."};
+const TAG={ground_beef:"reheat",shrimp:"fresh",chicken_breast:"fresh",chicken_thigh:"packed",steak:"fresh"};
+const FLOOR={him:180,her:100};
+
+const nutOf=(ing,amt)=>{const n=ING[ing];const k=n.basis==="100g"?amt/100:amt;return {kcal:n.kcal*k,p:n.p*k,c:n.c*k,fib:n.fib*k,f:n.f*k};};
+function mealTotals(mid,w){const t={kcal:0,p:0,c:0,fib:0,f:0};if(!mid)return t;
+  for(const cp of MEALS[mid].components){const a=cp[w];if(a){const x=nutOf(cp.ing,a);for(const k in t)t[k]+=x[k];}}return t;}
+function compTotals(comps,w){const t={kcal:0,p:0,c:0,fib:0,f:0};
+  for(const cp of comps){const a=cp[w];if(a){const x=nutOf(cp.ing,a);for(const k in t)t[k]+=x[k];}}return t;}
+const R=Math.round, r5=x=>Math.max(0,Math.round(x/5)*5), clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const mealsForSlot=s=>Object.keys(MEALS).filter(id=>!id.startsWith("_")&&MEALS[id].slot===s);
+
+function fillOptions(sel,ids,auto){sel.innerHTML=(auto?`<option value="">Auto</option>`:`<option value="">— none —</option>`)+
+  ids.map(id=>`<option value="${id}">${ING[id]?ING[id].name:MEALS[id].name}</option>`).join("");}
+
+function otherSlots(){return SLOTS.filter(s=>s!==document.getElementById("fillSlot").value);}
+function rebuildOthers(){
+  const os=otherSlots();
+  const w1=document.getElementById("o1wrap"),w2=document.getElementById("o2wrap");
+  w1.querySelector("label").textContent="Already: "+SLOT_LABEL[os[0]];
+  w2.querySelector("label").textContent="Already: "+SLOT_LABEL[os[1]];
+  const s1=document.getElementById("other1"),s2=document.getElementById("other2");
+  fillOptions(s1,mealsForSlot(os[0]),false); fillOptions(s2,mealsForSlot(os[1]),false);
+  // sensible defaults from the current week's Monday, if present
+  const mon=WEEK.days.monday.slots;
+  const pick=slot=>{const sv=mon[slot];return sv?(typeof sv==="string"?sv:sv.meal):"";};
+  if(mealsForSlot(os[0]).includes(pick(os[0])))s1.value=pick(os[0]);
+  if(mealsForSlot(os[1]).includes(pick(os[1])))s2.value=pick(os[1]);
+}
+
+function alreadyTotals(w){
+  const t={kcal:0,p:0,c:0,fib:0,f:0};
+  for(const id of ["other1","other2"]){const v=document.getElementById(id).value;const mt=mealTotals(v,w);for(const k in t)t[k]+=mt[k];}
+  if(w==="him"&&document.getElementById("shake").checked){const x=nutOf("koia",1);for(const k in t)t[k]+=x[k];}
+  return t;
+}
+function gapFor(w){const tgt=WEEK.targets[w],a=alreadyTotals(w);return {kcal:tgt.kcal-a.kcal,p:tgt.p-a.p,already:a,tgt};}
+
+function seasonOf(pr){return SEASON[pr]||"Savory";}
+function fatFor(fam){return fam==="Asian"?"sesame_oil":"olive_oil";}
+function lprFor(pr,fam){return fam==="Asian"||pr==="steak";}
+function lprNote(pr,fam){return fam==="Asian"
+  ?"His LPR: no rice vinegar/citrus — pinch of sugar + extra ginger & scallion. Hers: chili crisp + rice vinegar."
+  :"His LPR: garlic-butter baste, no citrus. Hers: chimichurri or lime.";}
+
+// portion one person's bowl to their remaining gap
+function solve(pr,cb,vg,fatIng,w){
+  const g=gapFor(w); const gapK=g.kcal, gapP=g.p;
+  const vgG=w==="him"?150:140, fatG=1;
+  let prG=clamp(r5(gapP/(ING[pr].p/100)),90,300);
+  let used=nutOf(pr,prG).kcal+nutOf(vg,vgG).kcal+nutOf(fatIng,fatG).kcal;
+  let cbG=clamp(r5((gapK-used)/(ING[cb].kcal/100)),0,340);
+  let avoG=0;
+  used=nutOf(pr,prG).kcal+nutOf(vg,vgG).kcal+nutOf(fatIng,fatG).kcal+nutOf(cb,cbG).kcal;
+  if(w==="him"&&(gapK-used)>120)avoG=60;                       // density lever for the gain
+  const comps=[{ing:pr,g:prG},{ing:cb,g:cbG},{ing:vg,g:vgG},{ing:fatIng,g:fatG}];
+  if(avoG)comps.push({ing:"avocado",g:avoG});
+  return comps;
+}
+
+function buildCandidate(pr,cb,vg){
+  const fam=seasonOf(pr), fatIng=fatFor(fam);
+  const him=solve(pr,cb,vg,fatIng,"him"), her=solve(pr,cb,vg,fatIng,"her");
+  // merge into components [{ing,him,her}]
+  const map={};
+  const put=(arr,w)=>arr.forEach(c=>{map[c.ing]=map[c.ing]||{ing:c.ing,him:0,her:0};map[c.ing][w]=c.g;});
+  put(him,"him"); put(her,"her");
+  const comps=Object.values(map);
+  return {pr,cb,vg,fam,fatIng,comps,lpr:lprFor(pr,fam)};
+}
+
+function scoreFor(cand,w){
+  const g=gapFor(w), tgt=g.tgt;
+  const mt=compTotals(cand.comps,w);
+  const dayK=g.already.kcal+mt.kcal, dayP=g.already.p+mt.p;
+  let s=100 - Math.abs(dayK-tgt.kcal)/tgt.kcal*140;
+  if(dayP<FLOOR[w]) s-=40;
+  if(dayK>tgt.kcal*1.12) s-=(dayK-tgt.kcal*1.12)/tgt.kcal*80;
+  if(w==="her"&&HIFIBER.has(cand.cb)) s+=6;
+  // variety: penalize a protein/carb already eaten today
+  const eaten=new Set();
+  for(const id of ["other1","other2"]){const v=document.getElementById(id).value;if(v)MEALS[v].components.forEach(c=>eaten.add(c.ing));}
+  if(eaten.has(cand.pr)) s-=14;
+  if(eaten.has(cand.cb)) s-=6;
+  return {s,dayK,dayP,mt};
+}
+
+function chip(val,ref,floor){
+  if(floor!==undefined){const ok=val>=floor;return `<span class="chip ${ok?'ok':'bad'}">P ${R(val)}g${ok?' ✓':' <'+floor}</span>`;}
+  const off=Math.abs(val-ref)/ref;const cls=off<=0.08?'ok':off<=0.15?'warn':'bad';
+  return `<span class="chip ${cls}">${R(val)} / ${ref} kcal</span>`;
+}
+
+function cardHTML(cand,i){
+  const sc=scoreFor(cand,who), tgt=WEEK.targets[who];
+  const nm=`${ING[cand.pr].name} · ${ING[cand.cb].name} · ${ING[cand.vg].name}`;
+  let tags=`<span class="tag">${cand.fam}</span><span class="tag">${TAG[cand.pr]||'fresh'}</span>`;
+  if(cand.lpr)tags+=`<span class="tag lpr">⚠ LPR swap</span>`;
+  tags+=`<span class="tag fit">fit ${R(sc.s)}</span>`;
+  const rows=cand.comps.map(c=>{
+    const unit=ING[c.ing].unit;
+    return `<div class="r"><span>${ING[c.ing].name}</span><span class="amt him">${c.him||'—'}${c.him?unit:''}</span><span class="amt her">${c.her||'—'}${c.her?unit:''}</span></div>`;
+  }).join("");
+  return `<section class="card" data-i="${i}">
+    <div class="top">
+      <div class="nm">${nm}</div>
+      <div class="tags">${tags}</div>
+      <div class="lands">lands the day: ${chip(sc.dayK,tgt.kcal)} ${chip(sc.dayP,undefined,FLOOR[who])}
+        <span class="chip">this meal ${R(sc.mt.kcal)} kcal · ${R(sc.mt.p)}g P · ${R(sc.mt.fib)}g fib</span></div>
+    </div>
+    <div class="comps"><div class="h"><span class="colh" style="text-align:left">Ingredient (cooked)</span><span class="colh">His</span><span class="colh">Hers</span></div>${rows}</div>
+    <div class="note"><b>Season:</b> ${SEASON_NOTE[cand.fam]}${cand.lpr?' · '+lprNote(cand.pr,cand.fam):''}</div>
+    <div class="cardfoot"><button class="mini" data-act="export" data-i="${i}">Export as meal</button></div>
+  </section>`;
+}
+
+let CANDS=[];
+function suggest(){
+  const lockP=document.getElementById("lockP").value, lockC=document.getElementById("lockC").value, lockV=document.getElementById("lockV").value;
+  const prs=lockP?[lockP]:ROLE.protein, cbs=lockC?[lockC]:ROLE.carb;
+  // choose veg: locked, else a per-protein default, rotated for variety
+  const vegPick=(pr,idx)=>lockV||["yu_choy","peppers","broccolini","brussels","spinach","mushrooms","squash"][idx%7];
+  let list=[];
+  let idx=0;
+  for(const pr of prs)for(const cb of cbs){list.push(buildCandidate(pr,cb,vegPick(pr,idx)));idx++;}
+  list.forEach(c=>c._score=scoreFor(c,who).s);
+  list.sort((a,b)=>b._score-a._score);
+  CANDS=list.slice(0,6);
+  const res=document.getElementById("results");
+  res.innerHTML=CANDS.map((c,i)=>cardHTML(c,i)).join("")||`<div class="state">No combos — loosen a lock.</div>`;
+  res.querySelectorAll('button[data-act="export"]').forEach(b=>b.onclick=()=>doExport(+b.dataset.i));
+}
+
+function doExport(i){
+  const c=CANDS[i];
+  const id=`sug-${c.pr.replace(/_/g,'')}-${c.cb.replace(/_/g,'')}-${c.vg.replace(/_/g,'')}`;
+  const obj={};obj[id]={name:`${ING[c.pr].name} · ${ING[c.cb].name} bowl`,slot:document.getElementById("fillSlot").value,
+    tag:TAG[c.pr]||"fresh",...(c.lpr?{lpr:true}:{}),note:SEASON_NOTE[c.fam]+(c.lpr?" "+lprNote(c.pr,c.fam):""),
+    components:c.comps.map(x=>({ing:x.ing,him:x.him,her:x.her}))};
+  const txt=JSON.stringify(obj,null,2).replace(/^\{\n|\n\}$/g,"");
+  let box=document.getElementById("exportbox");
+  if(!box){box=document.createElement("div");box.className="exportbox";box.id="exportbox";document.querySelector(".wrap").appendChild(box);}
+  box.innerHTML=`<textarea readonly></textarea><div class="hint">Paste into <code>src/meals.json</code> (mind the comma), then rebuild. Portions are a starting point — tweak before you cook.</div>`;
+  box.querySelector("textarea").value=txt;
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function renderGap(){
+  const g=gapFor(who),slot=SLOT_LABEL[document.getElementById("fillSlot").value];
+  document.getElementById("gap").innerHTML=`Filling <b>${slot}</b> for <b>${who==='him'?'His':'Hers'}</b> day — need about
+    <b>${R(g.kcal)}</b> kcal and <b>${R(g.p)}g</b> protein to reach ${g.tgt.kcal} / ${g.tgt.p}
+    <span style="color:var(--muted)">(already ${R(g.already.kcal)} kcal · ${R(g.already.p)}g P)</span>.`;
+}
+function refresh(){renderGap();suggest();}
+
+function boot(){
+  Promise.all([fetch("./src/ingredients.json").then(r=>r.json()),fetch("./src/meals.json").then(r=>r.json()),fetch("./src/week.json").then(r=>r.json())])
+   .then(([i,me,wk])=>{
+     ING={};for(const k in i)if(!k.startsWith("_"))ING[k]=i[k];MEALS=me;WEEK=wk;
+     fillOptions(document.getElementById("fillSlot"),["lunch","dinner"],false);
+     document.getElementById("fillSlot").value="dinner";
+     fillOptions(document.getElementById("lockP"),ROLE.protein,true);
+     fillOptions(document.getElementById("lockC"),ROLE.carb,true);
+     fillOptions(document.getElementById("lockV"),ROLE.veg,true);
+     rebuildOthers();
+     document.getElementById("fillSlot").onchange=()=>{rebuildOthers();refresh();};
+     ["other1","other2","shake","lockP","lockC","lockV"].forEach(id=>document.getElementById(id).onchange=refresh);
+     document.getElementById("wHim").onclick=()=>{who='him';document.body.classList.remove('her');document.getElementById("wHim").setAttribute("aria-pressed","true");document.getElementById("wHer").setAttribute("aria-pressed","false");refresh();};
+     document.getElementById("wHer").onclick=()=>{who='her';document.body.classList.add('her');document.getElementById("wHer").setAttribute("aria-pressed","true");document.getElementById("wHim").setAttribute("aria-pressed","false");refresh();};
+     refresh();
+   })
+   .catch(e=>{document.getElementById("results").innerHTML=`<div class="state">Couldn't load sources — serve over HTTP so <code>./src/*.json</code> is reachable.<br><br>(${String(e.message||e)})</div>`;});
+}
+boot();
+</script>
+</body>
+</html>
