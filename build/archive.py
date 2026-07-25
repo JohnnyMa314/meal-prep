@@ -94,6 +94,9 @@ def main():
 
     os.makedirs(dest, exist_ok=True)
     shutil.copy2(data_path, os.path.join(dest, "data.json"))
+    # the sources are already the NEW week, so only the compiled data.json holds
+    # the old plan — keep it plus the readable pair below
+
     grocery = None
     if os.path.exists(grocery_path):
         shutil.copy2(grocery_path, os.path.join(dest, "grocery.json"))
