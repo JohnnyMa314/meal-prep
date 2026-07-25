@@ -120,7 +120,7 @@ def build():
 
         entry = {"label": wd["label"], "sub": wd["sub"]}
         for who in ("him", "her"):
-            floor = 180 if who == "him" else 100
+            floor = targets[who].get("pfloor", 180 if who == "him" else 100)
             tot = {m: 0.0 for m in ("kcal", "p", "c", "fib", "f")}
             mlist = []
             for m in day_meals:

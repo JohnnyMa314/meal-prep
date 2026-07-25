@@ -205,7 +205,7 @@ function render(){
   document.getElementById('wHer').setAttribute('aria-pressed', who==='her');
   buildRail();
   const d=DB.days[dayKey], tgt=DB.targets[who], dt=dayTotals(dayKey,who);
-  const floorMet=dt.p>=(who==='him'?180:100);
+  const floorMet=dt.p>=(tgt.pfloor!==undefined?tgt.pfloor:(who==='him'?180:100));
   const main=document.getElementById('day');
   const list=[...d.meals];
   if(d.shake[who]) list.push({name:'Anytime — Koia Elite shake',tag:'anchor',comps:[{ing:'koia',him:d.shake.him,her:d.shake.her}]});
@@ -230,7 +230,7 @@ function render(){
 
 function initFooter(){
   document.getElementById('foot').innerHTML=
-    `<b>% shown is share of the daily target</b> (his ~2,250&nbsp;kcal / 190&nbsp;g&nbsp;protein · hers ~1,300 / 105), not of that day's plan — weekend day-totals read low on purpose (only breakfast is prepped). <b>Nutrition is estimated</b> from standard reference values per gram cooked. Ticks save on this device and reset when the plan's week changes. Add to Home Screen for a full-screen icon.`;
+    `<b>% shown is share of the daily target</b> (his ~2,250&nbsp;kcal / 145&nbsp;g&nbsp;protein · hers ~1,300 / 105), not of that day's plan. <b>Nutrition is estimated</b> from standard reference values per gram cooked. Ticks save on this device and reset when the plan's week changes. Add to Home Screen for a full-screen icon.`;
 }
 
 document.getElementById('wHim').onclick=()=>{ who='him'; store.set('mp1::person','him'); render(); };

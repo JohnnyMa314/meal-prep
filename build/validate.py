@@ -25,8 +25,7 @@ import grocery as G        # noqa: E402
 
 ROOT = B.ROOT
 SLOTS = ["breakfast", "lunch", "dinner"]
-WEEKEND = {"saturday", "sunday"}
-FLOOR = {"him": 180, "her": 100}
+FLOOR_DEFAULT = {"him": 180, "her": 100}   # only used if targets carry no pfloor
 
 ATWATER_WARN = 0.15   # relative deviation flagged at ingredient level
 MEAL_WARN = 0.12      # relative deviation flagged at meal level
@@ -188,24 +187,23 @@ def main():
     if not grocery_bad:
         ok("every grocery line sums from the actual meals in data.json")
 
-    # ---------- 5. plan hits targets (weekdays) ----------
-    hdr("5. Plan vs targets (weekdays only; weekends are breakfast-only by design)")
+    # ---------- 5. plan hits targets ----------
+    hdr("5. Plan vs targets")
     plan_bad = 0
     for dk in data["weekOrder"]:
-        if dk in WEEKEND:
-            continue
         for who in ("him", "her"):
             e = data["totals"][dk][who]
             tgt = data["targets"][who]
-            if e["p"] < FLOOR[who]:
+            floor = tgt.get("pfloor", FLOOR_DEFAULT[who])
+            if e["p"] < floor:
                 plan_bad += 1
-                warn(f"{dk} {who}: protein {e['p']}g below floor {FLOOR[who]}g")
+                warn(f"{dk} {who}: protein {e['p']}g below floor {floor}g")
             off = abs(e["kcal"] - tgt["kcal"]) / tgt["kcal"]
             if off > KCAL_OFF:
                 plan_bad += 1
                 warn(f"{dk} {who}: {e['kcal']} kcal is {off * 100:.0f}% off target {tgt['kcal']}")
     if not plan_bad:
-        ok("all weekdays: protein floors met and kcal within 15% of target")
+        ok("every day: protein floors met and kcal within 15% of target")
 
     # ---------- summary ----------
     print()

@@ -109,7 +109,8 @@ const HIFIBER=new Set(["lentils","beans","farro"]);
 const SEASON={ground_beef:"Asian",shrimp:"Asian",chicken_breast:"Savory",chicken_thigh:"Savory",steak:"Clean"};
 const SEASON_NOTE={Asian:"Ginger, garlic, scallion, soy, a little sesame oil.",Savory:"Salt, garlic, thyme/oregano, black pepper.",Clean:"Salt, pepper, a knob of butter."};
 const TAG={ground_beef:"reheat",shrimp:"fresh",chicken_breast:"fresh",chicken_thigh:"packed",steak:"fresh"};
-const FLOOR={him:180,her:100};
+const FLOOR_DEFAULT={him:180,her:100};
+const floorOf=w=>{const t=WEEK&&WEEK.targets&&WEEK.targets[w];return t&&t.pfloor!==undefined?t.pfloor:FLOOR_DEFAULT[w];};
 
 const nutOf=(ing,amt)=>{const n=ING[ing];const k=n.basis==="100g"?amt/100:amt;return {kcal:n.kcal*k,p:n.p*k,c:n.c*k,fib:n.fib*k,f:n.f*k};};
 function mealTotals(mid,w){const t={kcal:0,p:0,c:0,fib:0,f:0};if(!mid)return t;
@@ -184,7 +185,7 @@ function scoreFor(cand,w){
   const mt=compTotals(cand.comps,w);
   const dayK=g.already.kcal+mt.kcal, dayP=g.already.p+mt.p;
   let s=100 - Math.abs(dayK-tgt.kcal)/tgt.kcal*140;
-  if(dayP<FLOOR[w]) s-=40;
+  if(dayP<floorOf(w)) s-=40;
   if(dayK>tgt.kcal*1.12) s-=(dayK-tgt.kcal*1.12)/tgt.kcal*80;
   if(w==="her"&&HIFIBER.has(cand.cb)) s+=6;
   // variety: penalize a protein/carb already eaten today
@@ -215,7 +216,7 @@ function cardHTML(cand,i){
     <div class="top">
       <div class="nm">${nm}</div>
       <div class="tags">${tags}</div>
-      <div class="lands">lands the day: ${chip(sc.dayK,tgt.kcal)} ${chip(sc.dayP,undefined,FLOOR[who])}
+      <div class="lands">lands the day: ${chip(sc.dayK,tgt.kcal)} ${chip(sc.dayP,undefined,floorOf(who))}
         <span class="chip">this meal ${R(sc.mt.kcal)} kcal · ${R(sc.mt.p)}g P · ${R(sc.mt.fib)}g fib</span></div>
     </div>
     <div class="comps"><div class="h"><span class="colh" style="text-align:left">Ingredient (cooked)</span><span class="colh">His</span><span class="colh">Hers</span></div>${rows}</div>

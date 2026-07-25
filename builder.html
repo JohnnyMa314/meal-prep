@@ -91,7 +91,7 @@
         <button id="reset">Reset</button>
       </div>
     </div>
-    <div class="legend"><b>Him</b> ~2,250 kcal · protein floor 180g &nbsp;·&nbsp; <b>Her</b> ~1,300 kcal · floor 100g. Each slot is a saved recipe or an assembled bowl auto-portioned to each split.</div>
+    <div class="legend" id="legend">Each slot is a saved recipe or an assembled bowl auto-portioned to each split.</div>
   </header>
   <main id="main"><div class="state">Loading library…</div></main>
 </div>
@@ -103,7 +103,8 @@ let ROLE={protein:[],carb:[],veg:[]};
 const SEASON={ground_beef:"Asian",shrimp:"Asian",chicken_breast:"Savory",chicken_thigh:"Savory",steak:"Clean",egg:"Clean",edamame:"Asian"};
 const SEASON_NOTE={Asian:"Ginger, garlic, scallion, soy, a little sesame oil.",Savory:"Salt, garlic, thyme/oregano, black pepper.",Clean:"Salt, pepper, a knob of butter."};
 const SPLIT_RATIO={protein:0.6,carb:0.62,veg:1.0,fat:0.7,dairy:0.85,fruit:0.85,shake:0,extra:1.0};
-const FLOOR={him:180,her:100}, LB=453.592, TOL=0.06;
+const FLOOR_DEFAULT={him:180,her:100}, LB=453.592, TOL=0.06;
+const floorOf=w=>{const t=ST&&ST.targets&&ST.targets[w];return t&&t.pfloor!==undefined?t.pfloor:FLOOR_DEFAULT[w];};
 const GROUP_LABEL={chicken:"Chicken (thigh + breast)"};
 const UNIT_WORD={lb:"lb",cup_dry:"cups dry",dozen:"dozen",bottle:"bottles",can:"can",container:"container",tub:"tub",carton:"carton",bag:"bag",gallon:"gallon",each:""};
 
@@ -251,7 +252,7 @@ function slotEditor(dk,sk,slotComps){
   return `<div class="slot"><span class="lab">${SLOT_LABEL[sk]}</span><div>${main}${bowl}</div><span class="mk">${mk}</span></div>`;
 }
 function perBlock(dk,w,tot){
-  const T=ST.targets[w], floor=FLOOR[w], kOff=Math.abs(tot.kcal-T.kcal)/T.kcal, pOk=tot.p>=floor;
+  const T=ST.targets[w], floor=floorOf(w), kOff=Math.abs(tot.kcal-T.kcal)/T.kcal, pOk=tot.p>=floor;
   let chips=`<span class="chip ${pOk?'ok':'bad'}">P ${R(tot.p)}g${pOk?' ✓':' <'+floor}</span>`;
   chips+=`<span class="chip carb">${R(tot.c)}g C · ${R(tot.fib)}g fib</span>`;
   chips+=kOff<=0.08?`<span class="chip ok">on target</span>`:kOff<=0.15?`<span class="chip warn">${R(kOff*100)}% off</span>`:`<span class="chip bad">${R(kOff*100)}% off</span>`;
@@ -267,7 +268,13 @@ function dayCard(dk){
 }
 function render(){
   document.getElementById("main").innerHTML=ST.order.map(dayCard).join("");
-  document.getElementById("weekId").value=ST.weekId;wire();
+  document.getElementById("weekId").value=ST.weekId;
+  const t=ST.targets;
+  document.getElementById("legend").innerHTML=
+    `<b>Him</b> ${t.him.kcal.toLocaleString()} kcal · ${t.him.p}g P (floor ${floorOf("him")}) · ${t.him.c}g C · ${t.him.fib}g fib · ${t.him.f}g fat`
+    +` &nbsp;·&nbsp; <b>Her</b> ${t.her.kcal.toLocaleString()} kcal · ${t.her.p}g P (floor ${floorOf("her")}). `
+    +`Each slot is a saved recipe or an assembled bowl auto-portioned to each split.`;
+  wire();
 }
 function wire(){
   const m=document.getElementById("main");
@@ -368,7 +375,7 @@ function checkPanel(){
   for(const dk of ST.order){
     const {totals}=materializeDay(dk);
     for(const w of ["him","her"]){
-      const t=totals[w],T=ST.targets[w],floor=FLOOR[w],kOff=Math.abs(t.kcal-T.kcal)/T.kcal;
+      const t=totals[w],T=ST.targets[w],floor=floorOf(w),kOff=Math.abs(t.kcal-T.kcal)/T.kcal;
       const pOk=t.p>=floor, kOk=kOff<=0.15, ok=pOk&&kOk;if(!ok)allok=false;
       for(const k in wk[w])wk[w][k]+=t[k];
       rows+=`<tr><td>${ST.days[dk].label}</td><td>${w==='him'?'His':'Hers'}</td>

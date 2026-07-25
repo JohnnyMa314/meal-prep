@@ -5,8 +5,8 @@
   "weekOrder": ["monday", "tuesday", "wednesday", "thursday", "friday"],
 
   "targets": {
-    "him": { "kcal": 2250, "p": 190, "c": 226, "fib": 38, "f": 65 },
-    "her": { "kcal": 1300, "p": 105, "c": 134, "fib": 30, "f": 38 }
+    "him": { "kcal": 2250, "p": 145, "c": 225, "fib": 38, "f": 60, "pfloor": 140 },
+    "her": { "kcal": 1300, "p": 105, "c": 134, "fib": 30, "f": 38, "pfloor": 100 }
   },
 
   "days": {
