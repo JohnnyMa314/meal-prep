@@ -130,40 +130,95 @@ function seed(){
   }
 }
 
-// ---- auto-split solver: fill each person's remaining day toward flat targets ----
-function solveOne(slot,w,already){
-  const T=ST.targets[w];
+// ---- whole-day solver -------------------------------------------------------
+// A day mixes FIXED slots (saved recipes — their portions belong to the recipe)
+// with FLEX slots (assembled bowls). The solver takes the day as a whole:
+//   1. subtract the fixed slots + shake from the day target
+//   2. split what's LEFT across the flex slots by meal share
+//   3. portion each flex slot to its own share (protein → target, carb → calories)
+//   4. correction passes: re-spread any residual so the DAY lands on target even
+//      when an individual slot bottoms out on a clamp
+const SLOT_SHARE={breakfast:0.25,lunch:0.375,dinner:0.375};
+// caps are basis-aware: grams for 100g-basis foods, COUNTS for unit-basis ones
+// (eggs, oils, shakes) — portioning those in "grams" is how you get 60 eggs.
+const CAPS={protein:{g:[60,340],u:[1,6]},carb:{g:[0,420],u:[0,4]},veg:{g:[0,260],u:[0,3]}};
+const isUnit=ing=>ING[ing].basis==="unit";
+const perAmt=(ing,m)=>isUnit(ing)?ING[ing][m]:ING[ing][m]/100;   // macro per 1 unit / per 1 g
+const amtFor=(ing,m,want)=>{const d=perAmt(ing,m);return d>0?want/d:0;};
+const roundAmt=(ing,x)=>isUnit(ing)?Math.max(0,Math.round(x)):r5(x);
+const capAmt=(ing,role,x)=>{const c=CAPS[role][isUnit(ing)?"u":"g"];return clamp(x,c[0],c[1]);};
+const baseVeg=(ing,w,scale)=>roundAmt(ing,(isUnit(ing)?2:(w==="him"?150:140))*scale);
+
+const isFlex=slot=>slot.kind==="bowl"&&!!slot.protein;
+function slotFixedComps(slot){
+  if(slot.kind==="recipe"&&slot.meal)return MEALS[slot.meal].components.map(c=>({ing:c.ing,him:c.him,her:c.her}));
+  if(slot.kind==="recipe"&&slot.inline)return slot.inline.components.map(c=>({ing:c.ing,him:c.him,her:c.her}));
+  return null;
+}
+const oneTotals=comps=>{const t=z();for(const c of comps){const x=nutOf(c.ing,c.g);for(const k in t)t[k]+=x[k];}return t;};
+
+// portion a single assembled bowl for one person to a {kcal, p} sub-target
+function solveSlot(slot,w,tgt){
   const pr=slot.protein, cb=slot.carb, cb2=slot.carb2||"", vg=slot.veg||"", vg2=slot.veg2||"";
-  const fam=seasonOf(pr), fatIng=fatFor(fam);
-  const vgG=vg?(w==="him"?150:140):0, vg2G=vg2?(w==="him"?90:80):0, fatG=1;
-  const gapK=T.kcal-already.kcal, gapP=T.p-already.p;
-  let prG=clamp(r5(gapP/(ING[pr].p/100)),80,320);
-  let used=nutOf(pr,prG).kcal+(vg?nutOf(vg,vgG).kcal:0)+(vg2?nutOf(vg2,vg2G).kcal:0)+nutOf(fatIng,fatG).kcal;
-  let needK=gapK-used, cbG, cb2G=0;
-  if(cb2){cbG=clamp(r5(needK*0.6/(ING[cb].kcal/100)),0,340);cb2G=clamp(r5(needK*0.4/(ING[cb2].kcal/100)),0,300);}
-  else cbG=clamp(r5(needK/(ING[cb].kcal/100)),0,440);
+  const fatIng=fatFor(seasonOf(pr)), fatG=1;
+  const scale=clamp(tgt.kcal/650,0.55,1.7);                        // veg tracks meal size
+  const vgG=vg?capAmt(vg,"veg",baseVeg(vg,w,scale)):0;
+  const vg2G=vg2?capAmt(vg2,"veg",roundAmt(vg2,(isUnit(vg2)?1:(w==="him"?90:80))*scale)):0;
+  const prG=capAmt(pr,"protein",roundAmt(pr,amtFor(pr,"p",tgt.p)));
+  const baseK=nutOf(pr,prG).kcal+(vgG?nutOf(vg,vgG).kcal:0)+(vg2G?nutOf(vg2,vg2G).kcal:0)+nutOf(fatIng,fatG).kcal;
+  const needK=Math.max(0,tgt.kcal-baseK);
+  let cbG,cb2G=0;
+  if(cb2){cbG=capAmt(cb,"carb",roundAmt(cb,amtFor(cb,"kcal",needK*0.6)));cb2G=capAmt(cb2,"carb",roundAmt(cb2,amtFor(cb2,"kcal",needK*0.4)));}
+  else cbG=capAmt(cb,"carb",roundAmt(cb,amtFor(cb,"kcal",needK)));
   const comps=[{ing:pr,g:prG},{ing:cb,g:cbG}];
   if(cb2&&cb2G)comps.push({ing:cb2,g:cb2G});
-  if(vg)comps.push({ing:vg,g:vgG});
-  if(vg2&&vg2G)comps.push({ing:vg2,g:vg2G});
+  if(vgG)comps.push({ing:vg,g:vgG});
+  if(vg2G)comps.push({ing:vg2,g:vg2G});
   comps.push({ing:fatIng,g:fatG});
-  if(w==="him"){let u=comps.reduce((s,c)=>s+nutOf(c.ing,c.g).kcal,0);if(gapK-u>110){let a=clamp(r5((gapK-u)/(ING.avocado.kcal/100)),0,120);if(a)comps.push({ing:"avocado",g:a});}}
+  const short=tgt.kcal-oneTotals(comps).kcal;                       // carb clamped out? add density
+  if(short>110){const a=clamp(r5(amtFor("avocado","kcal",short)),0,150);if(a)comps.push({ing:"avocado",g:a});}
   return comps;
 }
-function solveBowlBoth(slot,already){
+function bowlBothForTarget(slot,tgts){
   const map={};
-  for(const w of ["him","her"])for(const c of solveOne(slot,w,already[w])){map[c.ing]=map[c.ing]||{ing:c.ing,him:0,her:0};map[c.ing][w]=c.g;}
+  for(const w of ["him","her"])for(const c of solveSlot(slot,w,tgts[w])){map[c.ing]=map[c.ing]||{ing:c.ing,him:0,her:0};map[c.ing][w]=c.g;}
   return Object.values(map);
 }
+
+// solve every flex slot in a day for one person, balanced across the whole day
+function solvePerson(dk,w){
+  const day=ST.days[dk],T=ST.targets[w],out={};
+  const flex=SLOTS.filter(sk=>isFlex(day.slots[sk]));
+  if(!flex.length)return out;
+  let base=z();
+  for(const sk of SLOTS){const f=slotFixedComps(day.slots[sk]);if(f){const t=compTotals(f,w);for(const k in base)base[k]+=t[k];}}
+  const sh=day.shake[w];if(sh){const x=nutOf("koia",sh);for(const k in base)base[k]+=x[k];}
+  const wts=flex.map(sk=>SLOT_SHARE[sk]), sw=wts.reduce((a,b)=>a+b,0);
+  const remK=T.kcal-base.kcal, remP=T.p-base.p;
+  let alloc=flex.map((_,i)=>({kcal:remK*wts[i]/sw,p:remP*wts[i]/sw})), solved=[];
+  for(let it=0;it<5;it++){
+    solved=flex.map((sk,i)=>solveSlot(day.slots[sk],w,alloc[i]));
+    let gK=0,gP=0;for(const c of solved){const t=oneTotals(c);gK+=t.kcal;gP+=t.p;}
+    const dK=remK-gK,dP=remP-gP;
+    if(Math.abs(dK)<20&&Math.abs(dP)<4)break;
+    alloc=alloc.map((a,i)=>({kcal:a.kcal+dK*wts[i]/sw,p:a.p+dP*wts[i]/sw}));
+  }
+  flex.forEach((sk,i)=>out[sk]=solved[i]);
+  return out;
+}
+
 function materializeDay(dk){
-  const day=ST.days[dk], run={him:z(),her:z()}, slotComps={};
+  const day=ST.days[dk],slotComps={},run={him:z(),her:z()};
+  const solved={him:solvePerson(dk,"him"),her:solvePerson(dk,"her")};
   for(const sk of SLOTS){
-    const slot=day.slots[sk];let comps=[];
-    if(slot.kind==="recipe"&&slot.meal)comps=MEALS[slot.meal].components.map(c=>({ing:c.ing,him:c.him,her:c.her}));
-    else if(slot.kind==="recipe"&&slot.inline)comps=slot.inline.components.map(c=>({ing:c.ing,him:c.him,her:c.her}));
-    else if(slot.kind==="bowl"&&slot.protein)comps=solveBowlBoth(slot,run);
-    slotComps[sk]=comps;
-    for(const w of ["him","her"]){const mt=compTotals(comps,w);for(const k in run[w])run[w][k]+=mt[k];}
+    const fixed=slotFixedComps(day.slots[sk]);
+    if(fixed)slotComps[sk]=fixed;
+    else if(isFlex(day.slots[sk])){
+      const map={};
+      for(const w of ["him","her"])for(const c of (solved[w][sk]||[])){map[c.ing]=map[c.ing]||{ing:c.ing,him:0,her:0};map[c.ing][w]=c.g;}
+      slotComps[sk]=Object.values(map);
+    } else slotComps[sk]=[];
+    for(const w of ["him","her"]){const mt=compTotals(slotComps[sk],w);for(const k in run[w])run[w][k]+=mt[k];}
   }
   for(const w of ["him","her"]){const s=day.shake[w];if(s){const x=nutOf("koia",s);for(const k in run[w])run[w][k]+=x[k];}}
   return {slotComps,totals:run};
@@ -279,9 +334,9 @@ function newRecipePanel(){
   function collect(){
     const mode=document.getElementById("nrMode").value, slot=document.getElementById("nrSlot").value;
     if(mode==="auto"){
-      const bs={protein:document.getElementById("nrP").value,carb:document.getElementById("nrC").value,carb2:document.getElementById("nrC2").value,veg:document.getElementById("nrV").value,veg2:document.getElementById("nrV2").value};
-      const share=slot==="breakfast"?0.28:0.36;
-      const comps=solveBowlBoth(bs,{him:{kcal:ST.targets.him.kcal*(1-share),p:ST.targets.him.p*(1-share),c:0,fib:0,f:0},her:{kcal:ST.targets.her.kcal*(1-share),p:ST.targets.her.p*(1-share),c:0,fib:0,f:0}});
+      const bs={kind:"bowl",protein:document.getElementById("nrP").value,carb:document.getElementById("nrC").value,carb2:document.getElementById("nrC2").value,veg:document.getElementById("nrV").value,veg2:document.getElementById("nrV2").value};
+      const share=SLOT_SHARE[slot];
+      const comps=bowlBothForTarget(bs,{him:{kcal:ST.targets.him.kcal*share,p:ST.targets.him.p*share},her:{kcal:ST.targets.her.kcal*share,p:ST.targets.her.p*share}});
       const fam=seasonOf(bs.protein);
       return {slot,comps,tag:"assembled",lpr:lprFor(bs.protein,fam),note:SEASON_NOTE[fam]};
     } else {
