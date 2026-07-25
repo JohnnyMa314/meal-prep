@@ -47,7 +47,9 @@ jobs:
         run: |
           git config user.name "meal-prep bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json grocery.json history
+          git add data.json grocery.json
+          # history/ only exists once a week has actually rolled over
+          if [ -d history ]; then git add history; fi
           if git diff --staged --quiet; then
             echo "nothing to commit — compiled output already up to date"
           else
