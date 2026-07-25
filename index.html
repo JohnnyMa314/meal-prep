@@ -242,7 +242,7 @@ async function boot(){
     if(!res.ok) throw new Error('HTTP '+res.status);
     DB=await res.json();
     order=DB.weekOrder;
-    todayKey=order[(new Date().getDay()+6)%7];
+    todayKey=order[(new Date().getDay()+6)%7]||order[0];
     const h=(location.hash||'').replace('#','').toLowerCase();
     dayKey=order.includes(h)?h:todayKey;
     who=store.get('mp1::person')==='her'?'her':'him';

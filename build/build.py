@@ -53,6 +53,19 @@ def meal_totals(nutrition, comps, who):
     return t
 
 
+def resolve_slot(sv, meals):
+    """Normalize a week.json slot value to (clean_name, tag, lpr, note, components).
+    Accepts a meal-id string, {meal, note?}, or an inline assembled meal (has components)."""
+    if isinstance(sv, str):
+        m = meals[sv]
+        return m["name"], m["tag"], m.get("lpr", False), m.get("note", ""), m["components"]
+    if "components" in sv:
+        return sv["name"], sv.get("tag", "assembled"), sv.get("lpr", False), sv.get("note", ""), sv["components"]
+    m = meals[sv["meal"]]
+    note = sv["note"] if "note" in sv else m.get("note", "")
+    return m["name"], m["tag"], m.get("lpr", False), note, m["components"]
+
+
 def build():
     ingredients = load("ingredients.json")
     meals = load("meals.json")
@@ -76,21 +89,14 @@ def build():
         for slot in SLOT_ORDER:
             if slot not in wd["slots"]:
                 continue
-            sv = wd["slots"][slot]
-            if isinstance(sv, str):
-                mid, note_override = sv, None
-            else:
-                mid, note_override = sv["meal"], sv.get("note", None)
-            m = meals[mid]
-            obj = {"name": SLOT_LABEL[slot] + " — " + m["name"], "tag": m["tag"]}
-            if m.get("lpr"):
+            clean, tag, lpr, note, comps = resolve_slot(wd["slots"][slot], meals)
+            obj = {"name": SLOT_LABEL[slot] + " — " + clean, "tag": tag}
+            if lpr:
                 obj["lpr"] = True
-            note = note_override if note_override is not None else m.get("note", "")
             if note:
                 obj["note"] = note
-            obj["comps"] = [dict(cp) for cp in m["components"]]
-            # stash the clean name for the totals block
-            obj["_clean"] = m["name"]
+            obj["comps"] = [dict(cp) for cp in comps]
+            obj["_clean"] = clean  # clean name for the totals block
             meal_objs.append(obj)
 
         days[dk] = {
@@ -109,9 +115,8 @@ def build():
         for slot in SLOT_ORDER:
             if slot not in wd["slots"]:
                 continue
-            sv = wd["slots"][slot]
-            mid = sv if isinstance(sv, str) else sv["meal"]
-            day_meals.append(meals[mid])
+            clean, tag, lpr, note, comps = resolve_slot(wd["slots"][slot], meals)
+            day_meals.append({"name": clean, "components": comps})
 
         entry = {"label": wd["label"], "sub": wd["sub"]}
         for who in ("him", "her"):

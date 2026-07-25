@@ -1,0 +1,9 @@
+{
+  "_comment": "Saved role-combinations for quick assembly in the builder. Each is a template (protein + carb [+ carb2] + veg [+ veg2]) — the builder auto-portions it to the day, person, and workout status. Managed in manage.html.",
+  "combos": [
+    { "name": "Beef · lentils · sweet potato", "protein": "ground_beef", "carb": "lentils", "carb2": "", "veg": "sweet_potato", "veg2": "" },
+    { "name": "Shrimp · rice · yu choy", "protein": "shrimp", "carb": "rice", "carb2": "", "veg": "yu_choy", "veg2": "" },
+    { "name": "Chicken · farro · brussels", "protein": "chicken_thigh", "carb": "farro", "carb2": "", "veg": "brussels", "veg2": "" },
+    { "name": "Beef · rice + beans · peppers", "protein": "ground_beef", "carb": "rice", "carb2": "beans", "veg": "peppers", "veg2": "" }
+  ]
+}

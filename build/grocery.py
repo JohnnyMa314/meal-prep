@@ -60,8 +60,13 @@ def compute():
             sv = wd["slots"].get(slot)
             if sv is None:
                 continue
-            mid = sv if isinstance(sv, str) else sv["meal"]
-            for cp in meals[mid]["components"]:
+            if isinstance(sv, str):
+                comps = meals[sv]["components"]
+            elif "components" in sv:            # inline assembled meal
+                comps = sv["components"]
+            else:
+                comps = meals[sv["meal"]]["components"]
+            for cp in comps:
                 amt = cp["him"] + cp["her"]
                 if amt == 0:
                     continue

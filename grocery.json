@@ -110,12 +110,12 @@
     {
       "key": "egg",
       "name": "Eggs",
-      "quantity": 2,
+      "quantity": 1,
       "unit": "dozen",
-      "display": "2 dozen",
+      "display": "1 dozen",
       "cooked_g": null,
       "raw_g": null,
-      "count": 20.0,
+      "count": 10.0,
       "members": [
         "egg"
       ]
@@ -162,11 +162,11 @@
     {
       "key": "ground_beef",
       "name": "Ground beef (90/10)",
-      "quantity": 5,
+      "quantity": 3.75,
       "unit": "lb",
-      "display": "5 lb",
-      "cooked_g": 1660.0,
-      "raw_g": 2243.2,
+      "display": "3.75 lb",
+      "cooked_g": 1180.0,
+      "raw_g": 1594.6,
       "count": null,
       "members": [
         "ground_beef"
@@ -175,12 +175,12 @@
     {
       "key": "koia",
       "name": "Koia Elite shake",
-      "quantity": 7,
+      "quantity": 5,
       "unit": "bottle",
-      "display": "7 bottles",
+      "display": "5 bottles",
       "cooked_g": null,
       "raw_g": null,
-      "count": 7.0,
+      "count": 5.0,
       "members": [
         "koia"
       ]
@@ -225,26 +225,13 @@
       ]
     },
     {
-      "key": "onion",
-      "name": "Onion",
-      "quantity": 2,
-      "unit": "each",
-      "display": "2",
-      "cooked_g": 200.0,
-      "raw_g": 222.2,
-      "count": null,
-      "members": [
-        "onion"
-      ]
-    },
-    {
       "key": "peppers",
       "name": "Peppers",
-      "quantity": 2.5,
+      "quantity": 1.75,
       "unit": "lb",
-      "display": "2.5 lb",
-      "cooked_g": 960.0,
-      "raw_g": 1129.4,
+      "display": "1.75 lb",
+      "cooked_g": 640.0,
+      "raw_g": 752.9,
       "count": null,
       "members": [
         "peppers"
@@ -344,11 +331,11 @@
     {
       "key": "sweet_potato",
       "name": "Sweet potato",
-      "quantity": 3.75,
+      "quantity": 2.25,
       "unit": "lb",
-      "display": "3.75 lb",
-      "cooked_g": 1650.0,
-      "raw_g": 1650.0,
+      "display": "2.25 lb",
+      "cooked_g": 1010.0,
+      "raw_g": 1010.0,
       "count": null,
       "members": [
         "sweet_potato"
