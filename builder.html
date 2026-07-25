@@ -86,7 +86,7 @@
         <span class="f">week <input id="weekId" spellcheck="false"></span>
         <button id="newRecipeBtn">＋ New recipe</button>
         <button id="checkBtn">Check plan</button>
-        <button id="groceryBtn">Grocery</button>
+        <button id="groceryBtn">Groceries + plan</button>
         <button id="exportBtn" class="primary">Export</button>
         <button id="reset">Reset</button>
       </div>
@@ -413,13 +413,37 @@ function computeGrocery(){
   }
   rows.sort((a,b)=>a.name.localeCompare(b.name));return {rows,staples};
 }
+// The week's deliverable: the full grocery list + the full meal plan.
 function groceryPanel(){
   const {rows,staples}=computeGrocery();
-  panel(`<button class="close" data-close>Close</button><h3>Weekly grocery — with weight→unit assumptions</h3>
-    <table class="tb"><thead><tr><th>Item</th><th>Buy</th><th>How it's derived</th></tr></thead><tbody>
+  let planHTML="", planTXT="";
+  for(const dk of ST.order){
+    const day=ST.days[dk], {slotComps,totals}=materializeDay(dk);
+    planHTML+=`<tr><td colspan="3" style="padding-top:12px"><b>${day.label}</b> <span class="asm">· his ${R(totals.him.kcal)} kcal / ${R(totals.him.p)}g P · hers ${R(totals.her.kcal)} / ${R(totals.her.p)}g P</span></td></tr>`;
+    planTXT+=`\n${day.label.toUpperCase()}  (his ${R(totals.him.kcal)} kcal/${R(totals.him.p)}g P · hers ${R(totals.her.kcal)}/${R(totals.her.p)}g P)\n`;
+    for(const sk of SLOTS){
+      const comps=slotComps[sk]; if(!comps.length) continue;
+      const slot=day.slots[sk];
+      const nm=slot.kind==="recipe"&&slot.meal?MEALS[slot.meal].name:slot.kind==="recipe"&&slot.inline?slot.inline.name:`${ING[slot.protein].name} · ${ING[slot.carb].name} bowl`;
+      const items=comps.filter(c=>c.him||c.her).map(c=>`${ING[c.ing].name} ${c.him||0}${ING[c.ing].unit}/${c.her||0}${ING[c.ing].unit}`);
+      planHTML+=`<tr><td style="padding-left:14px">${SLOT_LABEL[sk]}</td><td><b>${nm}</b></td><td class="asm">${items.join(" · ")}</td></tr>`;
+      planTXT+=`  ${SLOT_LABEL[sk]}: ${nm}\n    ${items.join(", ")}\n`;
+    }
+    const sh=day.shake; if(sh.him||sh.her){planHTML+=`<tr><td style="padding-left:14px">Shake</td><td>Koia Elite</td><td class="asm">${sh.him}/${sh.her} bottle</td></tr>`;planTXT+=`  Shake: Koia Elite ${sh.him}/${sh.her}\n`;}
+  }
+  const groTXT=rows.map(r=>`  ${r.name} — ${r.buy}`).join("\n")+`\n  Staples (buy when low): ${staples.join(", ")}`;
+  panel(`<button class="close" data-close>Close</button><h3>Week output — grocery list + meal plan</h3>
+    <h3 style="margin-top:10px;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)">Groceries to buy</h3>
+    <table class="tb"><thead><tr><th>Item</th><th>Buy</th><th>Derived from</th></tr></thead><tbody>
     ${rows.map(r=>`<tr><td>${r.name}</td><td class="buy">${r.buy}</td><td class="asm">${r.asm}</td></tr>`).join("")}</tbody></table>
-    <div class="hint">Staples (buy when low): ${staples.join(", ")}. Amounts round <b>up</b> to real pack sizes.</div>`)
+    <div class="hint">Staples (buy when low): ${staples.join(", ")}. Amounts round <b>up</b> to real pack sizes — this is the complete list, not netted against what's already in the fridge.</div>
+    <h3 style="margin-top:16px;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)">Meal plan · amounts are his/hers</h3>
+    <table class="tb"><tbody>${planHTML}</tbody></table>
+    <h3 style="margin-top:16px;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)">Copy as text</h3>
+    <textarea readonly id="planTxt">GROCERY LIST — ${ST.weekId}\n${groTXT}\n\nMEAL PLAN${planTXT}</textarea>
+    <div class="hint"><button id="copyPlan">Copy to clipboard</button></div>`)
     .querySelector("[data-close]").onclick=e=>e.target.closest(".panel").remove();
+  document.getElementById("copyPlan").onclick=()=>{const t=document.getElementById("planTxt");t.select();document.execCommand("copy");};
 }
 
 // ---------- exports ----------
