@@ -8,8 +8,8 @@
       "quantity": 0.5,
       "unit": "gallon",
       "display": "0.5 gallon",
-      "cooked_g": 970.0,
-      "raw_g": 970.0,
+      "cooked_g": 940.0,
+      "raw_g": 940.0,
       "count": null,
       "members": [
         "milk"
@@ -18,11 +18,11 @@
     {
       "key": "avocado",
       "name": "Avocado",
-      "quantity": 3,
+      "quantity": 2,
       "unit": "each",
-      "display": "3",
-      "cooked_g": 310.0,
-      "raw_g": 442.9,
+      "display": "2",
+      "cooked_g": 245.0,
+      "raw_g": 350.0,
       "count": null,
       "members": [
         "avocado"
@@ -34,8 +34,8 @@
       "quantity": 1,
       "unit": "can",
       "display": "1 can",
-      "cooked_g": 100.0,
-      "raw_g": 100.0,
+      "cooked_g": 95.0,
+      "raw_g": 95.0,
       "count": null,
       "members": [
         "beans"
@@ -57,11 +57,11 @@
     {
       "key": "rice",
       "name": "Brown rice",
-      "quantity": 2.75,
+      "quantity": 3.25,
       "unit": "cup_dry",
-      "display": "2.75 cups dry",
-      "cooked_g": 1310.0,
-      "raw_g": 481.6,
+      "display": "3.25 cups dry",
+      "cooked_g": 1655.0,
+      "raw_g": 608.5,
       "count": null,
       "members": [
         "rice"
@@ -83,11 +83,11 @@
     {
       "key": "chicken",
       "name": "Chicken (thigh + breast)",
-      "quantity": 3,
+      "quantity": 2.25,
       "unit": "lb",
-      "display": "3 lb",
-      "cooked_g": 990.0,
-      "raw_g": 1356.2,
+      "display": "2.25 lb",
+      "cooked_g": 720.0,
+      "raw_g": 986.3,
       "count": null,
       "members": [
         "chicken_breast",
@@ -100,8 +100,8 @@
       "quantity": 0.5,
       "unit": "lb",
       "display": "0.5 lb",
-      "cooked_g": 110.0,
-      "raw_g": 110.0,
+      "cooked_g": 65.0,
+      "raw_g": 65.0,
       "count": null,
       "members": [
         "edamame"
@@ -115,7 +115,7 @@
       "display": "1 dozen",
       "cooked_g": null,
       "raw_g": null,
-      "count": 10.0,
+      "count": 8.0,
       "members": [
         "egg"
       ]
@@ -126,8 +126,8 @@
       "quantity": 1.25,
       "unit": "cup_dry",
       "display": "1.25 cups dry",
-      "cooked_g": 640.0,
-      "raw_g": 227.8,
+      "cooked_g": 615.0,
+      "raw_g": 218.9,
       "count": null,
       "members": [
         "farro"
@@ -139,8 +139,8 @@
       "quantity": 6,
       "unit": "each",
       "display": "6",
-      "cooked_g": 340.0,
-      "raw_g": 340.0,
+      "cooked_g": 500.0,
+      "raw_g": 500.0,
       "count": null,
       "members": [
         "tortilla"
@@ -162,11 +162,11 @@
     {
       "key": "ground_beef",
       "name": "Ground beef (90/10)",
-      "quantity": 3.75,
+      "quantity": 2.75,
       "unit": "lb",
-      "display": "3.75 lb",
-      "cooked_g": 1180.0,
-      "raw_g": 1594.6,
+      "display": "2.75 lb",
+      "cooked_g": 870.0,
+      "raw_g": 1175.7,
       "count": null,
       "members": [
         "ground_beef"
@@ -191,8 +191,8 @@
       "quantity": 1.75,
       "unit": "cup_dry",
       "display": "1.75 cups dry",
-      "cooked_g": 770.0,
-      "raw_g": 336.2,
+      "cooked_g": 745.0,
+      "raw_g": 325.3,
       "count": null,
       "members": [
         "lentils"
@@ -243,8 +243,8 @@
       "quantity": 1,
       "unit": "container",
       "display": "1 container",
-      "cooked_g": 285.0,
-      "raw_g": 285.0,
+      "cooked_g": 270.0,
+      "raw_g": 270.0,
       "count": null,
       "members": [
         "oats"
@@ -256,8 +256,8 @@
       "quantity": 1,
       "unit": "bag",
       "display": "1 bag",
-      "cooked_g": 50.0,
-      "raw_g": 50.0,
+      "cooked_g": 30.0,
+      "raw_g": 30.0,
       "count": null,
       "members": [
         "cheese"
@@ -266,11 +266,11 @@
     {
       "key": "shrimp",
       "name": "Shrimp",
-      "quantity": 2,
+      "quantity": 1.5,
       "unit": "lb",
-      "display": "2 lb",
-      "cooked_g": 670.0,
-      "raw_g": 893.3,
+      "display": "1.5 lb",
+      "cooked_g": 460.0,
+      "raw_g": 613.3,
       "count": null,
       "members": [
         "shrimp"
@@ -321,8 +321,8 @@
       "quantity": 1,
       "unit": "lb",
       "display": "1 lb",
-      "cooked_g": 300.0,
-      "raw_g": 441.2,
+      "cooked_g": 240.0,
+      "raw_g": 352.9,
       "count": null,
       "members": [
         "steak"
@@ -331,11 +331,11 @@
     {
       "key": "sweet_potato",
       "name": "Sweet potato",
-      "quantity": 2.25,
+      "quantity": 3,
       "unit": "lb",
-      "display": "2.25 lb",
-      "cooked_g": 1010.0,
-      "raw_g": 1010.0,
+      "display": "3 lb",
+      "cooked_g": 1310.0,
+      "raw_g": 1310.0,
       "count": null,
       "members": [
         "sweet_potato"
