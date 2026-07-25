@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manage — Meal Prep</title>
+<style>
+  :root{
+    --paper:#f7f4ee; --card:#fffdf8; --ink:#201f1a; --muted:#6f6a5d;
+    --line:#e4ded1; --line2:#efe9dd;
+    --him:#46603a; --him-soft:#eaf0e3; --her:#8a4d68; --her-soft:#f3e7ee;
+    --carb:#b07d2b; --ok:#3f7a3a; --warn:#b26a1f; --bad:#b23b2f;
+    --num:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.4}
+  .wrap{max-width:900px;margin:0 auto;padding:0 0 140px}
+  header{position:sticky;top:0;z-index:30;background:var(--paper);padding:12px 16px 0;border-bottom:1px solid var(--line)}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .brand{font-size:1.05rem;font-weight:700}.brand small{display:block;font-weight:500;color:var(--muted);font-size:.72rem;letter-spacing:.02em;text-transform:uppercase}
+  .ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  button{appearance:none;border:1px solid var(--line);background:var(--card);font:inherit;font-weight:600;font-size:.82rem;color:var(--ink);padding:8px 12px;border-radius:9px;cursor:pointer}
+  button.primary{background:var(--him);color:#fff;border-color:var(--him)}
+  button.danger{color:var(--bad);border-color:#e8cdc8}
+  button.mini{font-size:.72rem;padding:5px 9px}
+  button:active{transform:translateY(1px)}
+  a.port{font-size:.78rem;color:var(--him);text-decoration:none;border:1px solid var(--line);padding:7px 11px;border-radius:9px}
+  .tabs{display:flex;gap:4px;margin-top:10px}
+  .tabs button{border-radius:9px 9px 0 0;border-bottom:0;background:transparent;border-color:transparent;color:var(--muted)}
+  .tabs button[aria-selected="true"]{background:var(--card);border-color:var(--line);color:var(--ink)}
+  .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 16px 0}
+  input[type=text],input[type=number],select{font:inherit;font-size:.86rem;padding:7px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+  input[type=number]{font-family:var(--num);text-align:right}
+  .search{flex:1;min-width:180px}
+  .dirty{font-size:.74rem;color:var(--warn);font-weight:600}
+  .card{margin:10px 16px;border:1px solid var(--line);background:var(--card);border-radius:14px;overflow:hidden}
+  .chead{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;flex-wrap:wrap}
+  .chead:hover{background:var(--line2)}
+  .chead .nm{font-weight:700;flex:1;min-width:150px}
+  .pill{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;padding:3px 7px;border-radius:5px;background:var(--line2);color:var(--muted)}
+  .pill.lpr{background:#f6e9df;color:#9a5a34}
+  .pill.slot{background:var(--him-soft);color:var(--him)}
+  .kc{font-family:var(--num);font-size:.76rem;color:var(--muted);white-space:nowrap}
+  .kc b{color:var(--him)}.kc i{color:var(--her);font-style:normal}
+  .body{padding:4px 14px 14px;border-top:1px solid var(--line2)}
+  .frm{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:10px 0}
+  .frm label{display:flex;flex-direction:column;gap:3px;font-size:.64rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);font-weight:600}
+  .frm input[type=text]{width:190px}
+  .frm.narrow input[type=number]{width:78px}
+  .comp{display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+  .comp select{min-width:150px}
+  .comp input[type=number]{width:74px}
+  .comp .u{font-size:.7rem;color:var(--muted);min-width:26px}
+  .comp .lb{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+  .macros{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--num);font-size:.76rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+  .macros b{color:var(--ink);font-weight:600}
+  table.tb{width:100%;border-collapse:collapse;font-size:.8rem}
+  table.tb th,table.tb td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line2);white-space:nowrap}
+  table.tb th{font-size:.62rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);position:sticky;top:0;background:var(--card)}
+  table.tb td.n{font-family:var(--num);text-align:right}
+  table.tb tr.click:hover{background:var(--line2);cursor:pointer}
+  .rolehead{margin:18px 16px 0;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+  .scroll{overflow-x:auto}
+  .warn{font-size:.76rem;color:var(--warn);margin-top:6px}
+  .bad{font-size:.76rem;color:var(--bad);margin-top:6px}
+  textarea{width:100%;height:200px;font-family:var(--num);font-size:.7rem;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--paper);color:var(--ink);white-space:pre;overflow:auto;margin-top:8px}
+  .hint{color:var(--muted);font-size:.76rem;margin-top:8px;line-height:1.5}
+  .hint code{font-family:var(--num);background:var(--line2);padding:1px 5px;border-radius:4px}
+  .state{padding:56px 24px;text-align:center;color:var(--muted)}
+  .panel{margin:16px;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px}
+  .panel h3{margin:0 0 6px;font-size:.95rem}
+  .panel .close{float:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topline">
+      <div class="brand">Manage<small>Meal Prep · recipes &amp; ingredients</small></div>
+      <div class="ctrls">
+        <span id="dirty" class="dirty"></span>
+        <a class="port" href="./builder.html">← Builder</a>
+        <button id="exportBtn" class="primary">Export changes</button>
+      </div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button id="tabR" role="tab" aria-selected="true">Recipes</button>
+      <button id="tabI" role="tab" aria-selected="false">Ingredients</button>
+    </div>
+  </header>
+  <main id="main"><div class="state">Loading…</div></main>
+</div>
+
+<script>
+let ING=null, MEALS=null, TARGETS=null, tab="recipes", open1=null, dirty=false;
+const SLOTS=["breakfast","lunch","dinner"], SLOT_LABEL={breakfast:"Breakfast",lunch:"Lunch",dinner:"Dinner"};
+const TAGS=["fresh","packed","reheat","prev-night","anchor","assembled","custom"];
+const ROLES=["protein","carb","veg","fat","fruit","dairy","shake","extra"];
+const ROLE_LABEL={protein:"Proteins",carb:"Carbs",veg:"Vegetables",fat:"Fats",fruit:"Fruit",dairy:"Dairy",shake:"Shakes",extra:"Other"};
+const PURCHASE_UNITS=["lb","cup_dry","each","dozen","bottle","can","container","tub","carton","bag","gallon","stick"];
+const BASES=["100g","unit"];
+const R=Math.round, slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+
+const nutOf=(ing,amt)=>{const n=ING[ing];if(!n)return{kcal:0,p:0,c:0,fib:0,f:0};const k=n.basis==="100g"?amt/100:amt;
+  return {kcal:n.kcal*k,p:n.p*k,c:n.c*k,fib:n.fib*k,f:n.f*k};};
+function totals(comps,w){const t={kcal:0,p:0,c:0,fib:0,f:0};
+  for(const cp of comps){const a=+cp[w]||0;if(a){const x=nutOf(cp.ing,a);for(const k in t)t[k]+=x[k];}}return t;}
+const ingIds=()=>Object.keys(ING).sort((a,b)=>ING[a].name.localeCompare(ING[b].name));
+const byRole=r=>ingIds().filter(k=>(ING[k].role||"extra")===r);
+function usedBy(ingKey){return Object.keys(MEALS).filter(k=>!k.startsWith("_")&&MEALS[k].components.some(c=>c.ing===ingKey));}
+function setDirty(){dirty=true;document.getElementById("dirty").textContent="● unsaved changes — export before leaving";}
+
+// ---------------- recipes ----------------
+function recipeCard(id){
+  const m=MEALS[id], th=totals(m.components,"him"), tr=totals(m.components,"her");
+  const isOpen=open1==="r:"+id;
+  let h=`<section class="card"><div class="chead" data-open="r:${id}">
+    <span class="nm">${esc(m.name)}</span>
+    <span class="pill slot">${SLOT_LABEL[m.slot]||m.slot}</span>
+    <span class="pill">${esc(m.tag||"")}</span>
+    ${m.lpr?'<span class="pill lpr">⚠ LPR</span>':''}
+    <span class="kc"><b>${R(th.kcal)}</b>/<i>${R(tr.kcal)}</i> kcal · <b>${R(th.p)}</b>/<i>${R(tr.p)}</i>g P</span>
+    <span class="kc">${isOpen?"▾":"▸"}</span></div>`;
+  if(isOpen){
+    h+=`<div class="body">
+      <div class="frm">
+        <label>Name<input type="text" data-rf="name" data-id="${id}" value="${esc(m.name)}"></label>
+        <label>Slot<select data-rf="slot" data-id="${id}">${SLOTS.map(s=>`<option value="${s}"${s===m.slot?" selected":""}>${SLOT_LABEL[s]}</option>`).join("")}</select></label>
+        <label>Tag<select data-rf="tag" data-id="${id}">${TAGS.map(t=>`<option value="${t}"${t===m.tag?" selected":""}>${t}</option>`).join("")}</select></label>
+        <label>His LPR<select data-rf="lpr" data-id="${id}"><option value="0"${m.lpr?"":" selected"}>no</option><option value="1"${m.lpr?" selected":""}>yes</option></select></label>
+      </div>
+      <div class="frm"><label style="flex:1">Note<input type="text" data-rf="note" data-id="${id}" value="${esc(m.note||"")}" style="width:100%"></label></div>
+      <div class="comp"><span class="lb" style="min-width:150px">Ingredient</span><span class="lb" style="width:74px;text-align:right">His</span><span class="u"></span><span class="lb" style="width:74px;text-align:right">Hers</span></div>`;
+    m.components.forEach((cp,i)=>{
+      const u=ING[cp.ing]?ING[cp.ing].unit:"?";
+      h+=`<div class="comp">
+        <select data-ci="${i}" data-id="${id}" data-cf="ing">${ingIds().map(k=>`<option value="${k}"${k===cp.ing?" selected":""}>${esc(ING[k].name)}</option>`).join("")}</select>
+        <input type="number" step="any" min="0" data-ci="${i}" data-id="${id}" data-cf="him" value="${cp.him}"><span class="u">${u}</span>
+        <input type="number" step="any" min="0" data-ci="${i}" data-id="${id}" data-cf="her" value="${cp.her}"><span class="u">${u}</span>
+        <button class="mini danger" data-delc="${id}:${i}">✕</button></div>`;
+    });
+    h+=`<button class="mini" data-addc="${id}">＋ ingredient</button>
+      <div class="macros">
+        <span>His <b>${R(th.kcal)}</b> kcal · <b>${R(th.p)}</b>g P · <b>${R(th.c)}</b>g C · <b>${R(th.fib)}</b>g fib · <b>${R(th.f)}</b>g fat</span>
+        <span>Hers <b>${R(tr.kcal)}</b> kcal · <b>${R(tr.p)}</b>g P · <b>${R(tr.c)}</b>g C · <b>${R(tr.fib)}</b>g fib · <b>${R(tr.f)}</b>g fat</span>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:8px"><button class="mini" data-dup="${id}">Duplicate</button><button class="mini danger" data-delr="${id}">Delete recipe</button></div>
+    </div>`;
+  }
+  return h+`</section>`;
+}
+function renderRecipes(){
+  const q=(document.getElementById("q")||{}).value||"", fs=(document.getElementById("fslot")||{}).value||"";
+  const ids=Object.keys(MEALS).filter(k=>!k.startsWith("_"))
+    .filter(k=>!fs||MEALS[k].slot===fs)
+    .filter(k=>!q||MEALS[k].name.toLowerCase().includes(q.toLowerCase())||MEALS[k].components.some(c=>ING[c.ing]&&ING[c.ing].name.toLowerCase().includes(q.toLowerCase())))
+    .sort((a,b)=>SLOTS.indexOf(MEALS[a].slot)-SLOTS.indexOf(MEALS[b].slot)||MEALS[a].name.localeCompare(MEALS[b].name));
+  return `<div class="bar">
+      <input type="text" id="q" class="search" placeholder="Search recipes or ingredients…" value="${esc(q)}">
+      <select id="fslot"><option value="">All slots</option>${SLOTS.map(s=>`<option value="${s}"${s===fs?" selected":""}>${SLOT_LABEL[s]}</option>`).join("")}</select>
+      <button id="newR" class="primary">＋ New recipe</button>
+      <span class="kc">${ids.length} recipe${ids.length===1?"":"s"}</span>
+    </div>`+(ids.length?ids.map(recipeCard).join(""):`<div class="state">No recipes match.</div>`);
+}
+
+// ---------------- ingredients ----------------
+function atwater(n){return 4*n.p+4*(n.c-n.fib)+2*n.fib+9*n.f;}
+function ingRow(k){
+  const n=ING[k], g=n.grocery||{}, imp=atwater(n), off=Math.abs(imp-n.kcal)/Math.max(n.kcal,1);
+  const isOpen=open1==="i:"+k;
+  let h=`<tr class="click" data-open="i:${k}"><td>${esc(n.name)}${off>0.15?' <span class="pill" style="background:#f6ecdb;color:var(--warn)">kcal?</span>':''}</td>
+    <td class="n">${n.kcal}</td><td class="n">${n.p}</td><td class="n">${n.c}</td><td class="n">${n.fib}</td><td class="n">${n.f}</td>
+    <td>${n.basis==="unit"?"per "+n.unit:"per 100g"}</td>
+    <td class="n">${g.yield!==undefined?g.yield:"—"}</td><td>${g.purchase_unit||"—"}</td><td class="n">${g.pack_size!==undefined?g.pack_size:"—"}</td>
+    <td>${g.is_staple?"staple":""}</td></tr>`;
+  if(isOpen){
+    const uses=usedBy(k);
+    h+=`<tr><td colspan="11"><div class="body" style="border:0">
+      <div class="frm narrow">
+        <label>Name<input type="text" data-if="name" data-k="${k}" value="${esc(n.name)}"></label>
+        <label>Role<select data-if="role" data-k="${k}">${ROLES.map(r=>`<option value="${r}"${r===(n.role||"extra")?" selected":""}>${r}</option>`).join("")}</select></label>
+        <label>Basis<select data-if="basis" data-k="${k}">${BASES.map(b=>`<option value="${b}"${b===n.basis?" selected":""}>${b}</option>`).join("")}</select></label>
+        <label>Unit<input type="text" data-if="unit" data-k="${k}" value="${esc(n.unit)}" style="width:70px"></label>
+      </div>
+      <div class="frm narrow">
+        <label>kcal<input type="number" step="any" data-if="kcal" data-k="${k}" value="${n.kcal}"></label>
+        <label>Protein<input type="number" step="any" data-if="p" data-k="${k}" value="${n.p}"></label>
+        <label>Carbs<input type="number" step="any" data-if="c" data-k="${k}" value="${n.c}"></label>
+        <label>Fiber<input type="number" step="any" data-if="fib" data-k="${k}" value="${n.fib}"></label>
+        <label>Fat<input type="number" step="any" data-if="f" data-k="${k}" value="${n.f}"></label>
+      </div>
+      <div class="frm narrow">
+        <label>Yield (cooked÷raw)<input type="number" step="any" data-gf="yield" data-k="${k}" value="${g.yield!==undefined?g.yield:1}"></label>
+        <label>Purchase unit<select data-gf="purchase_unit" data-k="${k}">${PURCHASE_UNITS.map(u=>`<option value="${u}"${u===g.purchase_unit?" selected":""}>${u}</option>`).join("")}</select></label>
+        <label>Pack size<input type="number" step="any" data-gf="pack_size" data-k="${k}" value="${g.pack_size!==undefined?g.pack_size:1}"></label>
+        <label>Grams / unit<input type="number" step="any" data-gf="unit_grams" data-k="${k}" value="${g.unit_grams==null?"":g.unit_grams}"></label>
+        <label>Staple<select data-gf="is_staple" data-k="${k}"><option value="0"${g.is_staple?"":" selected"}>no</option><option value="1"${g.is_staple?" selected":""}>yes</option></select></label>
+      </div>
+      <div class="${off>0.15?'warn':'hint'}">Macros imply <b>${R(imp)}</b> kcal vs <b>${n.kcal}</b> stated${off>0.15?` — ${R(off*100)}% off, check the numbers`:" ✓"}.</div>
+      <div class="hint">${uses.length?`Used by ${uses.length} recipe(s): ${uses.map(u=>esc(MEALS[u].name)).join(", ")}`:"Not used by any recipe."}</div>
+      <div style="margin-top:10px"><button class="mini danger" data-deli="${k}">Delete ingredient</button></div>
+    </div></td></tr>`;
+  }
+  return h;
+}
+function renderIngredients(){
+  const q=(document.getElementById("qi")||{}).value||"";
+  let h=`<div class="bar">
+    <input type="text" id="qi" class="search" placeholder="Search ingredients…" value="${esc(q)}">
+    <button id="newI" class="primary">＋ New ingredient</button>
+    <span class="kc">${ingIds().length} items</span></div>`;
+  for(const r of ROLES){
+    let ks=byRole(r).filter(k=>!q||ING[k].name.toLowerCase().includes(q.toLowerCase()));
+    if(!ks.length)continue;
+    h+=`<div class="rolehead">${ROLE_LABEL[r]} · ${ks.length}</div>
+      <div class="card"><div class="scroll"><table class="tb">
+      <thead><tr><th>Name</th><th class="n">kcal</th><th class="n">P</th><th class="n">C</th><th class="n">Fib</th><th class="n">Fat</th><th>Basis</th><th class="n">Yield</th><th>Buy as</th><th class="n">Pack</th><th></th></tr></thead>
+      <tbody>${ks.map(ingRow).join("")}</tbody></table></div></div>`;
+  }
+  return h;
+}
+
+function render(){
+  document.getElementById("tabR").setAttribute("aria-selected",tab==="recipes");
+  document.getElementById("tabI").setAttribute("aria-selected",tab==="ingredients");
+  document.getElementById("main").innerHTML=tab==="recipes"?renderRecipes():renderIngredients();
+  wire();
+}
+
+function wire(){
+  const m=document.getElementById("main");
+  m.querySelectorAll("[data-open]").forEach(el=>el.onclick=e=>{
+    if(e.target.closest("input,select,button"))return;
+    const k=el.dataset.open;open1=open1===k?null:k;render();});
+  // recipe fields
+  m.querySelectorAll("[data-rf]").forEach(el=>el.onchange=e=>{
+    const id=el.dataset.id,f=el.dataset.rf,v=el.value;
+    if(f==="lpr"){if(v==="1")MEALS[id].lpr=true;else delete MEALS[id].lpr;}
+    else if(f==="note"){if(v)MEALS[id].note=v;else delete MEALS[id].note;}
+    else MEALS[id][f]=v;
+    setDirty();render();});
+  m.querySelectorAll("[data-cf]").forEach(el=>el.onchange=e=>{
+    const id=el.dataset.id,i=+el.dataset.ci,f=el.dataset.cf;
+    MEALS[id].components[i][f]=f==="ing"?el.value:Math.max(0,parseFloat(el.value||"0"));
+    setDirty();render();});
+  m.querySelectorAll("[data-delc]").forEach(b=>b.onclick=()=>{
+    const [id,i]=b.dataset.delc.split(":");MEALS[id].components.splice(+i,1);setDirty();render();});
+  m.querySelectorAll("[data-addc]").forEach(b=>b.onclick=()=>{
+    MEALS[b.dataset.addc].components.push({ing:ingIds()[0],him:100,her:80});setDirty();render();});
+  m.querySelectorAll("[data-delr]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.delr;if(!confirm(`Delete “${MEALS[id].name}”? If a week still references it the build will fail until you update src/week.json.`))return;
+    delete MEALS[id];open1=null;setDirty();render();});
+  m.querySelectorAll("[data-dup]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.dup,src=MEALS[id];let nid=id+"-copy",n=2;while(MEALS[nid])nid=id+"-copy"+(n++);
+    MEALS[nid]=JSON.parse(JSON.stringify(src));MEALS[nid].name=src.name+" (copy)";open1="r:"+nid;setDirty();render();});
+  const nr=document.getElementById("newR");
+  if(nr)nr.onclick=()=>{
+    const name=prompt("Recipe name:");if(!name)return;
+    let id=slug(name)||"recipe";let n=2;while(MEALS[id])id=slug(name)+"-"+(n++);
+    MEALS[id]={name,slot:"lunch",tag:"fresh",components:[{ing:byRole("protein")[0]||ingIds()[0],him:150,her:110}]};
+    open1="r:"+id;setDirty();render();};
+  // ingredient fields
+  m.querySelectorAll("[data-if]").forEach(el=>el.onchange=()=>{
+    const k=el.dataset.k,f=el.dataset.if;
+    ING[k][f]=(["kcal","p","c","fib","f"].includes(f))?parseFloat(el.value||"0"):el.value;
+    setDirty();render();});
+  m.querySelectorAll("[data-gf]").forEach(el=>el.onchange=()=>{
+    const k=el.dataset.k,f=el.dataset.gf;ING[k].grocery=ING[k].grocery||{};
+    if(f==="is_staple")ING[k].grocery.is_staple=el.value==="1";
+    else if(f==="purchase_unit")ING[k].grocery.purchase_unit=el.value;
+    else if(f==="unit_grams")ING[k].grocery.unit_grams=el.value===""?null:parseFloat(el.value);
+    else ING[k].grocery[f]=parseFloat(el.value||"0");
+    setDirty();render();});
+  m.querySelectorAll("[data-deli]").forEach(b=>b.onclick=()=>{
+    const k=b.dataset.deli,uses=usedBy(k);
+    if(uses.length)return alert(`Can't delete — used by: ${uses.map(u=>MEALS[u].name).join(", ")}. Remove it from those recipes first.`);
+    if(!confirm(`Delete ingredient “${ING[k].name}”?`))return;
+    delete ING[k];open1=null;setDirty();render();});
+  const ni=document.getElementById("newI");
+  if(ni)ni.onclick=()=>{
+    const name=prompt("Ingredient name:");if(!name)return;
+    let k=slug(name).replace(/-/g,"_")||"item";let n=2;while(ING[k])k=slug(name).replace(/-/g,"_")+"_"+(n++);
+    ING[k]={name,role:"protein",unit:"g",basis:"100g",kcal:100,p:10,c:5,fib:1,f:3,
+      grocery:{is_staple:false,yield:1,purchase_unit:"lb",pack_size:0.25,unit_grams:453.592}};
+    tab="ingredients";open1="i:"+k;setDirty();render();};
+  const q=document.getElementById("q"),qi=document.getElementById("qi"),fs=document.getElementById("fslot");
+  if(q)q.oninput=()=>{const v=q.value;render();const e=document.getElementById("q");e.value=v;e.focus();e.setSelectionRange(v.length,v.length);};
+  if(qi)qi.oninput=()=>{const v=qi.value;render();const e=document.getElementById("qi");e.value=v;e.focus();e.setSelectionRange(v.length,v.length);};
+  if(fs)fs.onchange=render;
+}
+
+function exportPanel(){
+  const mealsOut={_comment:MEALS._comment,...Object.fromEntries(Object.keys(MEALS).filter(k=>!k.startsWith("_")).map(k=>[k,MEALS[k]]))};
+  const ingOut={_comment:ING._comment,...Object.fromEntries(ingIds().map(k=>[k,ING[k]]))};
+  const a=JSON.stringify(mealsOut,null,2), b=JSON.stringify(ingOut,null,2);
+  let p=document.getElementById("panel");
+  if(!p){p=document.createElement("div");p.id="panel";p.className="panel";document.querySelector(".wrap").appendChild(p);}
+  p.innerHTML=`<button class="close mini" id="pclose">Close</button><h3>Export</h3>
+    <div class="hint">Save each block over the matching file in <code>src/</code>, then run
+      <code>python build/build.py &amp;&amp; python build/grocery.py &amp;&amp; python build/validate.py</code> and push.
+      The validator will catch any calorie/macro inconsistency before it reaches the app.</div>
+    <h3 style="margin-top:12px">src/meals.json <button class="mini" id="dlM">Download</button></h3>
+    <textarea readonly>${esc(a)}</textarea>
+    <h3 style="margin-top:12px">src/ingredients.json <button class="mini" id="dlI">Download</button></h3>
+    <textarea readonly>${esc(b)}</textarea>`;
+  p.scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("pclose").onclick=()=>p.remove();
+  const dl=(txt,name)=>{const bl=new Blob([txt],{type:"application/json"});const el=document.createElement("a");
+    el.href=URL.createObjectURL(bl);el.download=name;el.click();};
+  document.getElementById("dlM").onclick=()=>dl(a,"meals.json");
+  document.getElementById("dlI").onclick=()=>dl(b,"ingredients.json");
+}
+
+function boot(){
+  Promise.all([
+    fetch("./src/ingredients.json").then(r=>r.json()),
+    fetch("./src/meals.json").then(r=>r.json()),
+    fetch("./src/week.json").then(r=>r.json())
+  ]).then(([i,me,wk])=>{
+    ING=i;MEALS=me;TARGETS=wk.targets;render();
+    document.getElementById("tabR").onclick=()=>{tab="recipes";open1=null;render();};
+    document.getElementById("tabI").onclick=()=>{tab="ingredients";open1=null;render();};
+    document.getElementById("exportBtn").onclick=exportPanel;
+    window.onbeforeunload=()=>dirty?"You have unsaved changes.":undefined;
+  }).catch(e=>{document.getElementById("main").innerHTML=
+    `<div class="state">Couldn't load sources — serve over HTTP so <code>./src/*.json</code> is reachable.<br><br>(${esc(e.message||e)})</div>`;});
+}
+boot();
+</script>
+</body>
+</html>
