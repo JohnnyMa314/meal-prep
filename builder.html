@@ -89,7 +89,8 @@
         <button id="newRecipeBtn">＋ New recipe</button>
         <button id="checkBtn">Check plan</button>
         <button id="groceryBtn">Groceries + plan</button>
-        <button id="exportBtn" class="primary">Export</button>
+        <span id="ghMount" style="display:inline-flex;gap:6px;align-items:center"></span>
+        <button id="exportBtn">Export manually</button>
         <button id="reset">Reset</button>
       </div>
     </div>
@@ -98,6 +99,7 @@
   <main id="main"><div class="state">Loading library…</div></main>
 </div>
 
+<script src="./gh.js"></script>
 <script>
 let ING=null, MEALS=null, WEEK=null, COMBOS=[], ST=null, NEWRECIPES={};
 const SLOTS=["breakfast","lunch","dinner"], SLOT_LABEL={breakfast:"Breakfast",lunch:"Lunch",dinner:"Dinner"};
@@ -485,6 +487,18 @@ function exportPanel(){
 }
 function panel(html){let p=document.getElementById("panel");if(!p){p=document.createElement("div");p.id="panel";p.className="panel";document.querySelector(".wrap").appendChild(p);}p.innerHTML=html;p.scrollIntoView({behavior:"smooth",block:"start"});return p;}
 
+function srcFiles(){
+  const f={"src/week.json":JSON.stringify(buildWeekJson(),null,2)+"
+",
+           "src/combos.json":JSON.stringify({_comment:"Saved combos - managed in the builder.",combos:COMBOS},null,2)+"
+"};
+  if(Object.keys(NEWRECIPES).length){
+    const out={_comment:MEALS._comment,...Object.fromEntries(Object.keys(MEALS).filter(k=>!k.startsWith("_")).map(k=>[k,MEALS[k]]))};
+    f["src/meals.json"]=JSON.stringify(out,null,2)+"
+";
+  }
+  return f;
+}
 function boot(){
   Promise.all([
     fetch("./src/ingredients.json").then(r=>r.json()),
@@ -499,6 +513,8 @@ function boot(){
     document.getElementById("checkBtn").onclick=checkPanel;
     document.getElementById("groceryBtn").onclick=groceryPanel;
     document.getElementById("exportBtn").onclick=exportPanel;
+    GH.mount(document.getElementById("ghMount"),()=>srcFiles(),
+      {label:"Save week to GitHub",message:"Update week plan from the builder"});
     document.getElementById("reset").onclick=()=>{seed();const p=document.getElementById("panel");if(p)p.remove();render();};
   }).catch(e=>{document.getElementById("main").innerHTML=`<div class="state">Couldn't load sources — serve over HTTP so <code>./src/*.json</code> is reachable.<br><br>(${String(e.message||e)})</div>`;});
 }

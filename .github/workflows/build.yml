@@ -1,0 +1,56 @@
+name: Build meal plan
+
+# Runs whenever the hand-edited sources change — including a save from the
+# browser UI. Archives the outgoing week, recompiles data.json + grocery.json,
+# validates, and commits the result back. Validation failing fails the job, so
+# a bad edit never reaches the app or the widget.
+#
+# Only `src/**` and `build/**` trigger this, and the job only ever writes
+# data.json / grocery.json / history/ — so its own commit cannot re-trigger it.
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'build/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-meal-plan
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Archive the outgoing week (if weekId changed)
+        run: python build/archive.py
+
+      - name: Compile data.json + grocery.json
+        run: |
+          python build/build.py
+          python build/grocery.py
+
+      - name: Validate the plan
+        run: python build/validate.py
+
+      - name: Commit compiled output
+        run: |
+          git config user.name "meal-prep bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json grocery.json history
+          if git diff --staged --quiet; then
+            echo "nothing to commit — compiled output already up to date"
+          else
+            git commit -m "Rebuild data.json + grocery.json [auto]"
+            git push
+          fi

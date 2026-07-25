@@ -81,7 +81,8 @@
       <div class="ctrls">
         <span id="dirty" class="dirty"></span>
         <a class="port" href="./builder.html">← Builder</a>
-        <button id="exportBtn" class="primary">Export changes</button>
+        <span id="ghMount" style="display:inline-flex;gap:6px;align-items:center"></span>
+        <button id="exportBtn">Export manually</button>
       </div>
     </div>
     <div class="tabs" role="tablist">
@@ -92,6 +93,7 @@
   <main id="main"><div class="state">Loading…</div></main>
 </div>
 
+<script src="./gh.js"></script>
 <script>
 let ING=null, MEALS=null, TARGETS=null, tab="recipes", open1=null, dirty=false;
 const SLOTS=["breakfast","lunch","dinner"], SLOT_LABEL={breakfast:"Breakfast",lunch:"Lunch",dinner:"Dinner"};
@@ -107,7 +109,7 @@ const nutOf=(ing,amt)=>{const n=ING[ing];if(!n)return{kcal:0,p:0,c:0,fib:0,f:0};
   return {kcal:n.kcal*k,p:n.p*k,c:n.c*k,fib:n.fib*k,f:n.f*k};};
 function totals(comps,w){const t={kcal:0,p:0,c:0,fib:0,f:0};
   for(const cp of comps){const a=+cp[w]||0;if(a){const x=nutOf(cp.ing,a);for(const k in t)t[k]+=x[k];}}return t;}
-const ingIds=()=>Object.keys(ING).sort((a,b)=>ING[a].name.localeCompare(ING[b].name));
+const ingIds=()=>Object.keys(ING).filter(k=>!k.startsWith("_")).sort((a,b)=>ING[a].name.localeCompare(ING[b].name));
 const byRole=r=>ingIds().filter(k=>(ING[k].role||"extra")===r);
 function usedBy(ingKey){return Object.keys(MEALS).filter(k=>!k.startsWith("_")&&MEALS[k].components.some(c=>c.ing===ingKey));}
 function setDirty(){dirty=true;document.getElementById("dirty").textContent="● unsaved changes — export before leaving";}
@@ -313,6 +315,13 @@ function exportPanel(){
   document.getElementById("dlI").onclick=()=>dl(b,"ingredients.json");
 }
 
+function srcFiles(){
+  const mealsOut={_comment:MEALS._comment,...Object.fromEntries(Object.keys(MEALS).filter(k=>!k.startsWith("_")).map(k=>[k,MEALS[k]]))};
+  const ingOut={_comment:ING._comment,...Object.fromEntries(ingIds().map(k=>[k,ING[k]]))};
+  return {"src/meals.json":JSON.stringify(mealsOut,null,2)+"
+","src/ingredients.json":JSON.stringify(ingOut,null,2)+"
+"};
+}
 function boot(){
   Promise.all([
     fetch("./src/ingredients.json").then(r=>r.json()),
@@ -323,6 +332,9 @@ function boot(){
     document.getElementById("tabR").onclick=()=>{tab="recipes";open1=null;render();};
     document.getElementById("tabI").onclick=()=>{tab="ingredients";open1=null;render();};
     document.getElementById("exportBtn").onclick=exportPanel;
+    GH.mount(document.getElementById("ghMount"),()=>srcFiles(),
+      {label:"Save to GitHub",message:"Update recipes / ingredients from the web UI",
+       onSaved:()=>{dirty=false;document.getElementById("dirty").textContent="";}});
     window.onbeforeunload=()=>dirty?"You have unsaved changes.":undefined;
   }).catch(e=>{document.getElementById("main").innerHTML=
     `<div class="state">Couldn't load sources — serve over HTTP so <code>./src/*.json</code> is reachable.<br><br>(${esc(e.message||e)})</div>`;});
