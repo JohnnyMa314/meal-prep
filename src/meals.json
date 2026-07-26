@@ -442,5 +442,27 @@
         "her": 1
       }
     ]
+  },
+  "hash-and-beef": {
+    "name": "Hash and Beef and Bread",
+    "slot": "lunch",
+    "tag": "fresh",
+    "components": [
+      {
+        "ing": "potatoes",
+        "him": 160,
+        "her": 110
+      },
+      {
+        "ing": "ground_beef",
+        "him": 100,
+        "her": 80
+      },
+      {
+        "ing": "sourdough",
+        "him": 100,
+        "her": 80
+      }
+    ]
   }
 }
