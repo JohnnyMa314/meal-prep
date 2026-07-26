@@ -13,6 +13,8 @@ on:
     paths:
       - 'src/**'
       - 'build/**'
+      - '*.html'
+      - '*.js'
   workflow_dispatch:
 
 permissions:
@@ -31,6 +33,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      # A syntax error in a page's inline script kills the whole script and the
+      # page just never boots — catch it here rather than in production.
+      - name: Syntax-check the page scripts
+        run: python build/check_pages.py
 
       - name: Archive the outgoing week (if weekId changed)
         run: python build/archive.py

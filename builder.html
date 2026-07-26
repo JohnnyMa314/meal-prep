@@ -487,15 +487,13 @@ function exportPanel(){
 }
 function panel(html){let p=document.getElementById("panel");if(!p){p=document.createElement("div");p.id="panel";p.className="panel";document.querySelector(".wrap").appendChild(p);}p.innerHTML=html;p.scrollIntoView({behavior:"smooth",block:"start"});return p;}
 
+const NL=String.fromCharCode(10);
 function srcFiles(){
-  const f={"src/week.json":JSON.stringify(buildWeekJson(),null,2)+"
-",
-           "src/combos.json":JSON.stringify({_comment:"Saved combos - managed in the builder.",combos:COMBOS},null,2)+"
-"};
+  const f={"src/week.json":JSON.stringify(buildWeekJson(),null,2)+NL,
+           "src/combos.json":JSON.stringify({_comment:"Saved combos - managed in the builder.",combos:COMBOS},null,2)+NL};
   if(Object.keys(NEWRECIPES).length){
     const out={_comment:MEALS._comment,...Object.fromEntries(Object.keys(MEALS).filter(k=>!k.startsWith("_")).map(k=>[k,MEALS[k]]))};
-    f["src/meals.json"]=JSON.stringify(out,null,2)+"
-";
+    f["src/meals.json"]=JSON.stringify(out,null,2)+NL;
   }
   return f;
 }

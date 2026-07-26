@@ -315,12 +315,11 @@ function exportPanel(){
   document.getElementById("dlI").onclick=()=>dl(b,"ingredients.json");
 }
 
+const NL=String.fromCharCode(10);
 function srcFiles(){
   const mealsOut={_comment:MEALS._comment,...Object.fromEntries(Object.keys(MEALS).filter(k=>!k.startsWith("_")).map(k=>[k,MEALS[k]]))};
   const ingOut={_comment:ING._comment,...Object.fromEntries(ingIds().map(k=>[k,ING[k]]))};
-  return {"src/meals.json":JSON.stringify(mealsOut,null,2)+"
-","src/ingredients.json":JSON.stringify(ingOut,null,2)+"
-"};
+  return {"src/meals.json":JSON.stringify(mealsOut,null,2)+NL,"src/ingredients.json":JSON.stringify(ingOut,null,2)+NL};
 }
 function boot(){
   Promise.all([
