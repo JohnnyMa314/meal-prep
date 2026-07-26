@@ -281,16 +281,83 @@ function wire(){
     if(!confirm(`Delete ingredient “${ING[k].name}”?`))return;
     delete ING[k];open1=null;setDirty();render();});
   const ni=document.getElementById("newI");
-  if(ni)ni.onclick=()=>{
-    const name=prompt("Ingredient name:");if(!name)return;
-    let k=slug(name).replace(/-/g,"_")||"item";let n=2;while(ING[k])k=slug(name).replace(/-/g,"_")+"_"+(n++);
-    ING[k]={name,role:"protein",unit:"g",basis:"100g",kcal:100,p:10,c:5,fib:1,f:3,
-      grocery:{is_staple:false,yield:1,purchase_unit:"lb",pack_size:0.25,unit_grams:453.592}};
-    tab="ingredients";open1="i:"+k;setDirty();render();};
+  if(ni)ni.onclick=lookupPanel;
   const q=document.getElementById("q"),qi=document.getElementById("qi"),fs=document.getElementById("fslot");
   if(q)q.oninput=()=>{const v=q.value;render();const e=document.getElementById("q");e.value=v;e.focus();e.setSelectionRange(v.length,v.length);};
   if(qi)qi.oninput=()=>{const v=qi.value;render();const e=document.getElementById("qi");e.value=v;e.focus();e.setSelectionRange(v.length,v.length);};
   if(fs)fs.onchange=render;
+}
+
+function panel(html){
+  let p=document.getElementById("panel");
+  if(!p){p=document.createElement("div");p.id="panel";p.className="panel";document.querySelector(".wrap").appendChild(p);}
+  p.innerHTML=html;p.scrollIntoView({behavior:"smooth",block:"start"});return p;
+}
+
+// ---------- ingredient lookup (src/nutrition-db.json) ----------
+let DB=null;
+function addFromDb(entry){
+  const base=entry.name;
+  let k=slug(base).replace(/-/g,"_")||"item", n=2;
+  while(ING[k])k=slug(base).replace(/-/g,"_")+"_"+(n++);
+  ING[k]={name:base,role:entry.role,unit:entry.unit,basis:entry.basis,
+    kcal:entry.kcal,p:entry.p,c:entry.c,fib:entry.fib,f:entry.f,
+    grocery:JSON.parse(JSON.stringify(entry.grocery))};
+  tab="ingredients";open1="i:"+k;setDirty();render();
+  const p=document.getElementById("panel"); if(p)p.remove();
+}
+function blankIngredient(){
+  const name=prompt("Ingredient name:"); if(!name)return;
+  let k=slug(name).replace(/-/g,"_")||"item", n=2;
+  while(ING[k])k=slug(name).replace(/-/g,"_")+"_"+(n++);
+  ING[k]={name,role:"protein",unit:"g",basis:"100g",kcal:100,p:10,c:5,fib:1,f:3,
+    grocery:{is_staple:false,yield:1,purchase_unit:"lb",pack_size:0.25,unit_grams:453.592}};
+  tab="ingredients";open1="i:"+k;setDirty();render();
+  const p=document.getElementById("panel"); if(p)p.remove();
+}
+function lookupResults(q){
+  const have=new Set(ingIds().map(k=>ING[k].name.toLowerCase()));
+  const t=q.trim().toLowerCase();
+  let list=DB.items;
+  if(t)list=list.filter(i=>i.name.toLowerCase().includes(t)||i.role.includes(t)||(i.prep||"").toLowerCase().includes(t));
+  return list.slice(0,60).map(i=>{
+    const dup=have.has(i.name.toLowerCase());
+    return `<tr class="click" data-add="${esc(i.name)}">
+      <td>${esc(i.name)}${dup?' <span class="pill">already added</span>':''}<div class="asm" style="font-size:.68rem">${esc(i.prep||"")}</div></td>
+      <td><span class="pill">${i.role}</span></td>
+      <td class="n">${i.kcal}</td><td class="n">${i.p}</td><td class="n">${i.c}</td><td class="n">${i.fib}</td><td class="n">${i.f}</td>
+      <td>${i.basis==="unit"?"per "+i.unit:"per 100g"}</td>
+      <td class="n">${i.grocery.yield}</td></tr>`;}).join("");
+}
+function lookupPanel(){
+  const draw=q=>{
+    const p=panel(`<button class="close mini" data-close>Close</button><h3>Add an ingredient</h3>
+      <div class="hint">Search ${DB.items.length} common foods — picking one fills in the nutrition and grocery
+        fields for you. Values are per 100g (or per unit) and <b>cooked</b> where a food is normally cooked.
+        Check the package label for branded items, and correct <b>yield</b> after a real shop.</div>
+      <div class="frm"><label style="flex:1">Search<input type="text" id="dbq" value="${esc(q)}"
+        placeholder="almond, chicken, rice, sourdough…" style="width:100%"></label>
+        <button id="blankI">Add blank custom item</button></div>
+      <div class="scroll" style="max-height:52vh;overflow-y:auto"><table class="tb">
+        <thead><tr><th>Food</th><th>Role</th><th class="n">kcal</th><th class="n">P</th><th class="n">C</th>
+        <th class="n">Fib</th><th class="n">Fat</th><th>Basis</th><th class="n">Yield</th></tr></thead>
+        <tbody>${lookupResults(q)}</tbody></table></div>`);
+    p.querySelector("[data-close]").onclick=()=>p.remove();
+    p.querySelector("#blankI").onclick=blankIngredient;
+    p.querySelectorAll("[data-add]").forEach(tr=>tr.onclick=()=>{
+      const e=DB.items.find(i=>i.name===tr.dataset.add); if(e)addFromDb(e);});
+    const q2=p.querySelector("#dbq");
+    q2.oninput=()=>{const v=q2.value;draw(v);const e=document.getElementById("dbq");
+      e.focus();e.setSelectionRange(v.length,v.length);};
+    setTimeout(()=>{const e=document.getElementById("dbq");if(e&&!q)e.focus();},20);
+  };
+  if(DB)return draw("");
+  panel(`<div class="hint">Loading the food database…</div>`);
+  loadSrc("nutrition-db.json").then(d=>{DB=d;draw("");})
+    .catch(e=>panel(`<button class="close mini" data-close>Close</button>
+      <div class="bad">Couldn't load src/nutrition-db.json (${esc(e.message||e)}).</div>
+      <div style="margin-top:8px"><button id="blankI">Add blank custom item</button></div>`)
+      .querySelector("#blankI").onclick=blankIngredient);
 }
 
 function exportPanel(){
@@ -321,11 +388,17 @@ function srcFiles(){
   const ingOut={_comment:ING._comment,...Object.fromEntries(ingIds().map(k=>[k,ING[k]]))};
   return {"src/meals.json":JSON.stringify(mealsOut,null,2)+NL,"src/ingredients.json":JSON.stringify(ingOut,null,2)+NL};
 }
+// GitHub Pages serves src/ with Cache-Control: max-age=600, so a plain fetch
+// hands back a stale copy for ~10 min after a save — which looks exactly like
+// "my new ingredient didn't save". Always ask for a fresh one.
+const loadSrc=n=>fetch("./src/"+n+"?v="+Date.now(),{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw new Error(n+" HTTP "+r.status);return r.json();});
+
 function boot(){
   Promise.all([
-    fetch("./src/ingredients.json").then(r=>r.json()),
-    fetch("./src/meals.json").then(r=>r.json()),
-    fetch("./src/week.json").then(r=>r.json())
+    loadSrc("ingredients.json"),
+    loadSrc("meals.json"),
+    loadSrc("week.json")
   ]).then(([i,me,wk])=>{
     ING=i;MEALS=me;TARGETS=wk.targets;render();
     document.getElementById("tabR").onclick=()=>{tab="recipes";open1=null;render();};

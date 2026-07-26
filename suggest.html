@@ -265,7 +265,9 @@ function renderGap(){
 function refresh(){renderGap();suggest();}
 
 function boot(){
-  Promise.all([fetch("./src/ingredients.json").then(r=>r.json()),fetch("./src/meals.json").then(r=>r.json()),fetch("./src/week.json").then(r=>r.json())])
+  const loadSrc=n=>fetch("./src/"+n+"?v="+Date.now(),{cache:"no-store"})
+    .then(r=>{if(!r.ok)throw new Error(n+" HTTP "+r.status);return r.json();});
+  Promise.all([loadSrc("ingredients.json"),loadSrc("meals.json"),loadSrc("week.json")])
    .then(([i,me,wk])=>{
      ING={};for(const k in i)if(!k.startsWith("_"))ING[k]=i[k];MEALS=me;WEEK=wk;
      fillOptions(document.getElementById("fillSlot"),["lunch","dinner"],"",labSlot);

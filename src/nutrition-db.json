@@ -1,0 +1,2798 @@
+{
+ "_comment": "Nutrition lookup used by manage.html when adding an ingredient. Values are per 100g (or per unit for basis:unit) and, for anything normally cooked, are COOKED values — matching how meal amounts are recorded. `prep` says which. `yield` = cooked grams / purchased grams, a starting estimate to correct after a real shop. Not read by the build; purely a source of suggestions.",
+ "items": [
+  {
+   "name": "1% milk",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 42,
+   "p": 3.4,
+   "c": 5,
+   "fib": 0,
+   "f": 1,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "gallon",
+    "pack_size": 0.5,
+    "unit_grams": 3785
+   }
+  },
+  {
+   "name": "2% milk",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 50,
+   "p": 3.4,
+   "c": 5,
+   "fib": 0,
+   "f": 2,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "gallon",
+    "pack_size": 0.5,
+    "unit_grams": 3785
+   }
+  },
+  {
+   "name": "Almond butter",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 614,
+   "p": 21,
+   "c": 19,
+   "fib": 10,
+   "f": 56,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "container",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Almonds",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 579,
+   "p": 21.2,
+   "c": 21.6,
+   "fib": 12.5,
+   "f": 49.9,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Apple",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 52,
+   "p": 0.3,
+   "c": 14,
+   "fib": 2.4,
+   "f": 0.2,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 200
+   }
+  },
+  {
+   "name": "Arugula",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 25,
+   "p": 2.6,
+   "c": 3.7,
+   "fib": 1.6,
+   "f": 0.7,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 142
+   }
+  },
+  {
+   "name": "Asparagus",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 22,
+   "p": 2.4,
+   "c": 4.1,
+   "fib": 2,
+   "f": 0.2,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.85,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Avocado",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 160,
+   "p": 2,
+   "c": 9,
+   "fib": 7,
+   "f": 15,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 200
+   }
+  },
+  {
+   "name": "Avocado oil",
+   "role": "fat",
+   "basis": "unit",
+   "unit": "tsp",
+   "kcal": 40,
+   "p": 0,
+   "c": 0,
+   "fib": 0,
+   "f": 4.5,
+   "prep": "per teaspoon",
+   "grocery": {
+    "is_staple": true,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Bacon",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 541,
+   "p": 37,
+   "c": 1.4,
+   "fib": 0,
+   "f": 42,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.4,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Bagel",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 250,
+   "p": 10,
+   "c": 49,
+   "fib": 2.1,
+   "f": 1.5,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 6,
+    "unit_grams": 95
+   }
+  },
+  {
+   "name": "Banana",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 89,
+   "p": 1.1,
+   "c": 23,
+   "fib": 2.6,
+   "f": 0.3,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.65,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 180
+   }
+  },
+  {
+   "name": "Barley",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 123,
+   "p": 2.3,
+   "c": 28,
+   "fib": 3.8,
+   "f": 0.4,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 3.0,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 200
+   }
+  },
+  {
+   "name": "Basmati rice",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 121,
+   "p": 3.5,
+   "c": 25,
+   "fib": 0.7,
+   "f": 0.4,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.9,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 185
+   }
+  },
+  {
+   "name": "Bell peppers",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 26,
+   "p": 1,
+   "c": 6,
+   "fib": 2,
+   "f": 0.3,
+   "prep": "raw / cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.85,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Black beans",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 132,
+   "p": 8.9,
+   "c": 24,
+   "fib": 8.7,
+   "f": 0.5,
+   "prep": "cooked / canned",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "can",
+    "pack_size": 1,
+    "unit_grams": 250
+   }
+  },
+  {
+   "name": "Blueberry",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 57,
+   "p": 0.7,
+   "c": 14,
+   "fib": 2.4,
+   "f": 0.3,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "carton",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Bok choy",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 12,
+   "p": 1.6,
+   "c": 1.8,
+   "fib": 1,
+   "f": 0.2,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.88,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Broccoli",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 35,
+   "p": 2.4,
+   "c": 7.2,
+   "fib": 3.3,
+   "f": 0.4,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Broccolini",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 35,
+   "p": 2.4,
+   "c": 7,
+   "fib": 3.3,
+   "f": 0.4,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Brown rice",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 112,
+   "p": 2.6,
+   "c": 24,
+   "fib": 1.6,
+   "f": 0.9,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.72,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 190
+   }
+  },
+  {
+   "name": "Brussels sprouts",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 36,
+   "p": 2.6,
+   "c": 7,
+   "fib": 2.6,
+   "f": 0.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Butter",
+   "role": "fat",
+   "basis": "unit",
+   "unit": "tsp",
+   "kcal": 36,
+   "p": 0,
+   "c": 0,
+   "fib": 0,
+   "f": 4,
+   "prep": "per teaspoon",
+   "grocery": {
+    "is_staple": true,
+    "yield": 1.0,
+    "purchase_unit": "stick",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Butternut squash",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 45,
+   "p": 1,
+   "c": 12,
+   "fib": 2,
+   "f": 0.1,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Cabbage",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 23,
+   "p": 1.3,
+   "c": 5.5,
+   "fib": 2.3,
+   "f": 0.1,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.85,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Canned tuna",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 116,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 0.8,
+   "prep": "drained",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "can",
+    "pack_size": 1,
+    "unit_grams": 142
+   }
+  },
+  {
+   "name": "Cannellini beans",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 139,
+   "p": 9.7,
+   "c": 25,
+   "fib": 6.3,
+   "f": 0.5,
+   "prep": "cooked / canned",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "can",
+    "pack_size": 1,
+    "unit_grams": 250
+   }
+  },
+  {
+   "name": "Carrots",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 41,
+   "p": 0.9,
+   "c": 10,
+   "fib": 2.8,
+   "f": 0.2,
+   "prep": "raw / cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Cashews",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 553,
+   "p": 18.2,
+   "c": 30.2,
+   "fib": 3.3,
+   "f": 43.8,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Cauliflower",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 23,
+   "p": 1.8,
+   "c": 4.1,
+   "fib": 2.3,
+   "f": 0.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Celery",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 14,
+   "p": 0.7,
+   "c": 3,
+   "fib": 1.6,
+   "f": 0.2,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 450
+   }
+  },
+  {
+   "name": "Cheddar",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 403,
+   "p": 25,
+   "c": 1.3,
+   "fib": 0,
+   "f": 33,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 226
+   }
+  },
+  {
+   "name": "Chia seeds",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 486,
+   "p": 17,
+   "c": 42,
+   "fib": 34,
+   "f": 31,
+   "prep": "dry",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Chicken breast",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 165,
+   "p": 31,
+   "c": 0,
+   "fib": 0,
+   "f": 3.6,
+   "prep": "cooked, skinless",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.73,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Chicken drumstick",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 172,
+   "p": 28,
+   "c": 0,
+   "fib": 0,
+   "f": 5.7,
+   "prep": "cooked, skinless",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Chicken thigh",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 209,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 11,
+   "prep": "cooked, skinless",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.73,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Chickpeas",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 164,
+   "p": 8.9,
+   "c": 27,
+   "fib": 7.6,
+   "f": 2.6,
+   "prep": "cooked from dry",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.4,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 200
+   }
+  },
+  {
+   "name": "Coconut oil",
+   "role": "fat",
+   "basis": "unit",
+   "unit": "tsp",
+   "kcal": 40,
+   "p": 0,
+   "c": 0,
+   "fib": 0,
+   "f": 4.5,
+   "prep": "per teaspoon",
+   "grocery": {
+    "is_staple": true,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Cod",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 105,
+   "p": 23,
+   "c": 0,
+   "fib": 0,
+   "f": 0.9,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Corn",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 96,
+   "p": 3.4,
+   "c": 21,
+   "fib": 2.4,
+   "f": 1.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Corn tortilla",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 218,
+   "p": 5.7,
+   "c": 45,
+   "fib": 6.3,
+   "f": 2.9,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 12,
+    "unit_grams": 26
+   }
+  },
+  {
+   "name": "Cottage cheese (2%)",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 84,
+   "p": 11,
+   "c": 4.3,
+   "fib": 0,
+   "f": 2.3,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Cottage cheese (4%)",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 98,
+   "p": 11,
+   "c": 3.4,
+   "fib": 0,
+   "f": 4.3,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Couscous",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 112,
+   "p": 3.8,
+   "c": 23,
+   "fib": 1.4,
+   "f": 0.2,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 3.0,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 173
+   }
+  },
+  {
+   "name": "Crab meat",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 97,
+   "p": 19,
+   "c": 0,
+   "fib": 0,
+   "f": 1.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Cream cheese",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 342,
+   "p": 6,
+   "c": 4.1,
+   "fib": 0,
+   "f": 34,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 226
+   }
+  },
+  {
+   "name": "Cucumber",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 15,
+   "p": 0.7,
+   "c": 3.6,
+   "fib": 0.5,
+   "f": 0.1,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.95,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 300
+   }
+  },
+  {
+   "name": "Dates",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 282,
+   "p": 2.5,
+   "c": 75,
+   "fib": 8,
+   "f": 0.4,
+   "prep": "pitted",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Deli ham",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 145,
+   "p": 21,
+   "c": 1.5,
+   "fib": 0,
+   "f": 5.5,
+   "prep": "ready to eat",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Edamame",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 121,
+   "p": 12,
+   "c": 9,
+   "fib": 5,
+   "f": 5,
+   "prep": "cooked, shelled",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.5,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Egg",
+   "role": "protein",
+   "basis": "unit",
+   "unit": "ct",
+   "kcal": 72,
+   "p": 6.3,
+   "c": 0.4,
+   "fib": 0,
+   "f": 4.8,
+   "prep": "large, cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "dozen",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Egg white",
+   "role": "protein",
+   "basis": "unit",
+   "unit": "ct",
+   "kcal": 17,
+   "p": 3.6,
+   "c": 0.2,
+   "fib": 0,
+   "f": 0.06,
+   "prep": "from a large egg",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "dozen",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Eggplant",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 35,
+   "p": 0.8,
+   "c": 8.7,
+   "fib": 2.5,
+   "f": 0.2,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 450
+   }
+  },
+  {
+   "name": "Farro",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 130,
+   "p": 5,
+   "c": 26,
+   "fib": 3.5,
+   "f": 1,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.81,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 185
+   }
+  },
+  {
+   "name": "Feta",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 264,
+   "p": 14,
+   "c": 4.1,
+   "fib": 0,
+   "f": 21,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 226
+   }
+  },
+  {
+   "name": "Flank steak",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 192,
+   "p": 28,
+   "c": 0,
+   "fib": 0,
+   "f": 8,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Flaxseed",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 534,
+   "p": 18,
+   "c": 29,
+   "fib": 27,
+   "f": 42,
+   "prep": "ground",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Flour tortilla",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 310,
+   "p": 8,
+   "c": 51,
+   "fib": 3,
+   "f": 8,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 6,
+    "unit_grams": 85
+   }
+  },
+  {
+   "name": "Garlic",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 149,
+   "p": 6.4,
+   "c": 33,
+   "fib": 2.1,
+   "f": 0.5,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.87,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 50
+   }
+  },
+  {
+   "name": "Grapes",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 69,
+   "p": 0.7,
+   "c": 18,
+   "fib": 0.9,
+   "f": 0.2,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.95,
+    "purchase_unit": "lb",
+    "pack_size": 0.5,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Greek yogurt (2%)",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 73,
+   "p": 10,
+   "c": 4,
+   "fib": 0,
+   "f": 2,
+   "prep": "plain",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 907
+   }
+  },
+  {
+   "name": "Greek yogurt (nonfat)",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 59,
+   "p": 10,
+   "c": 3.6,
+   "fib": 0,
+   "f": 0.4,
+   "prep": "plain",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 907
+   }
+  },
+  {
+   "name": "Greek yogurt (whole)",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 97,
+   "p": 9,
+   "c": 4,
+   "fib": 0,
+   "f": 5,
+   "prep": "plain",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 907
+   }
+  },
+  {
+   "name": "Green beans",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 35,
+   "p": 1.9,
+   "c": 7.9,
+   "fib": 3.4,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.95,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Green peas",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 84,
+   "p": 5.4,
+   "c": 16,
+   "fib": 5.5,
+   "f": 0.4,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.5,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground beef (80/20)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 254,
+   "p": 25,
+   "c": 0,
+   "fib": 0,
+   "f": 17,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground beef (85/15)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 215,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 12,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.72,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground beef (90/10)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 185,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 8.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.74,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground beef (93/7)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 172,
+   "p": 27,
+   "c": 0,
+   "fib": 0,
+   "f": 6.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.75,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground chicken",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 189,
+   "p": 24,
+   "c": 0,
+   "fib": 0,
+   "f": 10,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.72,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground pork",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 297,
+   "p": 25,
+   "c": 0,
+   "fib": 0,
+   "f": 21,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ground turkey (93/7)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 176,
+   "p": 27,
+   "c": 0,
+   "fib": 0,
+   "f": 7,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.72,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Halibut",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 111,
+   "p": 23,
+   "c": 0,
+   "fib": 0,
+   "f": 1.6,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Heavy cream",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 340,
+   "p": 2.8,
+   "c": 2.8,
+   "fib": 0,
+   "f": 36,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "carton",
+    "pack_size": 1,
+    "unit_grams": 473
+   }
+  },
+  {
+   "name": "Honey",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 304,
+   "p": 0.3,
+   "c": 82,
+   "fib": 0.2,
+   "f": 0,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "container",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Hummus",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 166,
+   "p": 7.9,
+   "c": 14,
+   "fib": 6,
+   "f": 9.6,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 283
+   }
+  },
+  {
+   "name": "Jasmine rice",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 129,
+   "p": 2.7,
+   "c": 28,
+   "fib": 0.5,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.9,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 185
+   }
+  },
+  {
+   "name": "Kale",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 28,
+   "p": 1.9,
+   "c": 5.6,
+   "fib": 2,
+   "f": 0.4,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.85,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Ketchup",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 101,
+   "p": 1.3,
+   "c": 27,
+   "fib": 0.3,
+   "f": 0.1,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": 567
+   }
+  },
+  {
+   "name": "Kidney beans",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 127,
+   "p": 8.7,
+   "c": 23,
+   "fib": 7.4,
+   "f": 0.5,
+   "prep": "cooked / canned",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "can",
+    "pack_size": 1,
+    "unit_grams": 250
+   }
+  },
+  {
+   "name": "Lamb loin",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 258,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 16,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Lentils",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 116,
+   "p": 9,
+   "c": 20,
+   "fib": 8,
+   "f": 0.4,
+   "prep": "cooked from dry",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.29,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 192
+   }
+  },
+  {
+   "name": "Mackerel",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 262,
+   "p": 24,
+   "c": 0,
+   "fib": 0,
+   "f": 18,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Mango",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 60,
+   "p": 0.8,
+   "c": 15,
+   "fib": 1.6,
+   "f": 0.4,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.65,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 320
+   }
+  },
+  {
+   "name": "Maple syrup",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 260,
+   "p": 0,
+   "c": 67,
+   "fib": 0,
+   "f": 0.1,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": 354
+   }
+  },
+  {
+   "name": "Mayonnaise",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 680,
+   "p": 1,
+   "c": 0.6,
+   "fib": 0,
+   "f": 75,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "container",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Miso paste",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 199,
+   "p": 12,
+   "c": 26,
+   "fib": 5.4,
+   "f": 6,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "tub",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Mozzarella (part-skim)",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 254,
+   "p": 24,
+   "c": 2.8,
+   "fib": 0,
+   "f": 16,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 226
+   }
+  },
+  {
+   "name": "Mushrooms",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 22,
+   "p": 3,
+   "c": 3,
+   "fib": 1,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.88,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Mussels",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 172,
+   "p": 24,
+   "c": 7.4,
+   "fib": 0,
+   "f": 4.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.35,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Nutritional yeast",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 385,
+   "p": 50,
+   "c": 36,
+   "fib": 21,
+   "f": 5,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 127
+   }
+  },
+  {
+   "name": "Olive oil",
+   "role": "fat",
+   "basis": "unit",
+   "unit": "tsp",
+   "kcal": 40,
+   "p": 0,
+   "c": 0,
+   "fib": 0,
+   "f": 4.5,
+   "prep": "per teaspoon",
+   "grocery": {
+    "is_staple": true,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Onion",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 40,
+   "p": 1.1,
+   "c": 9,
+   "fib": 1.7,
+   "f": 0.1,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 150
+   }
+  },
+  {
+   "name": "Orange",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 47,
+   "p": 0.9,
+   "c": 12,
+   "fib": 2.4,
+   "f": 0.1,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 180
+   }
+  },
+  {
+   "name": "Parmesan",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 431,
+   "p": 38,
+   "c": 4.1,
+   "fib": 0,
+   "f": 29,
+   "prep": "grated",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 226
+   }
+  },
+  {
+   "name": "Pasta",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 158,
+   "p": 5.8,
+   "c": 31,
+   "fib": 1.8,
+   "f": 0.9,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.2,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Peanut butter",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 588,
+   "p": 25,
+   "c": 20,
+   "fib": 6,
+   "f": 50,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "container",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Peanuts",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 587,
+   "p": 24.4,
+   "c": 21.5,
+   "fib": 8.4,
+   "f": 49.7,
+   "prep": "roasted",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Pecans",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 691,
+   "p": 9.2,
+   "c": 13.9,
+   "fib": 9.6,
+   "f": 72,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Pineapple",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 50,
+   "p": 0.5,
+   "c": 13,
+   "fib": 1.4,
+   "f": 0.1,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.55,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 900
+   }
+  },
+  {
+   "name": "Pinto beans",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 143,
+   "p": 9,
+   "c": 26,
+   "fib": 9,
+   "f": 0.7,
+   "prep": "cooked / canned",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "can",
+    "pack_size": 1,
+    "unit_grams": 250
+   }
+  },
+  {
+   "name": "Pistachios",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 560,
+   "p": 20,
+   "c": 28,
+   "fib": 10,
+   "f": 45,
+   "prep": "shelled",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Pork chop",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 231,
+   "p": 27,
+   "c": 0,
+   "fib": 0,
+   "f": 13,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.72,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Pork tenderloin",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 143,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 3.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.73,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Potatoes",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 93,
+   "p": 2,
+   "c": 21,
+   "fib": 2.1,
+   "f": 0.1,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.85,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Pumpkin seeds",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 559,
+   "p": 30,
+   "c": 11,
+   "fib": 6,
+   "f": 49,
+   "prep": "shelled",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Quinoa",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 120,
+   "p": 4.4,
+   "c": 21,
+   "fib": 2.8,
+   "f": 1.9,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 3.0,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 170
+   }
+  },
+  {
+   "name": "Raisins",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 299,
+   "p": 3.1,
+   "c": 79,
+   "fib": 3.7,
+   "f": 0.5,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 425
+   }
+  },
+  {
+   "name": "Raspberry",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 52,
+   "p": 1.2,
+   "c": 12,
+   "fib": 6.5,
+   "f": 0.7,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "carton",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Ribeye steak",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 291,
+   "p": 24,
+   "c": 0,
+   "fib": 0,
+   "f": 21,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.68,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Rolled oats",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 379,
+   "p": 13,
+   "c": 67,
+   "fib": 10,
+   "f": 6.5,
+   "prep": "DRY weight",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "container",
+    "pack_size": 1,
+    "unit_grams": 500
+   }
+  },
+  {
+   "name": "Romaine",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 17,
+   "p": 1.2,
+   "c": 3.3,
+   "fib": 2.1,
+   "f": 0.3,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.9,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 600
+   }
+  },
+  {
+   "name": "Salmon (farmed)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 206,
+   "p": 22,
+   "c": 0,
+   "fib": 0,
+   "f": 12,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Salmon (wild)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 182,
+   "p": 25,
+   "c": 0,
+   "fib": 0,
+   "f": 8,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Salsa",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 36,
+   "p": 1.5,
+   "c": 7,
+   "fib": 1.8,
+   "f": 0.2,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "container",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Sardines",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 208,
+   "p": 25,
+   "c": 0,
+   "fib": 0,
+   "f": 11,
+   "prep": "canned, drained",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "can",
+    "pack_size": 1,
+    "unit_grams": 106
+   }
+  },
+  {
+   "name": "Scallops",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 111,
+   "p": 20.5,
+   "c": 5.4,
+   "fib": 0,
+   "f": 0.8,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.75,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Seitan",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 143,
+   "p": 21,
+   "c": 11,
+   "fib": 1,
+   "f": 2,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 227
+   }
+  },
+  {
+   "name": "Sesame oil",
+   "role": "fat",
+   "basis": "unit",
+   "unit": "tsp",
+   "kcal": 40,
+   "p": 0,
+   "c": 0,
+   "fib": 0,
+   "f": 4.5,
+   "prep": "per teaspoon",
+   "grocery": {
+    "is_staple": true,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": null
+   }
+  },
+  {
+   "name": "Sesame seeds",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 573,
+   "p": 17,
+   "c": 23,
+   "fib": 12,
+   "f": 50,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 227
+   }
+  },
+  {
+   "name": "Shrimp",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 99,
+   "p": 24,
+   "c": 0.2,
+   "fib": 0,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.75,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Sirloin steak",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 212,
+   "p": 30,
+   "c": 0,
+   "fib": 0,
+   "f": 9.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.7,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Skim milk",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 34,
+   "p": 3.4,
+   "c": 5,
+   "fib": 0,
+   "f": 0.2,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "gallon",
+    "pack_size": 0.5,
+    "unit_grams": 3785
+   }
+  },
+  {
+   "name": "Sourdough",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 265,
+   "p": 10,
+   "c": 52,
+   "fib": 2.4,
+   "f": 1.7,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 800
+   }
+  },
+  {
+   "name": "Soy sauce",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 53,
+   "p": 8.1,
+   "c": 4.9,
+   "fib": 0.8,
+   "f": 0.6,
+   "prep": "low sodium",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": 296
+   }
+  },
+  {
+   "name": "Spinach",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 23,
+   "p": 2.9,
+   "c": 3.6,
+   "fib": 2.2,
+   "f": 0.4,
+   "prep": "raw / wilted",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Sriracha",
+   "role": "extra",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 93,
+   "p": 1.9,
+   "c": 19,
+   "fib": 2.4,
+   "f": 0.9,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bottle",
+    "pack_size": 1,
+    "unit_grams": 482
+   }
+  },
+  {
+   "name": "Strawberry",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 32,
+   "p": 0.7,
+   "c": 8,
+   "fib": 2,
+   "f": 0.3,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "carton",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Strip steak",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 250,
+   "p": 27,
+   "c": 0,
+   "fib": 0,
+   "f": 15,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.68,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Sunflower seeds",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 584,
+   "p": 21,
+   "c": 20,
+   "fib": 8.6,
+   "f": 51,
+   "prep": "shelled",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 340
+   }
+  },
+  {
+   "name": "Sweet potato",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 90,
+   "p": 2,
+   "c": 21,
+   "fib": 3.3,
+   "f": 0.15,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Tempeh",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 192,
+   "p": 20,
+   "c": 7.6,
+   "fib": 5,
+   "f": 11,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 227
+   }
+  },
+  {
+   "name": "Tilapia",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 129,
+   "p": 26,
+   "c": 0,
+   "fib": 0,
+   "f": 2.7,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Tofu (extra firm)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 120,
+   "p": 14,
+   "c": 3,
+   "fib": 1,
+   "f": 6.5,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 396
+   }
+  },
+  {
+   "name": "Tofu (firm)",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 144,
+   "p": 15.5,
+   "c": 4.3,
+   "fib": 2.3,
+   "f": 8.7,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 396
+   }
+  },
+  {
+   "name": "Tomato",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 18,
+   "p": 0.9,
+   "c": 3.9,
+   "fib": 1.2,
+   "f": 0.2,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.95,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Tuna steak",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 184,
+   "p": 30,
+   "c": 0,
+   "fib": 0,
+   "f": 6,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.8,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Turkey breast",
+   "role": "protein",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 147,
+   "p": 30,
+   "c": 0,
+   "fib": 0,
+   "f": 2,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.73,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Walnuts",
+   "role": "fat",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 654,
+   "p": 15.2,
+   "c": 13.7,
+   "fib": 6.7,
+   "f": 65.2,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Watermelon",
+   "role": "fruit",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 30,
+   "p": 0.6,
+   "c": 7.6,
+   "fib": 0.4,
+   "f": 0.2,
+   "prep": "raw",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.55,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 4000
+   }
+  },
+  {
+   "name": "White bread",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 265,
+   "p": 9,
+   "c": 49,
+   "fib": 2.7,
+   "f": 3.2,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 680
+   }
+  },
+  {
+   "name": "White rice",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 130,
+   "p": 2.7,
+   "c": 28,
+   "fib": 0.4,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.9,
+    "purchase_unit": "cup_dry",
+    "pack_size": 0.25,
+    "unit_grams": 185
+   }
+  },
+  {
+   "name": "Whole milk",
+   "role": "dairy",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 61,
+   "p": 3.2,
+   "c": 4.8,
+   "fib": 0,
+   "f": 3.3,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "gallon",
+    "pack_size": 0.5,
+    "unit_grams": 3785
+   }
+  },
+  {
+   "name": "Whole wheat bread",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 247,
+   "p": 13,
+   "c": 41,
+   "fib": 7,
+   "f": 3.4,
+   "prep": "as sold",
+   "grocery": {
+    "is_staple": false,
+    "yield": 1.0,
+    "purchase_unit": "each",
+    "pack_size": 1,
+    "unit_grams": 680
+   }
+  },
+  {
+   "name": "Whole wheat pasta",
+   "role": "carb",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 124,
+   "p": 5.3,
+   "c": 27,
+   "fib": 3.9,
+   "f": 0.5,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 2.2,
+    "purchase_unit": "bag",
+    "pack_size": 1,
+    "unit_grams": 454
+   }
+  },
+  {
+   "name": "Yu choy",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 20,
+   "p": 2,
+   "c": 3,
+   "fib": 2,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.88,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  },
+  {
+   "name": "Zucchini",
+   "role": "veg",
+   "basis": "100g",
+   "unit": "g",
+   "kcal": 17,
+   "p": 1.2,
+   "c": 3.1,
+   "fib": 1,
+   "f": 0.3,
+   "prep": "cooked",
+   "grocery": {
+    "is_staple": false,
+    "yield": 0.95,
+    "purchase_unit": "lb",
+    "pack_size": 0.25,
+    "unit_grams": 453.592
+   }
+  }
+ ]
+}

@@ -497,12 +497,17 @@ function srcFiles(){
   }
   return f;
 }
+// GitHub Pages serves src/ with Cache-Control: max-age=600, so a plain fetch
+// hands back a stale copy for ~10 min after a save. Always ask for a fresh one.
+const loadSrc=n=>fetch("./src/"+n+"?v="+Date.now(),{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw new Error(n+" HTTP "+r.status);return r.json();});
+
 function boot(){
   Promise.all([
-    fetch("./src/ingredients.json").then(r=>r.json()),
-    fetch("./src/meals.json").then(r=>r.json()),
-    fetch("./src/week.json").then(r=>r.json()),
-    fetch("./src/combos.json").then(r=>r.ok?r.json():{combos:[]}).catch(()=>({combos:[]}))
+    loadSrc("ingredients.json"),
+    loadSrc("meals.json"),
+    loadSrc("week.json"),
+    loadSrc("combos.json").catch(()=>({combos:[]}))
   ]).then(([i,me,wk,cb])=>{
     ING={};for(const k in i)if(!k.startsWith("_"))ING[k]=i[k];
     for(const k in ING){const r=ING[k].role;if(ROLE[r])ROLE[r].push(k);}
